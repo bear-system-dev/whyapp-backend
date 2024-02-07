@@ -16,6 +16,7 @@ model User {
   id             String         @id @default(uuid())
   nome           String
   email          String
+  senha          String
   ativo          Boolean
   identificador  String
   avatar         String?
