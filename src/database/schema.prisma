@@ -19,7 +19,7 @@ model User {
   ativo          Boolean
   identificador  String
   avatar         String?
-  Humor          Humor[]
+  humor          Humor[]
   descricao      String?
   grupos         Grupo[]
   cargos         Cargo[]
