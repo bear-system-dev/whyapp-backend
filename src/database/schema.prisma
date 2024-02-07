@@ -7,7 +7,250 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Test {
-  id String @id @default(uuid())
-  name String
+// model Test {
+//   id   String @id @default(uuid())
+//   name String
+// }
+
+model User {
+  id             String         @id @default(uuid())
+  nome           String
+  email          String
+  ativo          Boolean
+  identificador  String
+  avatar         String?
+  Humor          Humor[]
+  descricao      String?
+  grupos         Grupo[]
+  cargos         Cargo[]
+  chats          Chat[]
+  transmissoes   Transmissao[]
+  notifications  Notification[]
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  OpcaoEnquete   OpcaoEnquete?  @relation(fields: [opcaoEnqueteId], references: [id])
+  opcaoEnqueteId String?
+  GrupoMessage   GrupoMessage[]
+}
+
+model Notification {
+  id             String   @id @default(uuid())
+  destinatario   User     @relation(fields: [destinatarioId], references: [id])
+  destinatarioId String
+  mensagem       String
+  categoria      String
+  readAt         DateTime
+  canceledAt     DateTime
+  createdAt      DateTime @default(now())
+}
+
+model Humor {
+  id        String  @id @default(uuid())
+  tipo      String
+  descricao String?
+  usuario   User    @relation(fields: [usuarioId], references: [id])
+  usuarioId String
+}
+
+//chat do Usuario
+
+model Chat {
+  id         String         @id @default(uuid())
+  nome       String
+  token      String
+  foto       String
+  mensagens  ChatMessage[]
+  imagens    ChatImage[]
+  videos     ChatVideo[]
+  audios     ChatAudio[]
+  documentos ChatDocument[]
+  usuario    User           @relation(fields: [usuarioId], references: [id])
+  usuarioId  String
+  createdAt  DateTime       @default(now())
+  updatedAt  DateTime       @updatedAt
+}
+
+model ChatMessage {
+  id        String   @id @default(uuid())
+  mensagem  String
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  chatId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ChatAudio {
+  id        String   @id @default(uuid())
+  dados     String
+  mimetype  String
+  usuarioId String
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  chatId    String
+  createdAt DateTime @default(now())
+}
+
+model ChatImage {
+  id        String   @id @default(uuid())
+  dados     String
+  mimetype  String
+  usuarioId String
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  chatId    String
+  createdAt DateTime @default(now())
+}
+
+model ChatVideo {
+  id        String   @id @default(uuid())
+  dados     String
+  mimetype  String
+  usuarioId String
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  chatId    String
+  createdAt DateTime @default(now())
+}
+
+model ChatDocument {
+  id        String   @id @default(uuid())
+  dados     String
+  mimetype  String
+  usuarioId String
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  chatId    String
+  createdAt DateTime @default(now())
+}
+
+model Transmissao {
+  id              String          @id @default(uuid())
+  nome            String
+  token           String
+  foto            String
+  descricao       String
+  administrador   User            @relation(fields: [administradorId], references: [id])
+  usuarios        String[]
+  administradorId String
+  cargos          Cargo[]
+  mensagens       GrupoMessage[]
+  imagens         GrupoImage[]
+  audio           GrupoAudio[]
+  videos          GrupoVideo[]
+  documentos      GrupoDocument[]
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+}
+
+model Grupo {
+  id             String          @id @default(uuid())
+  nome           String
+  token          String
+  foto           String
+  usuarios       String[]
+  descricao      String
+  proprietario   User            @relation(fields: [proprietarioId], references: [id])
+  proprietarioId String
+  cargos         Cargo[]
+  mensagens      GrupoMessage[]
+  imagens        GrupoImage[]
+  audio          GrupoAudio[]
+  videos         GrupoVideo[]
+  documentos     GrupoDocument[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  Enquete        Enquete[]
+}
+
+model Cargo {
+  id            String       @id @default(uuid())
+  nome          String
+  cor           String
+  usuario       User         @relation(fields: [usuarioId], references: [id])
+  usuarioId     String
+  grupo         Grupo        @relation(fields: [grupoId], references: [id])
+  grupoId       String
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  Transmissao   Transmissao? @relation(fields: [transmissaoId], references: [id])
+  transmissaoId String?
+}
+
+model Enquete {
+  id             String       @id @default(uuid())
+  titulo         String
+  opcoes         OpcaoEnquete @relation(fields: [opcaoEnqueteId], references: [id])
+  usuarioId      String
+  grupo          Grupo        @relation(fields: [grupoId], references: [id])
+  grupoId        String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  opcaoEnqueteId String
+}
+
+model OpcaoEnquete {
+  id        String    @id @default(uuid())
+  nome      String
+  correta   Boolean
+  usuarios  User[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Enquete   Enquete[]
+}
+
+model GrupoMessage {
+  id            String      @id @default(uuid())
+  mensagem      String
+  grupo         Grupo       @relation(fields: [grupoId], references: [id])
+  grupoId       String
+  usuario       User        @relation(fields: [usuarioId], references: [id])
+  usuarioId     String
+  transmissao   Transmissao @relation(fields: [transmissaoId], references: [id])
+  transmissaoId String
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model GrupoAudio {
+  id            String       @id @default(uuid())
+  dados         String
+  mimetype      String
+  usuarioId     String
+  grupo         Grupo        @relation(fields: [grupoId], references: [id])
+  grupoId       String
+  createdAt     DateTime     @default(now())
+  Transmissao   Transmissao? @relation(fields: [transmissaoId], references: [id])
+  transmissaoId String?
+}
+
+model GrupoImage {
+  id            String       @id @default(uuid())
+  dados         String
+  mimetype      String
+  usuarioId     String
+  grupo         Grupo        @relation(fields: [grupoId], references: [id])
+  grupoId       String
+  createdAt     DateTime     @default(now())
+  Transmissao   Transmissao? @relation(fields: [transmissaoId], references: [id])
+  transmissaoId String?
+}
+
+model GrupoVideo {
+  id            String       @id @default(uuid())
+  dados         String
+  mimetype      String
+  usuarioId     String
+  grupo         Grupo        @relation(fields: [grupoId], references: [id])
+  grupoId       String
+  createdAt     DateTime     @default(now())
+  Transmissao   Transmissao? @relation(fields: [transmissaoId], references: [id])
+  transmissaoId String?
+}
+
+model GrupoDocument {
+  id            String       @id @default(uuid())
+  dados         String
+  mimetype      String
+  usuarioId     String
+  grupo         Grupo        @relation(fields: [grupoId], references: [id])
+  grupoId       String
+  createdAt     DateTime     @default(now())
+  Transmissao   Transmissao? @relation(fields: [transmissaoId], references: [id])
+  transmissaoId String?
 }
