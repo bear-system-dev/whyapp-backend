@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Prisma, User } from '@prisma/client';
 import { PrismaService } from 'src/database/prisma.service';
 import { UserCreateDTO } from './createUser.dto';
+import { QueryDTO } from 'src/models/Query.dto';
 @Injectable()
 export class UsersService {
   constructor(private prisma: PrismaService) {}
   async createUser(data: UserCreateDTO): Promise<User | Error> {
     try {
-      const user = this.prisma.user.create({
+      const user = await this.prisma.user.create({
         data: {
           nome: data.nome,
           email: data.email,
@@ -24,11 +24,12 @@ export class UsersService {
       return new Error(`Erro ao criar usuário`);
     }
   }
+
   async userUnique(
     userWhereUniqueInput: Prisma.UserWhereUniqueInput,
   ): Promise<User | Error> {
     try {
-      const uniqueUser = this.prisma.user.findUnique({
+      const uniqueUser = await this.prisma.user.findUnique({
         where: userWhereUniqueInput,
       });
       return uniqueUser;
@@ -36,16 +37,62 @@ export class UsersService {
       return new Error('Erro ao procurar registro');
     }
   }
-  // async userName(username: string): Promise<User | Error> {
-  //   try {
-  //     const user = this.prisma.user.findFirst({
-  //       where: {
-  //         nome: username,
-  //       },
-  //     });
-  //     return user;
-  //   } catch (error) {
-  //     return new Error('Erro ao procurar registro');
-  //   }
-  // }
+
+  async deleteById(userId: string): Promise<User | Error> {
+    try {
+      const deletedUser = await this.prisma.user.delete({
+        where: { id: userId },
+      });
+      return deletedUser;
+    } catch (error) {
+      return new Error('Erro ao excluir usuario');
+    }
+  }
+
+  async desactiveById(userId: string): Promise<User | Error> {
+    try {
+      const desactivatedUser = await this.prisma.user.update({
+        where: { id: userId },
+        data: { ativo: false },
+      });
+      return desactivatedUser;
+    } catch (error) {
+      console.log(error);
+      return new Error('Erro ao desativar usuário');
+    }
+  }
+
+  async activeById(userId: string): Promise<User | Error> {
+    try {
+      const activedUser = await this.prisma.user.update({
+        where: { id: userId },
+        data: { ativo: true },
+      });
+      return activedUser;
+    } catch (error) {
+      console.log(error);
+      return new Error('Erro ao ativar usuário');
+    }
+  }
+
+  async getAll(queries: QueryDTO): Promise<User[] | Error> {
+    const { filter, limit, page, orderDirection } = queries;
+    try {
+      const users: Array<User> = await this.prisma.user.findMany({
+        where: {
+          nome: {
+            contains: filter,
+          },
+        },
+        orderBy: {
+          nome: orderDirection,
+        },
+        take: limit,
+        skip: (page - 1) * limit,
+      });
+      return users;
+    } catch (error) {
+      return new Error('Erro ao procurar registros');
+    }
+  }
 }
