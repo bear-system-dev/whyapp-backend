@@ -10,6 +10,7 @@
     "migrations": "src/database/migrations"
   },
   "scripts": {
+    "postinstall": "npx prisma migrate deploy && npx prisma generate",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
