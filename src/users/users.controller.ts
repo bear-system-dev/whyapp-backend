@@ -10,13 +10,20 @@ import {
 import { Response } from 'express';
 import { UsersService } from './users.service';
 import { UserQueriesDTO } from './dto/userQueries.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { UserDTO } from './dto/user.dto';
 
 @ApiTags('User')
 @Controller('user')
 export class UserController {
   constructor(private usersService: UsersService) {}
   @Get()
+  @ApiResponse({
+    status: 200,
+    description: 'Lista dos dados dos Usuários',
+    type: UserDTO,
+    isArray: true,
+  })
   async getAll(@Query() queries: UserQueriesDTO, @Res() res: Response) {
     const { filter, limit, orderDirection, page } = queries;
     const users = await this.usersService.getAll({
@@ -35,6 +42,12 @@ export class UserController {
   }
 
   @Get(':id')
+  @ApiResponse({
+    status: 200,
+    description: 'Dados do Usuário Solicitado',
+    type: UserDTO,
+    isArray: false,
+  })
   async getById(@Param('id') userId: string, @Res() res: Response) {
     const user = await this.usersService.userUnique({ id: userId });
     if (user instanceof Error)
