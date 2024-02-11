@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma, User } from '@prisma/client';
 import { PrismaService } from 'src/database/prisma.service';
-import { UserCreateDTO } from './createUser.dto';
-import { QueryDTO } from 'src/models/Query.dto';
+import { UserCreateDTO } from './dto/userCreate.dto';
+import { UserQueriesDTO } from './dto/userQueries.dto';
 @Injectable()
 export class UsersService {
   constructor(private prisma: PrismaService) {}
@@ -75,7 +75,7 @@ export class UsersService {
     }
   }
 
-  async getAll(queries: QueryDTO): Promise<User[] | Error> {
+  async getAll(queries: UserQueriesDTO): Promise<User[] | Error> {
     const { filter, limit, page, orderDirection } = queries;
     try {
       const users: Array<User> = await this.prisma.user.findMany({

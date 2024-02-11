@@ -1,9 +1,12 @@
 import { Body, Controller, Post, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { UserCreateDTO } from 'src/users/createUser.dto';
+import { UserCreateDTO } from 'src/users/dto/userCreate.dto';
 import { UsersService } from 'src/users/users.service';
 import { Response } from 'express';
+import { ApiTags } from '@nestjs/swagger';
+import { UserEntrarDTO } from './dto/userEntrar.dto';
 
+@ApiTags('Authentication')
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -12,7 +15,7 @@ export class AuthController {
   ) {}
 
   @Post('entrar')
-  entrar(@Body() userData: { email: string; password: string }) {
+  entrar(@Body() userData: UserEntrarDTO) {
     return this.authService.signIn(userData.email, userData.password);
   }
 

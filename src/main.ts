@@ -7,11 +7,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('WhyApp - Backend')
+    .setTitle('Documentação WhyApp - Backend')
     .setDescription(
       `Aqui você encontra todos os endpoints da aplicação. Qualquer dúvida, entre em contato com o gerenciador do sistema.`,
     )
-    .setVersion('v1.0.1')
+    .setVersion('v1.3.8')
     .setLicense(
       `©2023-2024 Bear System | Todos os direitos reservados`,
       `https://bearsystem.onrender.com`,
