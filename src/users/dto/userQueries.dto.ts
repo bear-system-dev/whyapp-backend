@@ -1,19 +1,20 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class UserQueriesDTO {
-  @ApiProperty()
+  @ApiProperty({ example: 'Lucas Silva' })
   filter?: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 7 })
   limit?: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: 1 })
   page?: number;
 
   @ApiProperty({
     description:
       'Ordem de organização, baseado no banco de dados, do nome dos usuários retornados',
-    enum: { asc: 'asc', desc: 'des' },
+    enum: { asc: 'asc', desc: 'desc' },
+    example: 'desc',
   })
   orderDirection?: 'asc' | 'desc';
 }
