@@ -9,14 +9,15 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import { UsersService } from './users.service';
-import { QueryDTO } from 'src/models/Query.dto';
+import { UserQueriesDTO } from './dto/userQueries.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('User')
 @Controller('user')
 export class UserController {
   constructor(private usersService: UsersService) {}
-
   @Get()
-  async getAll(@Query() queries: QueryDTO, @Res() res: Response) {
+  async getAll(@Query() queries: UserQueriesDTO, @Res() res: Response) {
     const { filter, limit, orderDirection, page } = queries;
     const users = await this.usersService.getAll({
       filter: filter || '',

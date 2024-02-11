@@ -11,7 +11,7 @@ async function bootstrap() {
     .setDescription(
       `Aqui você encontra todos os endpoints da aplicação. Qualquer dúvida, entre em contato com o gerenciador do sistema.`,
     )
-    .setVersion('v1.0.1')
+    .setVersion('v1.3.7')
     .setLicense(
       `©2023-2024 Bear System | Todos os direitos reservados`,
       `https://bearsystem.onrender.com`,
