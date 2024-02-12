@@ -30,7 +30,7 @@ model User {
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
   OpcaoEnquete   OpcaoEnquete?  @relation(fields: [opcaoEnqueteId], references: [id])
-  opcaoEnqueteId String?
+  opcaoEnqueteId String 
   GrupoMessage   GrupoMessage[]
 }
 

@@ -6,6 +6,7 @@ import {
   Res,
   Get,
   Query,
+  Body,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { UsersService } from './users.service';
@@ -98,6 +99,23 @@ export class UserController {
       message: 'Usuário ativado com sucesso',
       userId: activatedUser.id,
       userStatus: activatedUser.ativo,
+    });
+  }
+  @Post('update/:id')
+  async updateUser(
+    @Param('id') userId: string,
+    @Body() newData: any,
+    @Res() res: Response,
+  ) {
+    const updatedUser = await this.usersService.updateUser(userId, newData);
+    if (updatedUser instanceof Error)
+      return res.status(400).json({
+        message: updatedUser.message,
+      });
+    console.log(updatedUser);
+    return res.status(200).json({
+      message: 'Usuário atualizado com sucesso',
+      userId: updatedUser.id,
     });
   }
 }

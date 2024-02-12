@@ -95,4 +95,16 @@ export class UsersService {
       return new Error('Erro ao procurar registros');
     }
   }
+  async updateUser(userId: string, newData: any): Promise<User | Error> {
+    try {
+      const updatedUser = await this.prisma.user.update({
+        where: { id: userId },
+        data: newData,
+      });
+
+      return updatedUser;
+    } catch (error) {
+      return new Error('Erro ao Atualizar');
+    }
+  }
 }
