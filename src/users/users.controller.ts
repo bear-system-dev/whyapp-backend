@@ -13,6 +13,7 @@ import { UsersService } from './users.service';
 import { UserQueriesDTO } from './dto/userQueries.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserDTO } from './dto/user.dto';
+import { UserUpdateDTO } from './dto/userUpdate.dto';
 
 @ApiTags('User')
 @Controller('user')
@@ -104,7 +105,7 @@ export class UserController {
   @Post('update/:id')
   async updateUser(
     @Param('id') userId: string,
-    @Body() newData: any,
+    @Body() newData: UserUpdateDTO,
     @Res() res: Response,
   ) {
     const updatedUser = await this.usersService.updateUser(userId, newData);

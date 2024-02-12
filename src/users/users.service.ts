@@ -3,6 +3,7 @@ import { Prisma, User } from '@prisma/client';
 import { PrismaService } from 'src/database/prisma.service';
 import { UserCreateDTO } from './dto/userCreate.dto';
 import { UserQueriesDTO } from './dto/userQueries.dto';
+import { UserUpdateDTO } from './dto/userUpdate.dto';
 @Injectable()
 export class UsersService {
   constructor(private prisma: PrismaService) {}
@@ -95,7 +96,10 @@ export class UsersService {
       return new Error('Erro ao procurar registros');
     }
   }
-  async updateUser(userId: string, newData: any): Promise<User | Error> {
+  async updateUser(
+    userId: string,
+    newData: UserUpdateDTO,
+  ): Promise<User | Error> {
     try {
       const updatedUser = await this.prisma.user.update({
         where: { id: userId },
