@@ -35,6 +35,7 @@ export class UsersService {
       });
       return uniqueUser;
     } catch (error) {
+      console.log(error);
       return new Error('Erro ao procurar registro');
     }
   }

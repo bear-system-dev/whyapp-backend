@@ -8,5 +8,5 @@ export class UserEntrarDTO {
   email: string;
 
   @ApiProperty({ example: 'umaSenhaBemForteEComplexa' })
-  password: string;
+  senha: string;
 }

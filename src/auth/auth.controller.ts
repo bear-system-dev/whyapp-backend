@@ -1,10 +1,20 @@
-import { Body, Controller, Post, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Headers,
+  Param,
+  Post,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserCreateDTO } from 'src/users/dto/userCreate.dto';
 import { UsersService } from 'src/users/users.service';
 import { Response } from 'express';
 import { ApiTags } from '@nestjs/swagger';
 import { UserEntrarDTO } from './dto/userEntrar.dto';
+import { StatusCodes } from 'http-status-codes';
+import { AuthGuard } from './auth.guard';
 
 @ApiTags('Authentication')
 @Controller('auth')
@@ -14,9 +24,56 @@ export class AuthController {
     private usersService: UsersService,
   ) {}
 
+  @UseGuards(AuthGuard)
+  @Post('sair/:id')
+  async sair(
+    @Param('id') userId: string,
+    @Headers('Authorization') token: string,
+    @Res() res: Response,
+  ) {
+    const user = await this.usersService.userUnique({ id: userId });
+    if (user instanceof Error)
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: user.message });
+
+    const { nome, email } = user;
+    const blackListedTokenFromRequest = {
+      token,
+      usuario: { userId, nome, email },
+    };
+    const isBlackListedToken = await this.authService.isBlackListedToken(
+      blackListedTokenFromRequest,
+    );
+    if (isBlackListedToken instanceof Error)
+      return res
+        .status(StatusCodes.UNAUTHORIZED)
+        .json({ message: isBlackListedToken.message });
+    const logout = this.authService.logOut(blackListedTokenFromRequest);
+    if (logout) {
+      return res
+        .status(StatusCodes.OK)
+        .json({ message: 'Deslogado com sucesso!' });
+    }
+    if (logout instanceof Error) {
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: logout.message });
+    }
+  }
+
   @Post('entrar')
-  entrar(@Body() userData: UserEntrarDTO) {
-    return this.authService.signIn(userData.email, userData.password);
+  async entrar(@Body() userData: UserEntrarDTO, @Res() res: Response) {
+    if (!userData.email || !userData.senha)
+      return res
+        .status(StatusCodes.UNAUTHORIZED)
+        .json({ message: 'Você deve fornecer o email e a senha' });
+    const token = await this.authService.signIn(userData);
+    if (token instanceof Error)
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: token.message });
+    return res.status(StatusCodes.OK).json(token);
   }
 
   @Post('cadastrar')

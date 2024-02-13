@@ -9,9 +9,11 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Documentação WhyApp - Backend')
     .setDescription(
-      `Aqui você encontra todos os endpoints da aplicação. Qualquer dúvida, entre em contato com o gerenciador do sistema.`,
+      `Aqui você encontra todos os endpoints da aplicação. Qualquer dúvida, entre em contato com o gerenciador do sistema.
+      \nATENÇÃO! Ao fazer uma requisição, o banco de dados pode ser alterado. Se isso ocorrer, por favor, remova os dados que você adicionou.
+      `,
     )
-    .setVersion('v1.3.8')
+    .setVersion('v1.4.0')
     .setLicense(
       `©2023-2024 Bear System | Todos os direitos reservados`,
       `https://bearsystem.onrender.com`,
