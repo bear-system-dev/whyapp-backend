@@ -15,6 +15,8 @@ import { ApiTags } from '@nestjs/swagger';
 import { UserEntrarDTO } from './dto/userEntrar.dto';
 import { StatusCodes } from 'http-status-codes';
 import { AuthGuard } from './auth.guard';
+import { BCrypt } from 'src/utils/bcrypt.service';
+const bcrypt = new BCrypt();
 
 @ApiTags('Authentication')
 @Controller('auth')
@@ -71,7 +73,7 @@ export class AuthController {
     const token = await this.authService.signIn(userData);
     if (token instanceof Error)
       return res
-        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .status(StatusCodes.UNAUTHORIZED)
         .json({ message: token.message });
     return res.status(StatusCodes.OK).json(token);
   }
@@ -83,6 +85,12 @@ export class AuthController {
     if (!data.email) erros.push('Você deve fornecer o e-mail');
     if (!data.senha) erros.push('Você deve fornecer a senha');
     if (!data.avatar) erros.push('Você deve fornecer seu avatar');
+    const newSenha = await bcrypt.hashData(data.senha);
+    if (newSenha instanceof Error)
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: newSenha.message });
+    data.senha = newSenha;
     if (erros.length <= 0) {
       const newUser = await this.usersService.createUser(data);
       if (newUser instanceof Error)

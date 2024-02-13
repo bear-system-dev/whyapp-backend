@@ -4,6 +4,8 @@ import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { UserEntrarDTO } from './dto/userEntrar.dto';
 import { BlackListedTokenDTO } from './dto/blackListedToken.dto';
+import { BCrypt } from 'src/utils/bcrypt.service';
+const bcrypt = new BCrypt();
 
 @Injectable()
 export class AuthService {
@@ -17,6 +19,8 @@ export class AuthService {
     try {
       const user = await this.usersService.userUnique({ email: data.email });
       if (user instanceof Error) return new Error(user.message);
+      const isEqual = await bcrypt.compareData(data.senha, user.senha);
+      if (!isEqual) return new Error('Senha incorreta');
       const token = await this.jwtService.signAsync({ userId: user.id });
       return { userdId: user.id, token };
     } catch (error) {
