@@ -4,6 +4,19 @@ import { PrismaService } from 'src/database/prisma.service';
 import { UserCreateDTO } from './dto/userCreate.dto';
 import { UserQueriesDTO } from './dto/userQueries.dto';
 import { UserUpdateDTO } from './dto/userUpdate.dto';
+
+const IUserDataIncludes = {
+  cargos: true,
+  chats: true,
+  enquetes: true,
+  GrupoMessage: true,
+  grupos: true,
+  humor: true,
+  notifications: true,
+  transmissoes: true,
+  _count: true,
+};
+
 @Injectable()
 export class UsersService {
   constructor(private prisma: PrismaService) {}
@@ -32,6 +45,7 @@ export class UsersService {
     try {
       const uniqueUser = await this.prisma.user.findUnique({
         where: userWhereUniqueInput,
+        include: IUserDataIncludes,
       });
       return uniqueUser;
     } catch (error) {
@@ -91,6 +105,7 @@ export class UsersService {
         },
         take: limit,
         skip: (page - 1) * limit,
+        include: IUserDataIncludes,
       });
       return users;
     } catch (error) {
