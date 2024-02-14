@@ -6,17 +6,23 @@ import {
   Res,
   Get,
   Query,
+  Body,
+  UseGuards,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { UsersService } from './users.service';
 import { UserQueriesDTO } from './dto/userQueries.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserDTO } from './dto/user.dto';
+import { UserUpdateDTO } from './dto/userUpdate.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @ApiTags('User')
 @Controller('user')
 export class UserController {
   constructor(private usersService: UsersService) {}
+
+  @UseGuards(AuthGuard)
   @Get()
   @ApiResponse({
     status: 200,
@@ -41,6 +47,7 @@ export class UserController {
     return res.status(200).json({ users });
   }
 
+  @UseGuards(AuthGuard)
   @Get(':id')
   @ApiResponse({
     status: 200,
@@ -59,6 +66,7 @@ export class UserController {
     return res.status(200).json({ user });
   }
 
+  @UseGuards(AuthGuard)
   @Delete('remove-account/:id')
   async deleteById(@Param('id') userId: string, @Res() res: Response) {
     const deletedUser = await this.usersService.deleteById(userId);
@@ -73,6 +81,7 @@ export class UserController {
     });
   }
 
+  @UseGuards(AuthGuard)
   @Delete('activate-account/:id')
   async desactiveById(@Param('id') userId: string, @Res() res: Response) {
     const desactivatedUser = await this.usersService.desactiveById(userId);
@@ -87,6 +96,7 @@ export class UserController {
     });
   }
 
+  @UseGuards(AuthGuard)
   @Post('activate-account/:id')
   async activeById(@Param('id') userId: string, @Res() res: Response) {
     const activatedUser = await this.usersService.activeById(userId);
@@ -98,6 +108,25 @@ export class UserController {
       message: 'Usuário ativado com sucesso',
       userId: activatedUser.id,
       userStatus: activatedUser.ativo,
+    });
+  }
+
+  @UseGuards(AuthGuard)
+  @Post('update/:id')
+  async updateUser(
+    @Param('id') userId: string,
+    @Body() newData: UserUpdateDTO,
+    @Res() res: Response,
+  ) {
+    const updatedUser = await this.usersService.updateUser(userId, newData);
+    if (updatedUser instanceof Error)
+      return res.status(400).json({
+        message: updatedUser.message,
+      });
+    console.log(updatedUser);
+    return res.status(200).json({
+      message: 'Usuário atualizado com sucesso',
+      userId: updatedUser.id,
     });
   }
 }

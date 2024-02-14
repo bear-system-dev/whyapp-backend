@@ -13,25 +13,24 @@ datasource db {
 // }
 
 model User {
-  id             String         @id @default(uuid())
-  nome           String
-  email          String         @unique
-  senha          String
-  ativo          Boolean
-  identificador  String
-  avatar         String?
-  humor          Humor[]
-  descricao      String?
-  grupos         Grupo[]
-  cargos         Cargo[]
-  chats          Chat[]
-  transmissoes   Transmissao[]
-  notifications  Notification[]
-  createdAt      DateTime       @default(now())
-  updatedAt      DateTime       @updatedAt
-  OpcaoEnquete   OpcaoEnquete?  @relation(fields: [opcaoEnqueteId], references: [id])
-  opcaoEnqueteId String?
-  GrupoMessage   GrupoMessage[]
+  id            String         @id @default(uuid())
+  nome          String
+  email         String         @unique
+  senha         String
+  ativo         Boolean
+  identificador String
+  avatar        String?
+  humor         Humor[]
+  descricao     String?
+  grupos        Grupo[]
+  cargos        Cargo[]
+  chats         Chat[]
+  transmissoes  Transmissao[]
+  notifications Notification[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  enquetes      Enquete[]
+  GrupoMessage  GrupoMessage[]
 }
 
 model Notification {
@@ -176,8 +175,9 @@ model Cargo {
 model Enquete {
   id             String       @id @default(uuid())
   titulo         String
-  opcoes         OpcaoEnquete @relation(fields: [opcaoEnqueteId], references: [id])
+  usuario        User         @relation(fields: [usuarioId], references: [id])
   usuarioId      String
+  opcoes         OpcaoEnquete @relation(fields: [opcaoEnqueteId], references: [id])
   grupo          Grupo        @relation(fields: [grupoId], references: [id])
   grupoId        String
   createdAt      DateTime     @default(now())
@@ -189,7 +189,7 @@ model OpcaoEnquete {
   id        String    @id @default(uuid())
   nome      String
   correta   Boolean
-  usuarios  User[]
+  usuarios  String[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   Enquete   Enquete[]
