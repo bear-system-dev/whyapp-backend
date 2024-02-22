@@ -3,7 +3,7 @@ import { compare, hash } from 'bcrypt';
 
 @Injectable()
 export class BCrypt {
-  private SALT: number = 16; //Se mudar, as senhas no DB não servirão mais.
+  private SALT: number = 8; //Se mudar, as senhas no DB não servirão mais.
   constructor() {}
   async hashData(data: string): Promise<string | Error> {
     try {
