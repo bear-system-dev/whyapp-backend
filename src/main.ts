@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import 'dotenv/config';
+import helmet from 'helmet';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -12,6 +13,7 @@ async function bootstrap() {
     optionsSuccessStatus: 204,
     credentials: true,
   });
+  app.use(helmet());
 
   const config = new DocumentBuilder()
     .setTitle('Documentação WhyApp - Backend')

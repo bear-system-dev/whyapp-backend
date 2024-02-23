@@ -16,7 +16,6 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserDTO } from './dto/user.dto';
 import { UserUpdateDTO } from './dto/userUpdate.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
-import { Throttle } from '@nestjs/throttler';
 
 @ApiTags('User')
 @Controller('user')
@@ -31,7 +30,6 @@ export class UserController {
     type: UserDTO,
     isArray: true,
   })
-  @Throttle({ default: { limit: 3, ttl: 60000 } })
   async getAll(@Query() queries: UserQueriesDTO, @Res() res: Response) {
     const { filter, limit, orderDirection, page } = queries;
     const users = await this.usersService.getAll({
