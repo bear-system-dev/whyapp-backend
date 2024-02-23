@@ -10,6 +10,7 @@ import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
+  private errors: Array<object> = []; //test
   constructor(
     private jwtService: JwtService,
     private authService: AuthService,
@@ -18,8 +19,11 @@ export class AuthGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
     const token = this.extractTokenFromHeader(request);
+
+    this.errors.push({ token }); //test
+
     if (!token) {
-      throw new UnauthorizedException('Token não existe');
+      throw new UnauthorizedException(`Token não existe ${this.errors}`);
     }
     const isBlackListedToken = await this.authService.isBlackListedToken({
       token: `Bearer ${token}`,
@@ -41,6 +45,7 @@ export class AuthGuard implements CanActivate {
 
   private extractTokenFromHeader(request: Request): string | undefined {
     const [type, token] = request.headers.authorization?.split(' ') ?? [];
+    this.errors.push({ extract: { type, token, headers: request.headers } });
     return type === 'Bearer' ? token : undefined;
   }
 }
