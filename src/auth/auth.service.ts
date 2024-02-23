@@ -22,7 +22,7 @@ export class AuthService {
       const isEqual = await bcrypt.compareData(data.senha, user.senha);
       if (!isEqual) return new Error('Senha incorreta');
       const token = await this.jwtService.signAsync({ userId: user.id });
-      return { userdId: user.id, token };
+      return { userId: user.id, token };
     } catch (error) {
       console.log(error);
       return new Error('Erro ao buscar registro');
