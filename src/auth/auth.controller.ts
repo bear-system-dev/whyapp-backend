@@ -1,16 +1,17 @@
 import {
   Body,
   Controller,
-  Headers,
+  // Headers,
   Param,
   Post,
+  Req,
   Res,
   UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserCreateDTO } from 'src/users/dto/userCreate.dto';
 import { UsersService } from 'src/users/users.service';
-import { Response } from 'express';
+import { Response, Request } from 'express';
 import { ApiTags } from '@nestjs/swagger';
 import { UserEntrarDTO } from './dto/userEntrar.dto';
 import { StatusCodes } from 'http-status-codes';
@@ -30,10 +31,12 @@ export class AuthController {
   @Post('sair/:id')
   async sair(
     @Param('id') userId: string,
-    @Headers('Authorization') token: string,
+    // @Headers('Authorization') token: string, //TESTES, TALVES REMOVER
+    @Req() req: Request,
     @Res() res: Response,
   ) {
     const user = await this.usersService.userUnique({ id: userId });
+    const token: string = req.headers.authorization;
     if (user instanceof Error)
       return res
         .status(StatusCodes.BAD_REQUEST)
