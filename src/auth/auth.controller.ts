@@ -16,6 +16,7 @@ import { UserEntrarDTO } from './dto/userEntrar.dto';
 import { StatusCodes } from 'http-status-codes';
 import { AuthGuard } from './auth.guard';
 import { BCrypt } from 'src/utils/bcrypt.service';
+import { CustomLogger } from 'src/utils/customLogger/customLogger.service';
 const bcrypt = new BCrypt();
 
 @ApiTags('Authentication')
@@ -24,6 +25,7 @@ export class AuthController {
   constructor(
     private authService: AuthService,
     private usersService: UsersService,
+    private logService: CustomLogger,
   ) {}
 
   @UseGuards(AuthGuard)
@@ -75,6 +77,7 @@ export class AuthController {
       return res
         .status(StatusCodes.UNAUTHORIZED)
         .json({ message: token.message });
+    this.logService.log({ message: 'Usuário entrou', token });
     return res.status(StatusCodes.OK).json(token);
   }
 
@@ -95,6 +98,10 @@ export class AuthController {
       const newUser = await this.usersService.createUser(data);
       if (newUser instanceof Error)
         return res.status(400).json({ messagae: newUser.message });
+      this.logService.log({
+        message: 'Novo usuário cadastrado',
+        newUserId: newUser.id,
+      });
       return res.status(201).json({ newUserId: newUser.id });
     }
     return res.status(400).json({ erros });
