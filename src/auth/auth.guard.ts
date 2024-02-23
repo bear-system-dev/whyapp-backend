@@ -23,7 +23,10 @@ export class AuthGuard implements CanActivate {
     this.errors.push({ token }); //test
 
     if (!token) {
-      throw new UnauthorizedException(`Token não existe ${this.errors}`);
+      throw new UnauthorizedException({
+        message: 'Token não existe',
+        errors: this.errors,
+      });
     }
     const isBlackListedToken = await this.authService.isBlackListedToken({
       token: `Bearer ${token}`,
