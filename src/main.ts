@@ -3,16 +3,13 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import 'dotenv/config';
 import helmet from 'helmet';
+import { corsOptions } from './utils/cors.options';
+
+const SERVER_PORT = process.env.SERVER_PORT || 3000;
+const SWAGGER_DOCS_PATH = process.env.SWAGGER_DOCS_PATH || 'v1/docs/api';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.enableCors({
-    origin: '*',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-    credentials: true,
-  });
+  const app = await NestFactory.create(AppModule, { cors: corsOptions });
   app.use(helmet());
 
   const config = new DocumentBuilder()
@@ -22,15 +19,15 @@ async function bootstrap() {
       \nATENÇÃO! Ao fazer uma requisição, o banco de dados pode ser alterado. Se isso ocorrer, por favor, remova os dados que você adicionou.
       `,
     )
-    .setVersion('v1.4.0')
+    .setVersion('v1.4.2')
     .setLicense(
       `©2023-2024 Bear System | Todos os direitos reservados`,
       `https://bearsystem.onrender.com`,
     )
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('v1/docs/api', app, document);
+  SwaggerModule.setup(SWAGGER_DOCS_PATH, app, document);
 
-  await app.listen(3000);
+  await app.listen(SERVER_PORT);
 }
 bootstrap();

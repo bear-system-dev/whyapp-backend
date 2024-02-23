@@ -4,13 +4,15 @@ import { UsersModule } from '../users/users.module';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './auth.controller';
 
+const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '10m';
+
 @Module({
   imports: [
     UsersModule,
     JwtModule.register({
       global: true,
       secret: process.env.SECRET_KEY,
-      signOptions: { expiresIn: process.env.JWT_EXPIRES_IN },
+      signOptions: { expiresIn: JWT_EXPIRES_IN },
     }),
   ],
   providers: [AuthService],

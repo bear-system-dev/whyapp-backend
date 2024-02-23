@@ -7,14 +7,17 @@ import { UsersModule } from './users/users.module';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 
+const THROTTLER_TTL = process.env.THROTTLER_TTL || 60000;
+const THROTTLER_LIMIT = process.env.THROTTLER_LIMIT || 100;
+
 @Module({
   imports: [
     AuthModule,
     UsersModule,
     ThrottlerModule.forRoot([
       {
-        ttl: 60000,
-        limit: 100,
+        ttl: Number(THROTTLER_TTL),
+        limit: Number(THROTTLER_LIMIT),
       },
     ]),
   ],
