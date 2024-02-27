@@ -5,7 +5,7 @@ import { UserCreateDTO } from './dto/userCreate.dto';
 import { UserQueriesDTO } from './dto/userQueries.dto';
 import { UserUpdateDTO } from './dto/userUpdate.dto';
 
-const IUserDataIncludes = {
+const userDataIncludes = {
   cargos: true,
   chats: true,
   enquetes: true,
@@ -45,7 +45,7 @@ export class UsersService {
     try {
       const uniqueUser = await this.prisma.user.findUnique({
         where: userWhereUniqueInput,
-        include: IUserDataIncludes,
+        include: userDataIncludes,
       });
       return uniqueUser;
     } catch (error) {
@@ -105,7 +105,7 @@ export class UsersService {
         },
         take: limit,
         skip: (page - 1) * limit,
-        include: IUserDataIncludes,
+        include: userDataIncludes,
       });
       return users;
     } catch (error) {

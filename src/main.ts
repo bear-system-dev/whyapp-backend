@@ -19,11 +19,15 @@ async function bootstrap() {
       \nATENÇÃO! Ao fazer uma requisição, o banco de dados pode ser alterado. Se isso ocorrer, por favor, remova os dados que você adicionou.
       `,
     )
-    .setVersion('v1.4.2')
+    .setVersion('v1.4.8')
     .setLicense(
       `©2023-2024 Bear System | Todos os direitos reservados`,
       `https://bearsystem.onrender.com`,
     )
+    .addTag('Home')
+    .addTag('Authentication')
+    .addTag('User')
+    .addTag('Message')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup(SWAGGER_DOCS_PATH, app, document);

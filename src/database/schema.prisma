@@ -57,8 +57,8 @@ model Humor {
 model Chat {
   id         String         @id @default(uuid())
   nome       String
-  token      String
-  foto       String
+  token      String?
+  foto       String?
   mensagens  ChatMessage[]
   imagens    ChatImage[]
   videos     ChatVideo[]
