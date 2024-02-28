@@ -23,7 +23,7 @@ export class MessagesController {
   constructor(private readonly messagesService: MessagesService) {}
 
   @UseGuards(AuthGuard)
-  @Post('private/:fromUserId')
+  @Post('private/:fromUserId/text')
   async createPrivateMessage(
     @Query() query: IQueryProps,
     @Param('fromUserId') fromUserId: string,
