@@ -27,6 +27,7 @@ export class ChatsService {
           chats: {
             create: {
               nome: chatCreateDTO.nome,
+              token: chatCreateDTO.token,
             },
           },
         },
@@ -61,13 +62,3 @@ export class ChatsService {
     }
   }
 }
-
-
-//Teste do dia 27/02/2024
-//
-
-//Teste do dia 27/02/2024
-//
-
-//Teste do dia 27/02/2024
-//

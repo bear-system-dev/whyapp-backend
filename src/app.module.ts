@@ -8,7 +8,7 @@ import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { ChatsService } from './chats/chats.service';
 import { ChatsModule } from './chats/chats.module';
-import { MessagesModule } from './messages/messages.module';
+import { MessageModule } from './messages/message.module';
 
 const THROTTLER_TTL = process.env.THROTTLER_TTL || 60000;
 const THROTTLER_LIMIT = process.env.THROTTLER_LIMIT || 100;
@@ -24,7 +24,7 @@ const THROTTLER_LIMIT = process.env.THROTTLER_LIMIT || 100;
         limit: Number(THROTTLER_LIMIT),
       },
     ]),
-    MessagesModule,
+    MessageModule,
   ],
   controllers: [HomePageController, UserController],
   providers: [

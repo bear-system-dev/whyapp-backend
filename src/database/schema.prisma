@@ -66,6 +66,7 @@ model Chat {
   documentos ChatDocument[]
   usuario    User           @relation(fields: [usuarioId], references: [id])
   usuarioId  String
+  destinatarioId String?
   createdAt  DateTime       @default(now())
   updatedAt  DateTime       @updatedAt
 }
