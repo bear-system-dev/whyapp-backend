@@ -20,4 +20,14 @@ export class MyGateway {
     const recipientId = client.handshake.query.recipientId as string;
     await this.messageService.processMessage(userId, recipientId, body);
   }
+  @SubscribeMessage('getMessages')
+  async onGetMessages(
+    @MessageBody() data: any,
+    @ConnectedSocket() client: Socket,
+  ) {
+    const mergedIds = data;
+    console.log(mergedIds);
+    const messages = await this.messageService.getMessages(mergedIds);
+    client.emit('messages', messages);
+  }
 }

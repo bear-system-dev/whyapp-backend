@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
+import { Chat, ChatMessage, User } from '@prisma/client';
 import { PrismaService } from 'src/database/prisma.service';
+import { chatDto } from './dto/chat.dto';
+import { newMessageDTO } from './dto/newMessage.dto';
 
 @Injectable()
 export class MessageService {
@@ -9,30 +12,48 @@ export class MessageService {
     userId: string,
     recipientId: string,
     message: any,
-  ): Promise<void> {
+  ): Promise<any> {
     try {
       const sender = await this.findUserById(userId);
       const recipient = await this.findUserById(recipientId);
-
+      if (userId === recipientId) {
+        throw new Error('O id do remetente e do destinatário são iguais.');
+      }
       if (sender && recipient) {
-        const chatData = {
-          nome: sender.nome,
-          destinatarioId: recipientId,
-          usuarioId: userId,
-        };
-        const chatId = await this.findChatId(userId, recipientId);
+        const mergedIds = await this.mergeIds(userId, recipientId);
+        const chatId = await this.findChatId(mergedIds);
         console.log(
           `Processing message from user ${sender.nome} to recipient ${recipient.nome}:`,
           message,
         );
 
-        if (chatId) {
-          const newMessage = await this.createNewMessage(message, chatId);
+        if (!chatId) {
+          const chatData = {
+            nome: sender.nome,
+            usuarioId: userId,
+            chatId: mergedIds,
+          };
+          const newChat = await this.createNewChat(chatData);
+          const newMessageData = {
+            mensagem: message,
+            chatId: newChat.chatId,
+            fromUserId: userId,
+            toUserId: recipientId,
+          };
+          const newMessage = await this.createNewMessage(newMessageData);
+
+          return newMessage;
+        } else {
+          const newMessageData = {
+            mensagem: message,
+            chatId: chatId,
+            fromUserId: userId,
+            toUserId: recipientId,
+          };
+          const newMessage = await this.createNewMessage(newMessageData);
+
           return newMessage;
         }
-
-        const newChat = await this.createNewChat(chatData);
-        console.log(newChat);
       } else {
         console.log('Sender or recipient not found.');
       }
@@ -42,7 +63,7 @@ export class MessageService {
     }
   }
 
-  private async findUserById(userId: string): Promise<any> {
+  private async findUserById(userId: string): Promise<User | null> {
     try {
       const user = await this.prisma.user.findUnique({
         where: { id: userId },
@@ -54,14 +75,14 @@ export class MessageService {
     }
   }
 
-  private async findChatId(
-    userId: string,
-    recipientId: string,
-  ): Promise<string | null> {
+  private async findChatId(mergedIds: string): Promise<string | null> {
     try {
       const chat = await this.prisma.chat.findFirst({
-        where: { destinatarioId: recipientId, usuarioId: userId },
+        where: { chatId: mergedIds },
       });
+      if (!chat) {
+        return;
+      }
       return chat ? chat.id : null;
     } catch (error) {
       console.log(error);
@@ -69,7 +90,7 @@ export class MessageService {
     }
   }
 
-  async createNewChat(chatData): Promise<any> {
+  private async createNewChat(chatData: chatDto): Promise<Chat> {
     console.log(chatData);
 
     try {
@@ -83,20 +104,40 @@ export class MessageService {
     }
   }
 
-  async createNewMessage(message, chatId): Promise<any> {
-    console.log(message);
-
+  private async createNewMessage(
+    newMessageData: newMessageDTO,
+  ): Promise<ChatMessage> {
     try {
       const newMessage = await this.prisma.chatMessage.create({
-        data: {
-          ...message,
-          chat: { connect: { id: chatId } },
-        },
+        data: newMessageData,
       });
-      console.log(newMessage);
+      return newMessage;
     } catch (error) {
       console.log(error);
       throw new Error('Erro ao criar a mensagem');
+    }
+  }
+  async getMessages(mergedIds: string): Promise<ChatMessage[]> {
+    try {
+      const chatId = await this.findChatId(mergedIds);
+      const findChatMessages = await this.prisma.chatMessage.findMany({
+        where: { chatId: chatId },
+      });
+      console.log(findChatMessages);
+      return findChatMessages;
+    } catch (error) {
+      console.error('Error fetching chat messages:', error);
+      throw error;
+    }
+  }
+  private async mergeIds(id1: string, id2: string): Promise<string> {
+    try {
+      const sortByFirst = [id1, id2].sort();
+      const joinedIds = sortByFirst.join('');
+      return joinedIds;
+    } catch (error) {
+      console.error('Error merging IDs:', error);
+      throw error;
     }
   }
 }
