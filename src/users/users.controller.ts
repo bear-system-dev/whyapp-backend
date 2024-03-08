@@ -17,6 +17,7 @@ import { UserDTO } from './dto/user.dto';
 import { UserUpdateDTO } from './dto/userUpdate.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { StatusCodes } from 'http-status-codes';
+import { userQueriesFriendsDTO } from './dto/userQueriesFriends.dto';
 
 @ApiTags('User')
 @Controller('user')
@@ -26,7 +27,7 @@ export class UserController {
   @UseGuards(AuthGuard)
   @Delete('amigos')
   async removeFriend(
-    @Query() queries: { userId: string; friendId: string },
+    @Query() queries: userQueriesFriendsDTO,
     @Res() res: Response,
   ): Promise<Response> {
     const { userId, friendId } = queries;
@@ -52,7 +53,7 @@ export class UserController {
           status: 500,
         });
       return res.status(StatusCodes.OK).json({
-        message: 'Amigo removido da sua lista de amigos com sucesso',
+        message: 'Usuário removido da sua lista de amigos com sucesso',
         status: 500,
       });
     }
@@ -65,7 +66,7 @@ export class UserController {
   @UseGuards(AuthGuard)
   @Post('amigos')
   async addFriend(
-    @Query() queries: { userId: string; friendId: string },
+    @Query() queries: userQueriesFriendsDTO,
     @Res() res: Response,
   ): Promise<Response> {
     const { userId, friendId } = queries;
