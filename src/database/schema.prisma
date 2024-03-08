@@ -7,11 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// model Test {
-//   id   String @id @default(uuid())
-//   name String
-// }
-
 model User {
   id            String         @id @default(uuid())
   nome          String
@@ -25,6 +20,7 @@ model User {
   grupos        Grupo[]
   cargos        Cargo[]
   chats         Chat[]
+  amigos        String[]
   transmissoes  Transmissao[]
   notifications Notification[]
   createdAt     DateTime       @default(now())
