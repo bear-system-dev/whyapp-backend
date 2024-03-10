@@ -4,12 +4,16 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import 'dotenv/config';
 import helmet from 'helmet';
 import { corsOptions } from './utils/cors.options';
+import { NestExpressApplication } from '@nestjs/platform-express';
 
 const SERVER_PORT = process.env.SERVER_PORT || 3000;
 const SWAGGER_DOCS_PATH = process.env.SWAGGER_DOCS_PATH || 'v1/docs/api';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: corsOptions });
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    cors: corsOptions,
+  });
+  app.useBodyParser('json', { limit: '5mb' });
   app.use(helmet());
 
   const config = new DocumentBuilder()
