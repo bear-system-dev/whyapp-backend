@@ -19,7 +19,12 @@ export class MyGateway {
   ) {
     const userId = client.handshake.query.userId as string;
     const recipientId = client.handshake.query.recipientId as string;
-    await this.messageService.processMessage(userId, recipientId, body);
+    const message = await this.messageService.processMessage(
+      userId,
+      recipientId,
+      body,
+    );
+    client.emit('newMessage', message);
   }
   @SubscribeMessage('getMessages')
   async onGetMessages(
