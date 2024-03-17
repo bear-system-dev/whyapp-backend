@@ -16,16 +16,14 @@ export class MessageService {
     try {
       const sender = await this.findUserById(userId);
       const recipient = await this.findUserById(recipientId);
+
       if (userId === recipientId) {
         throw new Error('O id do remetente e do destinatário são iguais.');
       }
+
       if (sender && recipient) {
         const mergedIds = await this.mergeIds(userId, recipientId);
-        const chatId = await this.findChatId(mergedIds);
-        console.log(
-          `Processing message from user ${sender.nome} to recipient ${recipient.nome}:`,
-          message,
-        );
+        let chatId = await this.findChatId(mergedIds);
 
         if (!chatId) {
           const chatData = {
@@ -34,26 +32,18 @@ export class MessageService {
             chatId: mergedIds,
           };
           const newChat = await this.createNewChat(chatData);
-          const newMessageData = {
-            mensagem: message,
-            chatId: newChat.chatId,
-            fromUserId: userId,
-            toUserId: recipientId,
-          };
-          const newMessage = await this.createNewMessage(newMessageData);
-
-          return newMessage;
-        } else {
-          const newMessageData = {
-            mensagem: message,
-            chatId: chatId,
-            fromUserId: userId,
-            toUserId: recipientId,
-          };
-          const newMessage = await this.createNewMessage(newMessageData);
-
-          return newMessage;
+          chatId = newChat.id;
         }
+
+        const newMessageData = {
+          mensagem: message,
+          chatId: chatId,
+          fromUserId: userId,
+          toUserId: recipientId,
+        };
+        const newMessage = await this.createNewMessage(newMessageData);
+
+        return newMessage;
       } else {
         console.log('Sender or recipient not found.');
       }
@@ -80,9 +70,6 @@ export class MessageService {
       const chat = await this.prisma.chat.findFirst({
         where: { chatId: mergedIds },
       });
-      if (!chat) {
-        return;
-      }
       return chat ? chat.id : null;
     } catch (error) {
       console.log(error);
