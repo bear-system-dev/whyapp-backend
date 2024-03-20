@@ -140,10 +140,10 @@ model Transmissao {
 model Grupo {
   id             String          @id @default(uuid())
   nome           String
-  token          String
-  foto           String
+  token          String?
+  foto           String?
   usuarios       String[]
-  descricao      String
+  descricao      String?
   proprietario   User            @relation(fields: [proprietarioId], references: [id])
   proprietarioId String
   cargos         Cargo[]
@@ -154,7 +154,7 @@ model Grupo {
   documentos     GrupoDocument[]
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
-  Enquete        Enquete[]
+  enquetes       Enquete[]
 }
 
 model Cargo {
