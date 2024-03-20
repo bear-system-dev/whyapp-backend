@@ -103,4 +103,83 @@ export class GroupsService {
       return new Error('Erro ao procurar por grupos deste usuário');
     }
   }
+
+  async addMembers(membros: Array<string>, groupId: string) {
+    try {
+      membros.forEach(async (membro) => {
+        await this.prismaService.grupo.update({
+          where: { id: groupId },
+          data: {
+            usuarios: {
+              push: membro,
+            },
+          },
+        });
+      });
+      return membros;
+    } catch (error) {
+      console.log(error);
+      return new Error('Erro ao adicionar membro ao grupo');
+    }
+  }
+
+  async removeMembers(membrosArray: Array<string>, groupId: string) {
+    try {
+      membrosArray.forEach(async (membroId) => {
+        await this.prismaService.grupo.update({
+          where: { id: groupId },
+          data: {
+            usuarios: {
+              set: (await this.getGroupMembers(groupId)).filter((member) => {
+                member !== membroId;
+              }),
+            },
+          },
+          select: { usuarios: true },
+        });
+      });
+    } catch (error) {
+      console.log(error);
+      return new Error('Erro ao adicionar membro ao grupo');
+    }
+  }
+
+  private async getGroupMembers(groupId: string) {
+    const membros = await this.prismaService.grupo.findFirst({
+      where: { id: groupId },
+      select: { usuarios: true },
+    });
+    return membros.usuarios;
+  }
+
+  // async isGroupMember(
+  //   groupId: string,
+  //   membros: string[],
+  // ): Promise<boolean | Error> {
+  //   let isMembro = true;
+  //   try {
+  //     membros.forEach(async (membroId) => {
+  //       const foundMembro = await this.prismaService.grupo.findFirst({
+  //         where: {
+  //           AND: {
+  //             id: groupId,
+  //             usuarios: {
+  //               has: membroId,
+  //             },
+  //           },
+  //         },
+  //       });
+  //       if (!foundMembro) {
+  //         console.log('false', isMembro);
+  //         isMembro = false;
+  //       }
+  //       console.log('true', isMembro);
+  //       isMembro = true;
+  //     });
+  //     return isMembro;
+  //   } catch (error) {
+  //     console.log(error);
+  //     return new Error('Erro ao buscar membro do grupo');
+  //   }
+  // }
 }

@@ -126,7 +126,6 @@ export class GroupsController {
         status: 400,
       });
     const groupExists = await this.groupsService.getById(groupId);
-    console.log(groupExists);
     if (groupExists instanceof Error)
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
         errorMessage: groupExists.message,
@@ -167,6 +166,110 @@ export class GroupsController {
       message: 'Grupos encontrados com sucesso',
       status: 200,
       grupos,
+    });
+  }
+
+  @Post('add-members')
+  async addMembers(
+    @Query('groupId') groupId: string,
+    @Body() data: { membros: Array<string> },
+    @Res() res: Response,
+  ) {
+    const { membros } = data;
+    if (!membros || membros?.length < 1 || membros === undefined)
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Você deve fornecer o Array membros com pelo menos um usuário',
+        status: 400,
+      });
+    if (!groupId)
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Você deve fornecer groupId nas queries',
+        status: 400,
+      });
+    const groupExists = await this.groupsService.getById(groupId);
+    if (groupExists instanceof Error)
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        errorMessage: groupExists.message,
+        status: 500,
+      });
+    if (!groupExists)
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        message: 'Esse grupo não existe',
+        status: 500,
+      });
+    const membrosAdicionados = await this.groupsService.addMembers(
+      membros,
+      groupId,
+    );
+    if (membrosAdicionados instanceof Error)
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        errorMessage: membrosAdicionados.message,
+        status: 500,
+      });
+    return res.status(StatusCodes.CREATED).json({
+      message: 'Membros adicionados com sucesso!',
+      status: 200,
+      membrosAdicionados,
+    });
+  }
+
+  @Post('remove-members')
+  async removeMembers(
+    @Query('groupId') groupId: string,
+    @Body() data: { membros: Array<string> },
+    @Res() res: Response,
+  ) {
+    const { membros } = data;
+    if (!membros || membros?.length < 1 || membros === undefined)
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Você deve fornecer o Array membros com pelo menos um usuário',
+        status: 400,
+      });
+    if (!groupId)
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Você deve fornecer groupId nas queries',
+        status: 400,
+      });
+    const groupExists = await this.groupsService.getById(groupId);
+    if (groupExists instanceof Error)
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        errorMessage: groupExists.message,
+        status: 500,
+      });
+    if (!groupExists)
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        message: 'Esse grupo não existe',
+        status: 500,
+      });
+
+    // const isGroupMember = await this.groupsService.isGroupMember(
+    //   groupId,
+    //   membros,
+    // );
+    // if (isGroupMember instanceof Error)
+    //   return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+    //     message: isGroupMember.message,
+    //     status: 500,
+    //   });
+    // if (!isGroupMember)
+    //   return res.status(StatusCodes.BAD_REQUEST).json({
+    //     message: 'Esse usuário não membro deste grupo ou já foi removido',
+    //     status: 400,
+    //   });
+
+    const membrosRemovidos = await this.groupsService.removeMembers(
+      membros,
+      groupId,
+    );
+    if (membrosRemovidos instanceof Error)
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        errorMessage: membrosRemovidos.message,
+        status: 500,
+      });
+    return res.status(StatusCodes.CREATED).json({
+      message: 'Membros removidos com sucesso!',
+      status: 200,
+      membrosRemovidos: membros,
     });
   }
 }
