@@ -4,9 +4,7 @@ import { PrismaService } from 'src/database/prisma.service';
 import { Grupo } from '@prisma/client';
 import { UpdateGroupDto } from './dto/update-group.dto';
 import { AddMembersDto } from './dto/add-members.dto';
-// import { UpdateGroupDto } from './dto/update-group.dto';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const groupIncludedData = {
   usuarios: true,
   cargos: true,
@@ -150,35 +148,4 @@ export class GroupsService {
     });
     return membros.usuarios;
   }
-
-  // async isGroupMember(
-  //   groupId: string,
-  //   membros: string[],
-  // ): Promise<boolean | Error> {
-  //   let isMembro = true;
-  //   try {
-  //     membros.forEach(async (membroId) => {
-  //       const foundMembro = await this.prismaService.grupo.findFirst({
-  //         where: {
-  //           AND: {
-  //             id: groupId,
-  //             usuarios: {
-  //               has: membroId,
-  //             },
-  //           },
-  //         },
-  //       });
-  //       if (!foundMembro) {
-  //         console.log('false', isMembro);
-  //         isMembro = false;
-  //       }
-  //       console.log('true', isMembro);
-  //       isMembro = true;
-  //     });
-  //     return isMembro;
-  //   } catch (error) {
-  //     console.log(error);
-  //     return new Error('Erro ao buscar membro do grupo');
-  //   }
-  // }
 }

@@ -17,7 +17,6 @@ import { AuthGuard } from 'src/auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
 import { UpdateGroupDto } from './dto/update-group.dto';
 import { AddMembersDto } from './dto/add-members.dto';
-// import { UpdateGroupDto } from './dto/update-group.dto';
 
 @UseGuards(AuthGuard)
 @ApiTags('Group')
@@ -27,9 +26,8 @@ export class GroupsController {
 
   @Post()
   async create(@Body() createGroupDto: CreateGroupDto, @Res() res: Response) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { nome, proprietarioId, descricao, foto, token } = createGroupDto;
-    if (!nome)
+    const { nome, proprietarioId } = createGroupDto;
+    if (!nome || !proprietarioId)
       return res.status(StatusCodes.BAD_REQUEST).json({
         message: 'É preciso enviar um nome e o proprietarioId',
         status: 400,
@@ -241,22 +239,6 @@ export class GroupsController {
         message: 'Esse grupo não existe',
         status: 500,
       });
-
-    // const isGroupMember = await this.groupsService.isGroupMember(
-    //   groupId,
-    //   membros,
-    // );
-    // if (isGroupMember instanceof Error)
-    //   return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-    //     message: isGroupMember.message,
-    //     status: 500,
-    //   });
-    // if (!isGroupMember)
-    //   return res.status(StatusCodes.BAD_REQUEST).json({
-    //     message: 'Esse usuário não membro deste grupo ou já foi removido',
-    //     status: 400,
-    //   });
-
     const membrosRemovidos = await this.groupsService.removeMembers(
       membros,
       groupId,
@@ -269,7 +251,7 @@ export class GroupsController {
     return res.status(StatusCodes.CREATED).json({
       message: 'Membros removidos com sucesso!',
       status: 200,
-      membrosRemovidos: membros,
+      membrosRemovidos,
     });
   }
 }
