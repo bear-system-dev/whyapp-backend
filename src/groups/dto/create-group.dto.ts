@@ -14,10 +14,4 @@ export class CreateGroupDto {
 
   @ApiProperty({ required: true })
   proprietarioId: string;
-
-  @ApiProperty({
-    required: false,
-    example: '["usuário 1", "usuário 2", "usuário 3"]',
-  })
-  usuarios?: string[];
 }

@@ -3,10 +3,12 @@ import { CreateGroupDto } from './dto/create-group.dto';
 import { PrismaService } from 'src/database/prisma.service';
 import { Grupo } from '@prisma/client';
 import { UpdateGroupDto } from './dto/update-group.dto';
+import { AddMembersDto } from './dto/add-members.dto';
 // import { UpdateGroupDto } from './dto/update-group.dto';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const groupIncludedData = {
+  usuarios: true,
   cargos: true,
   mensagens: true,
   imagens: true,
@@ -14,32 +16,32 @@ const groupIncludedData = {
   videos: true,
   documentos: true,
   enquetes: true,
+  _count: true,
 };
 
 @Injectable()
 export class GroupsService {
   constructor(private prismaService: PrismaService) {}
-  async create(createGroupDto: CreateGroupDto): Promise<Error | Grupo[]> {
-    const { nome, descricao, foto, token, usuarios } = createGroupDto;
+  async create(createGroupDto: CreateGroupDto): Promise<Error | Grupo> {
+    const { nome, descricao, foto, token, proprietarioId } = createGroupDto;
     try {
-      const grupo = await this.prismaService.user.update({
-        where: {
-          id: createGroupDto.proprietarioId,
-        },
+      const grupo = await this.prismaService.grupo.create({
         data: {
-          grupos: {
+          nome,
+          proprietarioId,
+          descricao,
+          foto,
+          token,
+          usuarios: {
             create: {
-              nome,
-              descricao,
-              foto,
-              token,
-              usuarios,
+              adicionadoPor: proprietarioId,
+              usuarioId: proprietarioId,
             },
           },
         },
-        select: { grupos: { include: groupIncludedData } },
+        include: groupIncludedData,
       });
-      return grupo.grupos;
+      return grupo;
     } catch (error) {
       console.log(error);
       return new Error('Erro ao criar grupo');
@@ -78,10 +80,10 @@ export class GroupsService {
     }
   }
 
-  async deleteById(id: string): Promise<Error | Grupo> {
+  async deleteById(groupId: string): Promise<Error | Grupo> {
     try {
       const deletedGroup = await this.prismaService.grupo.delete({
-        where: { id },
+        where: { id: groupId },
         include: groupIncludedData,
       });
       return deletedGroup;
@@ -93,9 +95,9 @@ export class GroupsService {
 
   async getAllByUserId(userId: string): Promise<Error | Grupo[]> {
     try {
-      const { grupos } = await this.prismaService.user.findFirst({
-        where: { id: userId },
-        select: { grupos: { include: groupIncludedData } },
+      const grupos = await this.prismaService.grupo.findMany({
+        where: { usuarios: { some: { usuarioId: userId } } },
+        include: groupIncludedData,
       });
       return grupos;
     } catch (error) {
@@ -104,40 +106,37 @@ export class GroupsService {
     }
   }
 
-  async addMembers(membros: Array<string>, groupId: string) {
+  async addMembers(membros: Array<AddMembersDto>, groupId: string) {
     try {
-      membros.forEach(async (membro) => {
-        await this.prismaService.grupo.update({
-          where: { id: groupId },
-          data: {
-            usuarios: {
-              push: membro,
+      const grupo = await this.prismaService.grupo.update({
+        where: { id: groupId },
+        data: {
+          usuarios: {
+            createMany: {
+              skipDuplicates: true,
+              data: membros,
             },
           },
-        });
+        },
       });
-      return membros;
+      return grupo;
     } catch (error) {
       console.log(error);
       return new Error('Erro ao adicionar membro ao grupo');
     }
   }
 
-  async removeMembers(membrosArray: Array<string>, groupId: string) {
+  async removeMembers(membros: Array<AddMembersDto>, groupId: string) {
     try {
-      membrosArray.forEach(async (membroId) => {
-        await this.prismaService.grupo.update({
-          where: { id: groupId },
-          data: {
-            usuarios: {
-              set: (await this.getGroupMembers(groupId)).filter((member) => {
-                member !== membroId;
-              }),
-            },
+      const grupo = await this.prismaService.grupo.update({
+        where: { id: groupId },
+        data: {
+          usuarios: {
+            deleteMany: membros,
           },
-          select: { usuarios: true },
-        });
+        },
       });
+      return grupo;
     } catch (error) {
       console.log(error);
       return new Error('Erro ao adicionar membro ao grupo');

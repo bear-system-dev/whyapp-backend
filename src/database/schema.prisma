@@ -8,25 +8,36 @@ datasource db {
 }
 
 model User {
-  id            String         @id @default(uuid())
+  id            String          @id @default(uuid())
   nome          String
-  email         String         @unique
+  email         String          @unique
   senha         String
   ativo         Boolean
   identificador String
   avatar        String?
   humor         Humor[]
   descricao     String?
-  grupos        Grupo[]
+  grupos        UsersOnGroups[]
   cargos        Cargo[]
   chats         Chat[]
   amigos        String[]
   transmissoes  Transmissao[]
   notifications Notification[]
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
   enquetes      Enquete[]
   GrupoMessage  GrupoMessage[]
+}
+
+model UsersOnGroups {
+  usuario       User     @relation(fields: [usuarioId], references: [id])
+  usuarioId     String
+  groupo        Grupo    @relation(fields: [grupoId], references: [id], onDelete: Cascade)
+  grupoId       String
+  entrouEm      DateTime @default(now())
+  adicionadoPor String
+
+  @@id([usuarioId, grupoId])
 }
 
 model Notification {
@@ -142,10 +153,9 @@ model Grupo {
   nome           String
   token          String?
   foto           String?
-  usuarios       String[]
-  descricao      String?
-  proprietario   User            @relation(fields: [proprietarioId], references: [id])
+  usuarios       UsersOnGroups[]
   proprietarioId String
+  descricao      String?
   cargos         Cargo[]
   mensagens      GrupoMessage[]
   imagens        GrupoImage[]

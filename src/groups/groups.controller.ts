@@ -16,6 +16,7 @@ import { StatusCodes } from 'http-status-codes';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
 import { UpdateGroupDto } from './dto/update-group.dto';
+import { AddMembersDto } from './dto/add-members.dto';
 // import { UpdateGroupDto } from './dto/update-group.dto';
 
 @UseGuards(AuthGuard)
@@ -27,23 +28,22 @@ export class GroupsController {
   @Post()
   async create(@Body() createGroupDto: CreateGroupDto, @Res() res: Response) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { nome, proprietarioId, usuarios, descricao, foto, token } =
-      createGroupDto;
+    const { nome, proprietarioId, descricao, foto, token } = createGroupDto;
     if (!nome)
       return res.status(StatusCodes.BAD_REQUEST).json({
         message: 'É preciso enviar um nome e o proprietarioId',
         status: 400,
       });
-    const userGrupos = await this.groupsService.create(createGroupDto);
-    if (userGrupos instanceof Error)
+    const newGrupo = await this.groupsService.create(createGroupDto);
+    if (newGrupo instanceof Error)
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-        message: userGrupos.message,
+        message: newGrupo.message,
         status: 500,
       });
     return res.status(StatusCodes.CREATED).json({
       message: 'Grupo criado com sucesso',
       status: 200,
-      data: userGrupos,
+      data: newGrupo,
     });
   }
 
@@ -172,7 +172,7 @@ export class GroupsController {
   @Post('add-members')
   async addMembers(
     @Query('groupId') groupId: string,
-    @Body() data: { membros: Array<string> },
+    @Body() data: { membros: Array<AddMembersDto> },
     @Res() res: Response,
   ) {
     const { membros } = data;
@@ -216,7 +216,7 @@ export class GroupsController {
   @Post('remove-members')
   async removeMembers(
     @Query('groupId') groupId: string,
-    @Body() data: { membros: Array<string> },
+    @Body() data: { membros: Array<AddMembersDto> },
     @Res() res: Response,
   ) {
     const { membros } = data;
