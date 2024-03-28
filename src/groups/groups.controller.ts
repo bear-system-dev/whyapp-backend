@@ -170,10 +170,9 @@ export class GroupsController {
   @Post('add-members')
   async addMembers(
     @Query('groupId') groupId: string,
-    @Body() data: { membros: Array<AddMembersDto> },
+    @Body() membros: Array<AddMembersDto>,
     @Res() res: Response,
   ) {
-    const { membros } = data;
     if (!membros || membros?.length < 1 || membros === undefined)
       return res.status(StatusCodes.BAD_REQUEST).json({
         message: 'Você deve fornecer o Array membros com pelo menos um usuário',
@@ -214,10 +213,9 @@ export class GroupsController {
   @Post('remove-members')
   async removeMembers(
     @Query('groupId') groupId: string,
-    @Body() data: { membros: Array<AddMembersDto> },
+    @Body() membros: Array<AddMembersDto>,
     @Res() res: Response,
   ) {
-    const { membros } = data;
     if (!membros || membros?.length < 1 || membros === undefined)
       return res.status(StatusCodes.BAD_REQUEST).json({
         message: 'Você deve fornecer o Array membros com pelo menos um usuário',

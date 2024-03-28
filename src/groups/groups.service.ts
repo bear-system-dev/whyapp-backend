@@ -120,7 +120,7 @@ export class GroupsService {
       return grupo;
     } catch (error) {
       console.log(error);
-      return new Error('Erro ao adicionar membro ao grupo');
+      return new Error('Erro ao adicionar membros ao grupo');
     }
   }
 
@@ -137,7 +137,7 @@ export class GroupsService {
       return grupo;
     } catch (error) {
       console.log(error);
-      return new Error('Erro ao adicionar membro ao grupo');
+      return new Error('Erro ao remover membros do grupo');
     }
   }
 
