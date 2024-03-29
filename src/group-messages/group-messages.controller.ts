@@ -6,6 +6,8 @@ import {
   Delete,
   Res,
   Put,
+  Get,
+  Query,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { GroupMessagesService } from './group-messages.service';
@@ -13,6 +15,7 @@ import { CreateGroupMessageDto } from './dto/create-group-message.dto';
 import { UpdateGroupMessageDto } from './dto/update-group-message.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { StatusCodes } from 'http-status-codes';
+import { UserQueriesDTO } from 'src/users/dto/userQueries.dto';
 
 @ApiTags('Group Messages')
 @Controller('group-messages')
@@ -96,6 +99,34 @@ export class GroupMessagesController {
       message: 'Mensagem atualizada com sucesso',
       status: 202,
       data: editedMessage,
+    });
+  }
+
+  @Get(':grupoId')
+  async getMessagesByGroupId(
+    @Param('grupoId') grupoId: string,
+    @Query() queries: UserQueriesDTO,
+    @Res() res: Response,
+  ) {
+    const { filter, limit, orderDirection, page } = queries;
+    const groupMessages = await this.groupMessagesService.getMessagesByGroupId(
+      {
+        filter: filter || '',
+        limit: Number(limit) || 7,
+        page: Number(page) || 1,
+        orderDirection: orderDirection || 'asc',
+      },
+      grupoId,
+    );
+    if (groupMessages instanceof Error)
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        message: groupMessages.message,
+        status: 500,
+      });
+    return res.status(StatusCodes.ACCEPTED).json({
+      message: 'Mensagens encontradas',
+      status: 200,
+      data: groupMessages,
     });
   }
 }

@@ -4,6 +4,7 @@ import { CreateGroupMessageDto } from './dto/create-group-message.dto';
 import { UpdateGroupMessageDto } from './dto/update-group-message.dto';
 import { PrismaService } from 'src/database/prisma.service';
 import { GrupoMessage } from '@prisma/client';
+import { PaginationQueriesDto } from './dto/pagination-queries.dto';
 
 const grupoMessageIncludedData = {};
 @Injectable()
@@ -53,6 +54,35 @@ export class GroupMessagesService {
     } catch (error) {
       console.log(error);
       return new Error('Erro ao atualizar mensagem');
+    }
+  }
+
+  async getMessagesByGroupId(
+    paginationQueriesDto: PaginationQueriesDto,
+    grupoId: string,
+  ): Promise<Error | GrupoMessage[]> {
+    try {
+      const { filter, limit, page, orderDirection } = paginationQueriesDto;
+      const grupoMessages = await this.prismaService.grupoMessage.findMany({
+        where: {
+          AND: {
+            grupoId,
+            mensagem: {
+              contains: filter,
+            },
+          },
+        },
+        orderBy: {
+          updatedAt: orderDirection,
+        },
+        take: limit,
+        skip: (page - 1) * limit,
+        include: grupoMessageIncludedData,
+      });
+      return grupoMessages;
+    } catch (error) {
+      console.log(error);
+      return new Error('Erro ao buscar mensagens do grupo');
     }
   }
 }
