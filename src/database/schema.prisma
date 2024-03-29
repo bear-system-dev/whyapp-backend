@@ -211,8 +211,8 @@ model GrupoMessage {
   grupoId       String
   usuario       User        @relation(fields: [usuarioId], references: [id])
   usuarioId     String
-  transmissao   Transmissao @relation(fields: [transmissaoId], references: [id])
-  transmissaoId String
+  transmissao   Transmissao? @relation(fields: [transmissaoId], references: [id])
+  transmissaoId String?
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
 }

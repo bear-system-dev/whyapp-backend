@@ -1,26 +1,58 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@nestjs/common';
 import { CreateGroupMessageDto } from './dto/create-group-message.dto';
 import { UpdateGroupMessageDto } from './dto/update-group-message.dto';
+import { PrismaService } from 'src/database/prisma.service';
+import { GrupoMessage } from '@prisma/client';
 
+const grupoMessageIncludedData = {};
 @Injectable()
 export class GroupMessagesService {
-  create(createGroupMessageDto: CreateGroupMessageDto) {
-    return 'This action adds a new groupMessage';
+  constructor(private readonly prismaService: PrismaService) {}
+  async create(
+    createGroupMessageDto: CreateGroupMessageDto,
+  ): Promise<Error | GrupoMessage> {
+    try {
+      const message = await this.prismaService.grupoMessage.create({
+        data: createGroupMessageDto,
+        include: grupoMessageIncludedData,
+      });
+      return message;
+    } catch (error) {
+      console.log(error);
+      return new Error('Erro ao cadastrar mensagem');
+    }
   }
 
-  findAll() {
-    return `This action returns all groupMessages`;
+  async deleteById(id: string): Promise<Error | GrupoMessage> {
+    try {
+      const oldMessage = await this.prismaService.grupoMessage.delete({
+        where: { id },
+        include: grupoMessageIncludedData,
+      });
+      return oldMessage;
+    } catch (error) {
+      console.log(error);
+      return new Error('Erro ao remover a mensagem do grupo');
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} groupMessage`;
-  }
-
-  update(id: number, updateGroupMessageDto: UpdateGroupMessageDto) {
-    return `This action updates a #${id} groupMessage`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} groupMessage`;
+  async updateById(
+    id: string,
+    mensagem: string,
+  ): Promise<Error | GrupoMessage> {
+    try {
+      const editedMessage = await this.prismaService.grupoMessage.update({
+        where: { id },
+        data: {
+          mensagem,
+        },
+        include: grupoMessageIncludedData,
+      });
+      return editedMessage;
+    } catch (error) {
+      console.log(error);
+      return new Error('Erro ao atualizar mensagem');
+    }
   }
 }
