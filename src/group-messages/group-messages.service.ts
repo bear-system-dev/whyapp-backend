@@ -85,4 +85,16 @@ export class GroupMessagesService {
       return new Error('Erro ao buscar mensagens do grupo');
     }
   }
+
+  async getById(id: string) {
+    try {
+      const mensagem = await this.prismaService.grupoMessage.findFirst({
+        where: { id },
+      });
+      return mensagem;
+    } catch (error) {
+      console.log(error);
+      return new Error('Erro ao buscar mensagem');
+    }
+  }
 }
