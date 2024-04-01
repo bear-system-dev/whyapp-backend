@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateGroupDto } from './dto/create-group.dto';
 import { PrismaService } from 'src/database/prisma.service';
-import { Grupo } from '@prisma/client';
+import { Grupo, GrupoMessage } from '@prisma/client';
 import { UpdateGroupDto } from './dto/update-group.dto';
 import { AddMembersDto } from './dto/add-members.dto';
 
@@ -65,13 +65,19 @@ export class GroupsService {
     }
   }
 
-  async getById(id: string): Promise<Error | Grupo> {
+  async getById(
+    id: string,
+  ): Promise<Error | { grupo: Grupo; ultimaMensagem: GrupoMessage }> {
     try {
       const grupo = await this.prismaService.grupo.findUnique({
         where: { id },
         include: groupIncludedData,
       });
-      return grupo;
+      const groupInfo = {
+        grupo,
+        ultimaMensagem: grupo.mensagens[grupo.mensagens.length - 1] ?? null,
+      };
+      return groupInfo;
     } catch (error) {
       console.log(error);
       return new Error('Erro ao buscar grupo pelo id');

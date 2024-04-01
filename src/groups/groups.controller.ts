@@ -103,16 +103,16 @@ export class GroupsController {
         message: 'Esse grupo não existe',
         status: 500,
       });
-    const grupo = await this.groupsService.getById(groupId);
-    if (grupo instanceof Error)
+    const groupInfo = await this.groupsService.getById(groupId);
+    if (groupInfo instanceof Error)
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-        message: grupo.message,
+        message: groupInfo.message,
         status: 500,
       });
     return res.status(StatusCodes.OK).json({
       message: 'Grupo encontrado com sucesso',
       status: 200,
-      grupo,
+      groupInfo,
     });
   }
 
