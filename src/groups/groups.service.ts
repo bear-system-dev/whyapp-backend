@@ -97,13 +97,23 @@ export class GroupsService {
     }
   }
 
-  async getAllByUserId(userId: string): Promise<Error | Grupo[]> {
+  async getAllByUserId(
+    userId: string,
+  ): Promise<Error | { grupo: Grupo; ultimaMensagem: GrupoMessage }[]> {
     try {
       const grupos = await this.prismaService.grupo.findMany({
         where: { usuarios: { some: { usuarioId: userId } } },
         include: groupIncludedData,
       });
-      return grupos;
+      const groupsInfo = [];
+      grupos.forEach((grupo) => {
+        groupsInfo.push({
+          grupo,
+          ultimaMensagem: grupo.mensagens[grupo.mensagens.length - 1] ?? null,
+        });
+      });
+      console.log(groupsInfo);
+      return groupsInfo;
     } catch (error) {
       console.log(error);
       return new Error('Erro ao procurar por grupos deste usuário');

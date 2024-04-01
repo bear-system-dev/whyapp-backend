@@ -154,16 +154,16 @@ export class GroupsController {
         message: 'Você deve fornecer userId nas queries',
         status: 400,
       });
-    const grupos = await this.groupsService.getAllByUserId(userId);
-    if (grupos instanceof Error)
+    const groupsInfo = await this.groupsService.getAllByUserId(userId);
+    if (groupsInfo instanceof Error)
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-        message: grupos.message,
+        message: groupsInfo.message,
         status: 500,
       });
     return res.status(StatusCodes.OK).json({
       message: 'Grupos encontrados com sucesso',
       status: 200,
-      grupos,
+      groupsInfo,
     });
   }
 

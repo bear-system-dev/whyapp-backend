@@ -34,8 +34,8 @@ export class GroupsGateway {
       return client.emit('error', { mensagem: userGroups.message });
 
     userGroups.forEach((userGroup) => {
-      console.log(`UserId: ${userId} || Joined Group: ${userGroup.id}`);
-      client.join(userGroup.id);
+      console.log(`UserId: ${userId} || Joined Group: ${userGroup.grupo.id}`);
+      client.join(userGroup.grupo.id);
     });
     return client.emit('load groups', userGroups);
   }
