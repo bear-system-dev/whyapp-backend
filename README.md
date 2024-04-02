@@ -1,4 +1,4 @@
-# whyapp-backend
+# WhyApp-Backend
 
 ### API do software [WhyApp](https://github.com/bear-system-dev/whyapp-frontend), desenvolvido pela [Bear System © | 2023](https://bearsystem.onrender.com)
 
