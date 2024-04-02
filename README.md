@@ -6,6 +6,8 @@
 
 - [NodeJs LTS (v20.11.0)](https://nodejs.org/en)
 - Yarn
+  
+O projeto é feito utilizando o framework [NestJS](https://docs.nestjs.com)
 
 ## Instalação
 
