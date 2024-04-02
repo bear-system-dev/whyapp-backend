@@ -4,7 +4,7 @@
   "description": "",
   "author": "",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "prisma": {
     "schema": "src/database/schema.prisma",
     "migrations": "src/database/migrations"

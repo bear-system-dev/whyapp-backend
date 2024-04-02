@@ -2,6 +2,11 @@
 
 ### API do software [WhyApp](https://github.com/bear-system-dev/whyapp-frontend), desenvolvido pela [Bear System © | 2023](https://bearsystem.onrender.com)
 
+## Depende
+
+- [NodeJs LTS (v20.11.0)](https://nodejs.org/en)
+- Yarn
+
 ## Instalação
 
 Siga estes passos corretamente para instalar, testar e modificar a cópia desta API
