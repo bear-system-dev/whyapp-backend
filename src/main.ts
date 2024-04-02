@@ -21,7 +21,7 @@ async function bootstrap() {
     .setDescription(
       `Aqui você encontra todos os endpoints da aplicação. Qualquer dúvida, entre em contato com o gerenciador do sistema.
       \n<em>ATENÇÃO!</em> Ao fazer uma requisição, o banco de dados pode ser alterado. Se isso ocorrer, por favor, remova os dados que você adicionou.
-      \n<i><b>Mais detalhes sobre o funcionamento você encontra na <a alt='docs' href='' target='_blank'>documentação</a> do repositório</b></i>
+      \n<i><b>Mais detalhes sobre o funcionamento você encontra na <a alt='docs' href='https://github.com/bear-system-dev/whyapp-backend/tree/dev?tab=readme-ov-file#whyapp-backend' target='_blank'>documentação</a> do repositório</b></i>
       `,
     )
     .setVersion('v1.5.3')
