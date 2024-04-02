@@ -8,6 +8,7 @@ import {
   Put,
   Get,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { GroupMessagesService } from './group-messages.service';
@@ -16,8 +17,10 @@ import { UpdateGroupMessageDto } from './dto/update-group-message.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { StatusCodes } from 'http-status-codes';
 import { UserQueriesDTO } from 'src/users/dto/userQueries.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @ApiTags('Group Messages')
+@UseGuards(AuthGuard)
 @Controller('group-messages')
 export class GroupMessagesController {
   constructor(private readonly groupMessagesService: GroupMessagesService) {}
