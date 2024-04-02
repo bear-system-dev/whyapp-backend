@@ -6,6 +6,6 @@ import { ApiTags } from '@nestjs/swagger';
 export class HomePageController {
   @Get()
   home(): string {
-    return 'Teste';
+    return '<h1>API WhyApp Backend - Rodando...<h1>';
   }
 }
