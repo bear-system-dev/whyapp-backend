@@ -14,7 +14,7 @@ export class MyGateway {
 
   @SubscribeMessage('newMessage')
   async onNewMessage(
-    @MessageBody() body: any,
+    @MessageBody() body: string,
     @ConnectedSocket() client: Socket,
   ) {
     const userId = client.handshake.query.userId as string;
@@ -24,16 +24,16 @@ export class MyGateway {
       recipientId,
       body,
     );
-    client.emit('newMessage', message);
+    const mergedIds = await this.messageService.mergeIds(userId, recipientId);
+    return client.to(mergedIds).emit('newMessage', message);
   }
   @SubscribeMessage('getMessages')
   async onGetMessages(
-    @MessageBody() data: any,
+    @MessageBody() data: string,
     @ConnectedSocket() client: Socket,
   ) {
     const mergedIds = data;
-    console.log(mergedIds);
     const messages = await this.messageService.getMessages(mergedIds);
-    client.emit('messages', messages);
+    return client.to(mergedIds).emit('messages', messages);
   }
 }
