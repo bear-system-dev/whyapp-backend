@@ -7,30 +7,37 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// model Test {
-//   id   String @id @default(uuid())
-//   name String
-// }
-
 model User {
-  id            String         @id @default(uuid())
+  id            String          @id @default(uuid())
   nome          String
-  email         String         @unique
+  email         String          @unique
   senha         String
   ativo         Boolean
   identificador String
   avatar        String?
   humor         Humor[]
   descricao     String?
-  grupos        Grupo[]
+  grupos        UsersOnGroups[]
   cargos        Cargo[]
   chats         Chat[]
+  amigos        String[]
   transmissoes  Transmissao[]
   notifications Notification[]
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
   enquetes      Enquete[]
   GrupoMessage  GrupoMessage[]
+}
+
+model UsersOnGroups {
+  usuario       User     @relation(fields: [usuarioId], references: [id])
+  usuarioId     String
+  groupo        Grupo    @relation(fields: [grupoId], references: [id], onDelete: Cascade)
+  grupoId       String
+  entrouEm      DateTime @default(now())
+  adicionadoPor String
+
+  @@id([usuarioId, grupoId])
 }
 
 model Notification {
@@ -57,8 +64,8 @@ model Humor {
 model Chat {
   id         String         @id @default(uuid())
   nome       String
-  token      String
-  foto       String
+  token      String?
+  foto       String?
   mensagens  ChatMessage[]
   imagens    ChatImage[]
   videos     ChatVideo[]
@@ -66,17 +73,20 @@ model Chat {
   documentos ChatDocument[]
   usuario    User           @relation(fields: [usuarioId], references: [id])
   usuarioId  String
+  chatId     String?
   createdAt  DateTime       @default(now())
   updatedAt  DateTime       @updatedAt
 }
 
 model ChatMessage {
-  id        String   @id @default(uuid())
-  mensagem  String
-  chat      Chat     @relation(fields: [chatId], references: [id])
-  chatId    String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         String   @id @default(uuid())
+  mensagem   String
+  chat       Chat     @relation(fields: [chatId], references: [id])
+  chatId     String
+  fromUserId String
+  toUserId   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 model ChatAudio {
@@ -141,12 +151,11 @@ model Transmissao {
 model Grupo {
   id             String          @id @default(uuid())
   nome           String
-  token          String
-  foto           String
-  usuarios       String[]
-  descricao      String
-  proprietario   User            @relation(fields: [proprietarioId], references: [id])
+  token          String?
+  foto           String?
+  usuarios       UsersOnGroups[]
   proprietarioId String
+  descricao      String?
   cargos         Cargo[]
   mensagens      GrupoMessage[]
   imagens        GrupoImage[]
@@ -155,7 +164,7 @@ model Grupo {
   documentos     GrupoDocument[]
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
-  Enquete        Enquete[]
+  enquetes       Enquete[]
 }
 
 model Cargo {
@@ -202,8 +211,8 @@ model GrupoMessage {
   grupoId       String
   usuario       User        @relation(fields: [usuarioId], references: [id])
   usuarioId     String
-  transmissao   Transmissao @relation(fields: [transmissaoId], references: [id])
-  transmissaoId String
+  transmissao   Transmissao? @relation(fields: [transmissaoId], references: [id])
+  transmissaoId String?
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
 }

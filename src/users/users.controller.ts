@@ -16,11 +16,110 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserDTO } from './dto/user.dto';
 import { UserUpdateDTO } from './dto/userUpdate.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
+import { StatusCodes } from 'http-status-codes';
+import { userQueriesFriendsDTO } from './dto/userQueriesFriends.dto';
 
 @ApiTags('User')
 @Controller('user')
 export class UserController {
   constructor(private usersService: UsersService) {}
+
+  @UseGuards(AuthGuard)
+  @Delete('amigos')
+  async removeFriend(
+    @Query() queries: userQueriesFriendsDTO,
+    @Res() res: Response,
+  ): Promise<Response> {
+    const { userId, friendId } = queries;
+    if (userId && friendId) {
+      const isFriends = await this.usersService.isFriends(userId, friendId);
+      if (isFriends instanceof Error)
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+          message: isFriends.message,
+          status: 500,
+        });
+      if (!isFriends)
+        return res.status(StatusCodes.BAD_REQUEST).json({
+          message: 'Esse usuário não está na sua lista de amigos',
+          status: 400,
+        });
+      const userWithoutFriend = await this.usersService.removeFriend(
+        userId,
+        friendId,
+      );
+      if (userWithoutFriend instanceof Error)
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+          message: userWithoutFriend.message,
+          status: 500,
+        });
+      return res.status(StatusCodes.OK).json({
+        message: 'Usuário removido da sua lista de amigos com sucesso',
+        status: 500,
+      });
+    }
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message: 'Você precisar informar userId e friendId nos Queries Params',
+      status: 400,
+    });
+  }
+
+  @UseGuards(AuthGuard)
+  @Post('amigos')
+  async addFriend(
+    @Query() queries: userQueriesFriendsDTO,
+    @Res() res: Response,
+  ): Promise<Response> {
+    const { userId, friendId } = queries;
+    if (userId && friendId) {
+      if (userId === friendId)
+        return res.status(StatusCodes.BAD_REQUEST).json({
+          message: 'Você não pode adicionar você mesmo a sua lista de amigos',
+          status: 400,
+        });
+      const isFriends = await this.usersService.isFriends(userId, friendId);
+      if (isFriends instanceof Error)
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+          message: isFriends.message,
+          status: 500,
+        });
+      if (isFriends)
+        return res.status(StatusCodes.BAD_REQUEST).json({
+          message: 'Esse usuário já existe na sua lista de amigos',
+          status: 400,
+        });
+
+      const findUsersFriend = await this.usersService.userUnique({
+        id: friendId,
+      });
+      if (findUsersFriend instanceof Error)
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+          message: findUsersFriend.message,
+          status: 500,
+        });
+      if (!findUsersFriend)
+        return res.status(StatusCodes.BAD_REQUEST).json({
+          message: 'Esse usuário não existe',
+          status: 400,
+        });
+      const userWithFriend = await this.usersService.addFriend(
+        userId,
+        friendId,
+      );
+      if (userWithFriend instanceof Error)
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+          message: userWithFriend.message,
+          status: 500,
+        });
+      return res.status(StatusCodes.OK).json({
+        message: 'Usuário adicionado na sua lista de amigos com sucesso',
+        userWithFriend,
+      });
+    }
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message: 'Você precisar informar userId e friendId nos Queries Params',
+      status: 400,
+    });
+  }
 
   @UseGuards(AuthGuard)
   @Get()

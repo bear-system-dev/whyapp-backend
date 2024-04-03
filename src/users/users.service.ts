@@ -5,7 +5,7 @@ import { UserCreateDTO } from './dto/userCreate.dto';
 import { UserQueriesDTO } from './dto/userQueries.dto';
 import { UserUpdateDTO } from './dto/userUpdate.dto';
 
-const IUserDataIncludes = {
+const userDataIncludes = {
   cargos: true,
   chats: true,
   enquetes: true,
@@ -45,7 +45,7 @@ export class UsersService {
     try {
       const uniqueUser = await this.prisma.user.findUnique({
         where: userWhereUniqueInput,
-        include: IUserDataIncludes,
+        include: userDataIncludes,
       });
       return uniqueUser;
     } catch (error) {
@@ -105,13 +105,14 @@ export class UsersService {
         },
         take: limit,
         skip: (page - 1) * limit,
-        include: IUserDataIncludes,
+        include: userDataIncludes,
       });
       return users;
     } catch (error) {
       return new Error('Erro ao procurar registros');
     }
   }
+
   async updateUser(
     userId: string,
     newData: UserUpdateDTO,
@@ -125,6 +126,80 @@ export class UsersService {
       return updatedUser;
     } catch (error) {
       return new Error('Erro ao Atualizar');
+    }
+  }
+
+  private async getUserFriends(userId: string): Promise<string[]> {
+    const { amigos } = await this.prisma.user.findFirst({
+      where: {
+        id: userId,
+      },
+      select: {
+        amigos: true,
+      },
+    });
+    return amigos;
+  }
+
+  async addFriend(userId: string, friendId: string): Promise<User | Error> {
+    try {
+      const userWithFriend = await this.prisma.user.update({
+        where: {
+          id: userId,
+        },
+        data: {
+          amigos: {
+            push: friendId,
+          },
+        },
+        include: userDataIncludes,
+      });
+      return userWithFriend;
+    } catch (error) {
+      console.log(error);
+      return new Error('Erro ao adicionar amigo ao usuário');
+    }
+  }
+
+  async removeFriend(userId: string, friendId: string): Promise<User | Error> {
+    try {
+      const userWithoutFriend = await this.prisma.user.update({
+        where: {
+          id: userId,
+        },
+        data: {
+          amigos: {
+            set: (await this.getUserFriends(userId)).filter(
+              (friend) => friend !== friendId,
+            ),
+          },
+        },
+        include: userDataIncludes,
+      });
+      return userWithoutFriend;
+    } catch (error) {
+      console.log(error);
+      return new Error('Erro ao remover amigo do usuário');
+    }
+  }
+
+  async isFriends(userId: string, friendId: string): Promise<boolean | Error> {
+    try {
+      const friend = await this.prisma.user.findFirst({
+        where: {
+          AND: {
+            id: userId,
+            amigos: {
+              has: friendId,
+            },
+          },
+        },
+      });
+      if (!friend) return false;
+      return true;
+    } catch (error) {
+      console.log(error);
+      return new Error('Erro ao verificar se são amigos');
     }
   }
 }

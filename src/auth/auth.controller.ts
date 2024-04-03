@@ -16,6 +16,7 @@ import { UserEntrarDTO } from './dto/userEntrar.dto';
 import { StatusCodes } from 'http-status-codes';
 import { AuthGuard } from './auth.guard';
 import { BCrypt } from 'src/utils/bcrypt.service';
+import { CustomLogger } from 'src/utils/customLogger/customLogger.service';
 const bcrypt = new BCrypt();
 
 @ApiTags('Authentication')
@@ -24,6 +25,7 @@ export class AuthController {
   constructor(
     private authService: AuthService,
     private usersService: UsersService,
+    private logService: CustomLogger,
   ) {}
 
   @UseGuards(AuthGuard)
@@ -70,11 +72,26 @@ export class AuthController {
       return res
         .status(StatusCodes.UNAUTHORIZED)
         .json({ message: 'Você deve fornecer o email e a senha' });
+    const verEmail = await this.usersService.userUnique({
+      email: userData.email,
+    });
+    if (verEmail instanceof Error)
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        message: verEmail.message,
+        errorStack: verEmail.stack,
+        status: 500,
+      });
+    if (!verEmail)
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Esse email ainda não possue cadastro',
+        status: 400,
+      });
     const token = await this.authService.signIn(userData);
     if (token instanceof Error)
       return res
         .status(StatusCodes.UNAUTHORIZED)
         .json({ message: token.message });
+    this.logService.log({ message: 'Usuário entrou', token });
     return res.status(StatusCodes.OK).json(token);
   }
 
@@ -92,9 +109,27 @@ export class AuthController {
         .json({ message: newSenha.message });
     data.senha = newSenha;
     if (erros.length <= 0) {
+      const verEmail = await this.usersService.userUnique({
+        email: data.email,
+      });
+      if (verEmail instanceof Error)
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+          message: verEmail.message,
+          errorStack: verEmail.stack,
+          status: 500,
+        });
+      if (verEmail?.email === data.email)
+        return res.status(StatusCodes.BAD_REQUEST).json({
+          message: 'Esse email já possue cadastrado',
+          status: 400,
+        });
       const newUser = await this.usersService.createUser(data);
       if (newUser instanceof Error)
         return res.status(400).json({ messagae: newUser.message });
+      this.logService.log({
+        message: 'Novo usuário cadastrado',
+        newUserId: newUser.id,
+      });
       return res.status(201).json({ newUserId: newUser.id });
     }
     return res.status(400).json({ erros });
