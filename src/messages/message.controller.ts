@@ -27,6 +27,7 @@ export class MyGateway {
     const mergedIds = await this.messageService.mergeIds(userId, recipientId);
     return client.to(mergedIds).emit('newMessage', message);
   }
+
   @SubscribeMessage('getMessages')
   async onGetMessages(
     @MessageBody() data: string,
@@ -35,5 +36,21 @@ export class MyGateway {
     const mergedIds = data;
     const messages = await this.messageService.getMessages(mergedIds);
     return client.to(mergedIds).emit('messages', messages);
+  }
+
+  @SubscribeMessage('join private')
+  async onJoinPrivate(
+    @ConnectedSocket() client: Socket,
+    @MessageBody() mergedIds: string,
+  ) {
+    client.join(mergedIds);
+  }
+
+  @SubscribeMessage('leave private')
+  async onLeavePrivate(
+    @ConnectedSocket() client: Socket,
+    @MessageBody() mergedIds: string,
+  ) {
+    client.leave(mergedIds);
   }
 }
