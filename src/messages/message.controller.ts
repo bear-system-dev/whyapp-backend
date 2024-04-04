@@ -35,6 +35,7 @@ export class MyGateway {
   ) {
     const mergedIds = data;
     const messages = await this.messageService.getMessages(mergedIds);
+    console.log('Mensagem enviada para a sala: ', mergedIds);
     return client.to(mergedIds).emit('messages', messages);
   }
 
@@ -43,6 +44,7 @@ export class MyGateway {
     @ConnectedSocket() client: Socket,
     @MessageBody() mergedIds: string,
   ) {
+    console.log('Cliente entrou na sala: ', mergedIds);
     return client.join(mergedIds);
   }
 
@@ -51,6 +53,7 @@ export class MyGateway {
     @ConnectedSocket() client: Socket,
     @MessageBody() mergedIds: string,
   ) {
+    console.log('Cliente saiu da sala: ', mergedIds);
     return client.leave(mergedIds);
   }
 }
