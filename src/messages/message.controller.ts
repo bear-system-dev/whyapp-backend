@@ -43,7 +43,7 @@ export class MyGateway {
     @ConnectedSocket() client: Socket,
     @MessageBody() mergedIds: string,
   ) {
-    client.join(mergedIds);
+    return client.join(mergedIds);
   }
 
   @SubscribeMessage('leave private')
@@ -51,6 +51,6 @@ export class MyGateway {
     @ConnectedSocket() client: Socket,
     @MessageBody() mergedIds: string,
   ) {
-    client.leave(mergedIds);
+    return client.leave(mergedIds);
   }
 }
