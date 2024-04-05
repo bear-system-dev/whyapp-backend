@@ -102,12 +102,21 @@ export class AuthController {
     if (!data.email) erros.push('Você deve fornecer o e-mail');
     if (!data.senha) erros.push('Você deve fornecer a senha');
     if (!data.avatar) erros.push('Você deve fornecer seu avatar');
+
     const newSenha = await bcrypt.hashData(data.senha);
     if (newSenha instanceof Error)
       return res
         .status(StatusCodes.INTERNAL_SERVER_ERROR)
         .json({ message: newSenha.message });
     data.senha = newSenha;
+
+    const newEmail = await bcrypt.hashData(data.email);
+    if (newEmail instanceof Error)
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: newEmail.message });
+    data.email = newEmail;
+
     if (erros.length <= 0) {
       const verEmail = await this.usersService.userUnique({
         email: data.email,
@@ -115,7 +124,6 @@ export class AuthController {
       if (verEmail instanceof Error)
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
           message: verEmail.message,
-          errorStack: verEmail.stack,
           status: 500,
         });
       if (verEmail?.email === data.email)
