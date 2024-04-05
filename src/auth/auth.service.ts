@@ -23,9 +23,6 @@ export class AuthService {
       const isPassEqual = await bcrypt.compareData(data.senha, user.senha);
       if (!isPassEqual) return new Error('Senha incorreta');
 
-      const isEmailEqual = await bcrypt.compareData(data.email, user.email);
-      if (!isEmailEqual) return new Error('E-amil incorreto');
-
       const token = await this.jwtService.signAsync({ userId: user.id });
 
       return { userId: user.id, token };

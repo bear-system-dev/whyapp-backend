@@ -16,6 +16,7 @@ import { UserEntrarDTO } from './dto/userEntrar.dto';
 import { StatusCodes } from 'http-status-codes';
 import { AuthGuard } from './auth.guard';
 import { BCrypt } from 'src/utils/bcrypt.service';
+import { CryptrService } from 'src/utils/cryptr.service';
 import { CustomLogger } from 'src/utils/customLogger/customLogger.service';
 const bcrypt = new BCrypt();
 
@@ -26,6 +27,7 @@ export class AuthController {
     private authService: AuthService,
     private usersService: UsersService,
     private logService: CustomLogger,
+    private cryptrService: CryptrService,
   ) {}
 
   @UseGuards(AuthGuard)
@@ -110,12 +112,11 @@ export class AuthController {
         .json({ message: newSenha.message });
     data.senha = newSenha;
 
-    const newEmail = await bcrypt.hashData(data.email);
-    if (newEmail instanceof Error)
-      return res
-        .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({ message: newEmail.message });
-    data.email = newEmail;
+    const encEmail = this.cryptrService.transformData(
+      { email: data.email, senha: data.senha, avatar: data.avatar },
+      'encrypt',
+    );
+    console.log(encEmail);
 
     if (erros.length <= 0) {
       const verEmail = await this.usersService.userUnique({
