@@ -16,8 +16,8 @@ import { UserEntrarDTO } from './dto/userEntrar.dto';
 import { StatusCodes } from 'http-status-codes';
 import { AuthGuard } from './auth.guard';
 import { BCrypt } from 'src/utils/bcrypt.service';
-import { CryptrService } from 'src/utils/cryptr.service';
 import { CustomLogger } from 'src/utils/customLogger/customLogger.service';
+import { BearHashingService } from 'src/utils/bearHashing/bear-hashing.service';
 const bcrypt = new BCrypt();
 
 @ApiTags('Authentication')
@@ -27,7 +27,7 @@ export class AuthController {
     private authService: AuthService,
     private usersService: UsersService,
     private logService: CustomLogger,
-    private cryptrService: CryptrService,
+    private bearHashingService: BearHashingService,
   ) {}
 
   @UseGuards(AuthGuard)
@@ -74,6 +74,8 @@ export class AuthController {
       return res
         .status(StatusCodes.UNAUTHORIZED)
         .json({ message: 'Você deve fornecer o email e a senha' });
+
+    userData.email = this.bearHashingService.transform(userData.email);
     const verEmail = await this.usersService.userUnique({
       email: userData.email,
     });
@@ -112,11 +114,7 @@ export class AuthController {
         .json({ message: newSenha.message });
     data.senha = newSenha;
 
-    const encEmail = this.cryptrService.transformData(
-      { email: data.email, senha: data.senha, avatar: data.avatar },
-      'encrypt',
-    );
-    console.log(encEmail);
+    data.email = this.bearHashingService.transform(data.email);
 
     if (erros.length <= 0) {
       const verEmail = await this.usersService.userUnique({
@@ -132,6 +130,7 @@ export class AuthController {
           message: 'Esse email já possue cadastrado',
           status: 400,
         });
+
       const newUser = await this.usersService.createUser(data);
       if (newUser instanceof Error)
         return res.status(400).json({ messagae: newUser.message });
