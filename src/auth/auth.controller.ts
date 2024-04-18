@@ -87,7 +87,7 @@ export class AuthController {
       });
     if (!verEmail)
       return res.status(StatusCodes.BAD_REQUEST).json({
-        message: 'Esse email ainda não possue cadastro',
+        message: 'Esse e-mail ainda não possui cadastro',
         status: 400,
       });
     const token = await this.authService.signIn(userData);
@@ -127,7 +127,7 @@ export class AuthController {
         });
       if (verEmail?.email === data.email)
         return res.status(StatusCodes.BAD_REQUEST).json({
-          message: 'Esse email já possue cadastrado',
+          message: 'Esse e-mail já possui cadastro',
           status: 400,
         });
 
