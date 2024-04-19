@@ -18,6 +18,7 @@ import { AuthGuard } from './auth.guard';
 import { BCrypt } from 'src/utils/bcrypt.service';
 import { CustomLogger } from 'src/utils/customLogger/customLogger.service';
 import { BearHashingService } from 'src/utils/bearHashing/bear-hashing.service';
+import { MailingService } from 'src/mailing/mailer.service';
 const bcrypt = new BCrypt();
 
 @ApiTags('Authentication')
@@ -28,6 +29,7 @@ export class AuthController {
     private usersService: UsersService,
     private logService: CustomLogger,
     private bearHashingService: BearHashingService,
+    private mailingService: MailingService,
   ) {}
 
   @UseGuards(AuthGuard)
@@ -75,6 +77,7 @@ export class AuthController {
         .status(StatusCodes.UNAUTHORIZED)
         .json({ message: 'Você deve fornecer o email e a senha' });
 
+    const _originalUserEmail = userData.email;
     userData.email = this.bearHashingService.transform(userData.email);
     const verEmail = await this.usersService.userUnique({
       email: userData.email,
@@ -96,6 +99,17 @@ export class AuthController {
         .status(StatusCodes.UNAUTHORIZED)
         .json({ message: token.message });
     this.logService.log({ message: 'Usuário entrou', token });
+
+    res.cookie('userId', token.userId);
+    res.cookie('jwtToken', token.token);
+
+    await this.mailingService.sendLogin({
+      to: _originalUserEmail,
+      subject: 'Novo login em: WhyApp',
+      text: 'O que seria isto?',
+      userName: _originalUserEmail,
+    });
+
     return res.status(StatusCodes.OK).json(token);
   }
 
@@ -114,6 +128,7 @@ export class AuthController {
         .json({ message: newSenha.message });
     data.senha = newSenha;
 
+    const _originalUserEmail = data.email;
     data.email = this.bearHashingService.transform(data.email);
 
     if (erros.length <= 0) {
@@ -138,6 +153,14 @@ export class AuthController {
         message: 'Novo usuário cadastrado',
         newUserId: newUser.id,
       });
+
+      await this.mailingService.sendRegister({
+        to: _originalUserEmail,
+        subject: 'Bem Vindo(a) ao WhyApp',
+        text: 'Aonde isso apareceeeee??',
+        userName: data.nome,
+      });
+
       return res.status(201).json({ newUserId: newUser.id });
     }
     return res.status(400).json({ erros });

@@ -5,6 +5,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './auth.controller';
 import { CustomLoggerModule } from 'src/utils/customLogger/CustomLogger.module';
 import { BearHashingService } from 'src/utils/bearHashing/bear-hashing.service';
+import { MailingService } from 'src/mailing/mailer.service';
 
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '10m';
 
@@ -18,7 +19,7 @@ const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '10m';
       signOptions: { expiresIn: JWT_EXPIRES_IN },
     }),
   ],
-  providers: [AuthService, BearHashingService],
+  providers: [AuthService, BearHashingService, MailingService],
   controllers: [AuthController],
   exports: [AuthService],
 })
