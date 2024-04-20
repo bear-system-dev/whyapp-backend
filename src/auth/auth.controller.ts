@@ -4,13 +4,14 @@ import {
   Headers,
   Param,
   Post,
+  Req,
   Res,
   UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserCreateDTO } from 'src/users/dto/userCreate.dto';
 import { UsersService } from 'src/users/users.service';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { ApiTags } from '@nestjs/swagger';
 import { UserEntrarDTO } from './dto/userEntrar.dto';
 import { StatusCodes } from 'http-status-codes';
@@ -38,6 +39,7 @@ export class AuthController {
     @Param('id') userId: string,
     @Headers('Authorization') token: string,
     @Res() res: Response,
+    @Req() req: Request,
   ) {
     const user = await this.usersService.userUnique({ id: userId });
     if (user instanceof Error)
@@ -59,6 +61,9 @@ export class AuthController {
         .json({ message: isBlackListedToken.message });
     const logout = this.authService.logOut(blackListedTokenFromRequest);
     if (logout) {
+      if (req.cookies.userId) req.cookies.userId = ''; //Cookies
+      if (req.cookies.jwtToken) req.cookies.jwtToken = ''; //Cookies
+
       return res
         .status(StatusCodes.OK)
         .json({ message: 'Deslogado com sucesso!' });
@@ -78,6 +83,7 @@ export class AuthController {
         .json({ message: 'Você deve fornecer o email e a senha' });
 
     const _originalUserEmail = userData.email;
+    userData.email = userData.email.toLowerCase();
     userData.email = this.bearHashingService.transform(userData.email);
     const verEmail = await this.usersService.userUnique({
       email: userData.email,
@@ -100,8 +106,8 @@ export class AuthController {
         .json({ message: token.message });
     this.logService.log({ message: 'Usuário entrou', token });
 
-    res.cookie('userId', token.userId);
-    res.cookie('jwtToken', token.token);
+    res.cookie('userId', token.userId); //Cookies
+    res.cookie('jwtToken', token.token); //Cookies
 
     await this.mailingService.sendLogin({
       to: _originalUserEmail,
@@ -129,6 +135,7 @@ export class AuthController {
     data.senha = newSenha;
 
     const _originalUserEmail = data.email;
+    data.email = data.email.toLowerCase();
     data.email = this.bearHashingService.transform(data.email);
 
     if (erros.length <= 0) {

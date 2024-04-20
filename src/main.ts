@@ -12,6 +12,8 @@ const SERVER_PORT = process.env.SERVER_PORT || 3000;
 const SWAGGER_DOCS_PATH = process.env.SWAGGER_DOCS_PATH || 'v1/docs/api';
 const SECRET_KEY = process.env.SECRET_KEY || 'aokjda~]fasf';
 
+const sessionMemoryStore = new session.MemoryStore();
+
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     cors: corsOptions,
@@ -22,9 +24,13 @@ async function bootstrap() {
   app.use(
     session({
       secret: SECRET_KEY,
-      resave: false,
-      saveUninitialized: false,
-      cookie: { secure: false }, //Set to TRUE when on HTTPS domain
+      saveUninitialized: false, // Salvará os dados da session na memório toda vez que um usuário acessar, mesmo que apenas visitando. Isso pode causar falta de desempenho por ter muita coisa na memória. Sendo o ideal manter em FALSE em caso de sistemas de login
+      resave: false, // Salvará a sessão no STORE novamente mesmo que ela não tenha sido modificada, meio que irá resetá a data de expiração e tals
+      cookie: {
+        secure: 'auto', //Set to TRUE when on HTTPS domain
+        maxAge: 60000, // 60s
+      },
+      store: sessionMemoryStore,
     }),
   );
 
