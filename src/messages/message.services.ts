@@ -11,7 +11,7 @@ export class MessageService {
   async processMessage(
     userId: string,
     recipientId: string,
-    message: any,
+    message: string,
   ): Promise<any> {
     try {
       const sender = await this.findUserById(userId);
@@ -117,7 +117,7 @@ export class MessageService {
       throw error;
     }
   }
-  private async mergeIds(id1: string, id2: string): Promise<string> {
+  async mergeIds(id1: string, id2: string): Promise<string> {
     try {
       const sortByFirst = [id1, id2].sort();
       const joinedIds = sortByFirst.join('');
