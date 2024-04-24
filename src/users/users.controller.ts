@@ -101,6 +101,13 @@ export class UserController {
       });
     }
 
+    await this.mailingService.sendResetPasswordNotfication({
+      to: userEmail,
+      subject: 'Troca de senha realizada',
+      text: 'Troca de senha',
+      userName: userEmail,
+    });
+
     session.resetPassword.reset = true;
     req.session.destroy((err) => {
       if (err) {

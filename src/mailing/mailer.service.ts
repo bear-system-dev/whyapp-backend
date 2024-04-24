@@ -87,6 +87,32 @@ export class MailingService {
     }
   }
 
+  async sendResetPasswordNotfication(data: ISendEmail) {
+    const { userName, subject, text, to } = data;
+    const env = await this.getEnv();
+    if (!(env instanceof Error)) {
+      const { PROFESSIONAL_EMAIL, PROFESSIONAL_NAME } = env;
+      await this.mailerService.sendMail({
+        sender: { name: PROFESSIONAL_NAME, address: PROFESSIONAL_EMAIL },
+        to,
+        subject,
+        text,
+        html: `
+        <div style='display:flex; justify-content:center; align-items:center; flex-direction:column; font-size:1.2rem'>
+          <h1>Olá, ${userName}. Atenção!</h1>
+          <p>SUA SENHA FOI ALTERADA</p>
+          <p><i>Se não foi você, <a href='' target='_blank'>clique aqui</a> ou no botão abaixo</i></p>
+          <button style="background-color:green; width:200px; height:50px; border-radius:7px;">SUPORTE</button>
+          <br />
+          <p>Se precisar entre com contato conosco! Iremos te atender em até 24h.</p>
+        </div>
+        `,
+      });
+    } else {
+      console.log(env.message, ' Impossível enviar e-mails.');
+    }
+  }
+
   private async getEnv() {
     const PROFESSIONAL_EMAIL = process.env.PROFESSIONAL_EMAIL
       ? process.env.PROFESSIONAL_EMAIL
