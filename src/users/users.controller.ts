@@ -18,11 +18,191 @@ import { UserUpdateDTO } from './dto/userUpdate.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { StatusCodes } from 'http-status-codes';
 import { userQueriesFriendsDTO } from './dto/userQueriesFriends.dto';
+import { MailingService } from 'src/mailing/mailer.service';
+import { BCrypt } from 'src/utils/bcrypt.service';
+import { BearHashingService } from 'src/utils/bearHashing/bear-hashing.service';
+const bcrypt = new BCrypt();
+
+const usersEmailPasswordResetCodes = {};
 
 @ApiTags('User')
 @Controller('user')
 export class UserController {
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    private mailingService: MailingService,
+    private bearHashingService: BearHashingService,
+  ) {}
+
+  @Post('reset-password/reset')
+  async resetPasswordReset(
+    @Body() data: { userEmail: string; newPassword: string },
+    @Res() res: Response,
+  ) {
+    const { newPassword, userEmail } = data;
+    if (
+      !userEmail ||
+      userEmail.length < 1 ||
+      userEmail === '' ||
+      !newPassword ||
+      newPassword.length < 1 ||
+      newPassword === ''
+    ) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Você deve enviar userEmail e newPassword no body',
+        status: 400,
+      });
+    }
+
+    const hashedEmail = this.bearHashingService.transform(userEmail);
+    const userExists = await this.usersService.userUnique({
+      email: hashedEmail,
+    });
+    if (userExists instanceof Error || !userExists) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Este usuário não existe',
+        status: 400,
+      });
+    }
+
+    const hashedNewPassword = await bcrypt.hashData(newPassword);
+    if (hashedNewPassword instanceof Error) {
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        message: hashedNewPassword.message,
+        status: 500,
+      });
+    }
+    console.log(`${newPassword}: ${hashedNewPassword}`);
+
+    const newPasswordUser = await this.usersService.updatePasswordByUserUnique(
+      {
+        email: hashedEmail,
+      },
+      hashedNewPassword,
+    );
+    if (newPasswordUser instanceof Error) {
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        message: newPasswordUser.message,
+        status: 500,
+      });
+    }
+
+    return res.status(StatusCodes.OK).json({
+      message: 'Senha trocada com sucesso',
+      status: 200,
+    });
+  }
+
+  @Post('reset-password/verify-code')
+  async resetPasswordVerify(
+    @Query('resetCode') resetCode: string, //resetCode é o código digitado pelo usuário no front
+    @Body() data: { userEmail: string },
+    @Res() res: Response,
+  ) {
+    const { userEmail } = data;
+    if (!resetCode || resetCode.length < 1 || resetCode === '') {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Você precisa enviar o resetCode como Query Param',
+        status: 400,
+      });
+    }
+    if (!userEmail || userEmail.length < 1 || userEmail === '') {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Você deve enviar userEmail no body',
+        status: 400,
+      });
+    }
+
+    const hashedEmail = this.bearHashingService.transform(userEmail);
+    const userExists = await this.usersService.userUnique({
+      email: hashedEmail,
+    });
+    if (userExists instanceof Error || !userExists) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Este usuário não existe',
+        status: 400,
+      });
+    }
+
+    if (usersEmailPasswordResetCodes[userEmail]) {
+      const code = usersEmailPasswordResetCodes[userEmail];
+      console.log(code);
+      if (code !== resetCode) {
+        return res.status(StatusCodes.BAD_REQUEST).json({
+          message: 'O código informado é inválido',
+          status: 400,
+        });
+      }
+      return res.status(StatusCodes.OK).json({
+        message: 'Código validado com sucesso',
+        status: 200,
+      });
+    }
+
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message:
+        'Usuário não solicitou o código de verificação, ou o servidor foi reiniciado',
+      status: 400,
+    });
+  }
+
+  @Post('reset-password/send-code')
+  async resetPasswordSend(
+    @Body() data: { userEmail: string },
+    @Res() res: Response,
+  ) {
+    const { userEmail } = data;
+    if (!userEmail || userEmail.length < 1 || userEmail === '') {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Você deve enviar userEmail no body',
+        status: 400,
+      });
+    }
+
+    const hashedEmail = this.bearHashingService.transform(userEmail);
+    const userExists = await this.usersService.userUnique({
+      email: hashedEmail,
+    });
+    if (userExists instanceof Error || !userExists) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Este usuário não existe',
+        status: 400,
+      });
+    }
+
+    try {
+      const resetPasswordCode: string =
+        this.usersService.generateResetPasswordCode();
+      await this.mailingService.sendResetPasswordCode(
+        {
+          to: userEmail,
+          subject: 'Código para troca de senha',
+          text: 'Reset Password',
+          userName: userEmail,
+        },
+        resetPasswordCode,
+      );
+      usersEmailPasswordResetCodes[userEmail] = resetPasswordCode;
+      console.log(usersEmailPasswordResetCodes);
+      return res.status(StatusCodes.OK).json({
+        message: 'Código para troca de senha enviado com sucesso',
+        status: 200,
+        data: {
+          userEmail,
+          code: resetPasswordCode,
+        },
+      });
+    } catch (error) {
+      console.log(
+        `Erro ao enviar o código de troca de senha para o usuário: ${userEmail}`,
+        error,
+      );
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        message: 'Erro ao enviar o código de troca de senha para o usuário',
+        status: 500,
+      });
+    }
+  }
 
   @UseGuards(AuthGuard)
   @Delete('amigos')
