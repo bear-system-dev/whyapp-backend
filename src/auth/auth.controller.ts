@@ -64,6 +64,11 @@ export class AuthController {
       if (req.cookies.userId) req.cookies.userId = ''; //Cookies
       if (req.cookies.jwtToken) req.cookies.jwtToken = ''; //Cookies
 
+      req.session.destroy((err) => {
+        if (err) console.log('Um erro ocurreu ao destuir sessão: ', err);
+        console.log('Usuário saiu da conta, destruindo sessão...');
+      });
+
       return res
         .status(StatusCodes.OK)
         .json({ message: 'Deslogado com sucesso!' });
