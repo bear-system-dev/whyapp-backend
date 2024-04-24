@@ -8,8 +8,10 @@ import {
   Query,
   Body,
   UseGuards,
+  Session,
+  Req,
 } from '@nestjs/common';
-import { Response } from 'express';
+import { Response, Request } from 'express';
 import { UsersService } from './users.service';
 import { UserQueriesDTO } from './dto/userQueries.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -38,7 +40,19 @@ export class UserController {
   async resetPasswordReset(
     @Body() data: { userEmail: string; newPassword: string },
     @Res() res: Response,
+    @Session() session: Record<string, any>,
+    @Req() req: Request,
   ) {
+    console.log(session);
+    if (
+      !session?.resetPassword?.sendCode ||
+      !session?.resetPassword?.verifyCode
+    )
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Sessão inválida, reenvie o código ou verifique novamente',
+        status: 400,
+      });
+
     const { newPassword, userEmail } = data;
     if (
       !userEmail ||
@@ -87,6 +101,17 @@ export class UserController {
       });
     }
 
+    session.resetPassword.reset = true;
+    req.session.destroy((err) => {
+      if (err) {
+        console.log(err);
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+          message: 'Erro ao finzalizar sessão',
+          status: 500,
+        });
+      }
+    });
+
     return res.status(StatusCodes.OK).json({
       message: 'Senha trocada com sucesso',
       status: 200,
@@ -98,7 +123,15 @@ export class UserController {
     @Query('resetCode') resetCode: string, //resetCode é o código digitado pelo usuário no front
     @Body() data: { userEmail: string },
     @Res() res: Response,
+    @Session() session: Record<string, any>,
   ) {
+    console.log(session);
+    if (!session?.resetPassword?.sendCode)
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Sessão inválida, reenvie o código',
+        status: 400,
+      });
+
     const { userEmail } = data;
     if (!resetCode || resetCode.length < 1 || resetCode === '') {
       return res.status(StatusCodes.BAD_REQUEST).json({
@@ -133,6 +166,9 @@ export class UserController {
           status: 400,
         });
       }
+
+      session.resetPassword.verifyCode = true;
+
       return res.status(StatusCodes.OK).json({
         message: 'Código validado com sucesso',
         status: 200,
@@ -150,6 +186,7 @@ export class UserController {
   async resetPasswordSend(
     @Body() data: { userEmail: string },
     @Res() res: Response,
+    @Session() session: Record<string, any>,
   ) {
     const { userEmail } = data;
     if (!userEmail || userEmail.length < 1 || userEmail === '') {
@@ -184,6 +221,13 @@ export class UserController {
       );
       usersEmailPasswordResetCodes[userEmail] = resetPasswordCode;
       console.log(usersEmailPasswordResetCodes);
+
+      session.resetPassword = {
+        userEmail,
+        resetPasswordCode,
+        sendCode: true,
+      };
+
       return res.status(StatusCodes.OK).json({
         message: 'Código para troca de senha enviado com sucesso',
         status: 200,
