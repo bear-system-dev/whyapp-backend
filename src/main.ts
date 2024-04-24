@@ -29,7 +29,7 @@ async function bootstrap() {
       resave: false, // Salvará a sessão no STORE novamente mesmo que ela não tenha sido modificada, meio que irá resetá a data de expiração e tals
       cookie: {
         secure: 'auto', // Set to TRUE when on HTTPS domain
-        maxAge: 300000, // 60s
+        maxAge: 600000, // 10min
         httpOnly: true, // Cookies serão acessados apenas com requisições HTTP e não com javascript do cliente
       },
       // Salvando no banco de dados
