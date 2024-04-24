@@ -101,6 +101,9 @@ export class UserController {
       });
     }
 
+    delete usersEmailPasswordResetCodes[userEmail];
+    console.log('Delete: ', usersEmailPasswordResetCodes);
+
     await this.mailingService.sendResetPasswordNotfication({
       to: userEmail,
       subject: 'Troca de senha realizada',
