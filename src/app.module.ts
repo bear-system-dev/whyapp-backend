@@ -12,6 +12,8 @@ import { MessageModule } from './messages/message.module';
 import { GroupMessagesModule } from './group-messages/group-messages.module';
 import { GroupsModule } from './groups/groups.module';
 import { AuthGuard } from './auth/auth.guard';
+import { MailingService } from './mailing/mailer.service';
+import { MailingModule } from './mailing/mailing.module';
 
 const THROTTLER_TTL = process.env.THROTTLER_TTL || 60000;
 const THROTTLER_LIMIT = process.env.THROTTLER_LIMIT || 100;
@@ -30,6 +32,7 @@ const THROTTLER_LIMIT = process.env.THROTTLER_LIMIT || 100;
     MessageModule,
     GroupMessagesModule,
     GroupsModule,
+    MailingModule,
   ],
   controllers: [HomePageController, UserController],
   providers: [
@@ -43,6 +46,7 @@ const THROTTLER_LIMIT = process.env.THROTTLER_LIMIT || 100;
       provide: APP_GUARD,
       useClass: AuthGuard,
     },
+    MailingService,
   ],
 })
 export class AppModule { }

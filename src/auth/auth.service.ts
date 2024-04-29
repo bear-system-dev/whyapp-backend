@@ -19,9 +19,12 @@ export class AuthService {
     try {
       const user = await this.usersService.userUnique({ email: data.email });
       if (user instanceof Error) return new Error(user.message);
-      const isEqual = await bcrypt.compareData(data.senha, user.senha);
-      if (!isEqual) return new Error('Senha incorreta');
+
+      const isPassEqual = await bcrypt.compareData(data.senha, user.senha);
+      if (!isPassEqual) return new Error('Senha incorreta');
+
       const token = await this.jwtService.signAsync({ userId: user.id });
+
       return { userId: user.id, token };
     } catch (error) {
       console.log(error);

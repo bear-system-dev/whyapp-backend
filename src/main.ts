@@ -5,9 +5,12 @@ import 'dotenv/config';
 import helmet from 'helmet';
 import { corsOptions } from './utils/cors.options';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import coockieParser from 'cookie-parser';
+import session from 'express-session';
 
 const SERVER_PORT = process.env.SERVER_PORT || 3000;
 const SWAGGER_DOCS_PATH = process.env.SWAGGER_DOCS_PATH || 'v1/docs/api';
+const SECRET_KEY = process.env.SECRET_KEY || 'aokjda~]fasf';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
@@ -15,6 +18,15 @@ async function bootstrap() {
   });
   app.useBodyParser('json', { limit: '5mb' });
   app.use(helmet());
+  app.use(coockieParser(SECRET_KEY, {}));
+  app.use(
+    session({
+      secret: SECRET_KEY,
+      resave: false,
+      saveUninitialized: false,
+      cookie: { secure: false }, //Set to TRUE when on HTTPS domain
+    }),
+  );
 
   const config = new DocumentBuilder()
     .setTitle('Documentação WhyApp - Backend')

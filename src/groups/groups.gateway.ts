@@ -9,9 +9,21 @@ import { Server, Socket } from 'socket.io';
 import { GroupsService } from './groups.service';
 import { corsOptions } from 'src/utils/cors.options';
 import { GroupMessagesService } from 'src/group-messages/group-messages.service';
+// import { instrument } from '@socket.io/admin-ui';
 
 @WebSocketGateway({ cors: corsOptions, namespace: 'grupos' })
 export class GroupsGateway {
+  // afterInit() {
+  //   instrument(this.server, {
+  //     auth: {
+  //       type: 'basic',
+  //       username: process.env.SOCKETIO_ADMIN_UI_USERNAME || 'admin',
+  //       password: process.env.SOCKETIO_ADMIN_UI_PASSWORD || 'admin2024',
+  //     },
+  //     mode: 'development',
+  //     namespaceName: process.env.SOCKETIO_ADMIN_UI_NAMESPACE_NAME || '/admin',
+  //   });
+  // }
   constructor(
     private readonly groupsService: GroupsService,
     private readonly groupMessagesService: GroupMessagesService,
