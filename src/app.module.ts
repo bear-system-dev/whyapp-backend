@@ -11,6 +11,7 @@ import { ChatsModule } from './chats/chats.module';
 import { MessageModule } from './messages/message.module';
 import { GroupMessagesModule } from './group-messages/group-messages.module';
 import { GroupsModule } from './groups/groups.module';
+import { AuthGuard } from './auth/auth.guard';
 
 const THROTTLER_TTL = process.env.THROTTLER_TTL || 60000;
 const THROTTLER_LIMIT = process.env.THROTTLER_LIMIT || 100;
@@ -38,6 +39,10 @@ const THROTTLER_LIMIT = process.env.THROTTLER_LIMIT || 100;
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
     },
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
   ],
 })
-export class AppModule {}
+export class AppModule { }

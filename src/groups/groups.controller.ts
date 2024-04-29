@@ -3,7 +3,6 @@ import {
   Post,
   Body,
   Res,
-  UseGuards,
   Query,
   Put,
   Get,
@@ -13,16 +12,14 @@ import { Response } from 'express';
 import { GroupsService } from './groups.service';
 import { CreateGroupDto } from './dto/create-group.dto';
 import { StatusCodes } from 'http-status-codes';
-import { AuthGuard } from 'src/auth/auth.guard';
 import { ApiTags } from '@nestjs/swagger';
 import { UpdateGroupDto } from './dto/update-group.dto';
 import { AddMembersDto } from './dto/add-members.dto';
 
-@UseGuards(AuthGuard)
 @ApiTags('Group')
 @Controller('groups')
 export class GroupsController {
-  constructor(private readonly groupsService: GroupsService) {}
+  constructor(private readonly groupsService: GroupsService) { }
 
   @Post()
   async create(@Body() createGroupDto: CreateGroupDto, @Res() res: Response) {
