@@ -51,6 +51,7 @@ export class UserController {
       return res.status(StatusCodes.BAD_REQUEST).json({
         message: 'Sessão inválida, reenvie o código ou verifique novamente',
         status: 400,
+        sessionId: session.id,
       });
 
     const { newPassword, userEmail } = data;
@@ -140,6 +141,7 @@ export class UserController {
       return res.status(StatusCodes.BAD_REQUEST).json({
         message: 'Sessão inválida, reenvie o código',
         status: 400,
+        sessionId: session.id,
       });
 
     const { userEmail } = data;
@@ -198,6 +200,7 @@ export class UserController {
     @Res() res: Response,
     @Session() session: Record<string, any>,
   ) {
+    console.log(session);
     const { userEmail } = data;
     if (!userEmail || userEmail.length < 1 || userEmail === '') {
       return res.status(StatusCodes.BAD_REQUEST).json({
@@ -245,6 +248,7 @@ export class UserController {
           userEmail,
           code: resetPasswordCode,
         },
+        sessionId: session.id,
       });
     } catch (error) {
       console.log(
