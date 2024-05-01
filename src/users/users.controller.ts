@@ -190,8 +190,10 @@ export class UserController {
         });
       }
 
-      session.resetPassword.verifyCode = true;
-      usersEmailPasswordResetCodes[userEmail] = session;
+      usersEmailPasswordResetCodes[userEmail] = usersEmailPasswordResetCodes[
+        userEmail
+      ].resetPassword.verifyCode = true;
+      console.log('Funcionoouuu??');
 
       return res.status(StatusCodes.OK).json({
         message: 'Código validado com sucesso',
