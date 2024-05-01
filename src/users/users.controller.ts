@@ -136,14 +136,6 @@ export class UserController {
     @Res() res: Response,
     @Session() session: Record<string, any>,
   ) {
-    console.log(session);
-    if (!session?.resetPassword?.sendCode)
-      return res.status(StatusCodes.BAD_REQUEST).json({
-        message: 'Sessão inválida, reenvie o código',
-        status: 400,
-        sessionId: session.id,
-      });
-
     const { userEmail } = data;
     if (!resetCode || resetCode.length < 1 || resetCode === '') {
       return res.status(StatusCodes.BAD_REQUEST).json({
@@ -158,10 +150,30 @@ export class UserController {
       });
     }
 
+    // session.resetPassword = {
+    //   userEmail,
+    //   resetPasswordCode,
+    //   sendCode: true,
+    // };
+
+    console.log(session);
+    console.log(usersEmailPasswordResetCodes[userEmail] ?? userEmail);
+    if (
+      usersEmailPasswordResetCodes[userEmail]?.resetPassword?.userEmail !==
+        userEmail ||
+      !usersEmailPasswordResetCodes[userEmail]?.resetPassword?.sendCode
+    )
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Sessão inválida, reenvie o código',
+        status: 400,
+        sessionId: session.id,
+      });
+
     const hashedEmail = this.bearHashingService.transform(userEmail);
     const userExists = await this.usersService.userUnique({
       email: hashedEmail,
     });
+
     if (userExists instanceof Error || !userExists) {
       return res.status(StatusCodes.BAD_REQUEST).json({
         message: 'Este usuário não existe',
@@ -232,14 +244,15 @@ export class UserController {
         },
         resetPasswordCode,
       );
-      usersEmailPasswordResetCodes[userEmail] = resetPasswordCode;
-      console.log(usersEmailPasswordResetCodes);
 
       session.resetPassword = {
         userEmail,
         resetPasswordCode,
         sendCode: true,
       };
+
+      usersEmailPasswordResetCodes[userEmail] = session;
+      console.log(usersEmailPasswordResetCodes);
 
       return res.status(StatusCodes.OK).json({
         message: 'Código para troca de senha enviado com sucesso',

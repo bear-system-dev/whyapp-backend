@@ -9,7 +9,6 @@ import { PaginationQueriesDto } from './dto/pagination-queries.dto';
 const grupoMessageIncludedData = {};
 @Injectable()
 export class GroupMessagesService {
-  
   constructor(private readonly prismaService: PrismaService) {}
 
   async create(

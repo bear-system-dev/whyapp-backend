@@ -7,7 +7,10 @@ import { MessagesGateway } from 'src/events/messages.gateway';
 
 @Injectable()
 export class MessageService {
-  constructor(private prisma: PrismaService, private readonly messageGateway: MessagesGateway) {}
+  constructor(
+    private prisma: PrismaService,
+    private readonly messageGateway: MessagesGateway,
+  ) {}
 
   async processMessage(
     userId: string,
@@ -45,7 +48,7 @@ export class MessageService {
         const newMessage = await this.createNewMessage(newMessageData);
 
         //NOTIFICATION
-        this.messageGateway.notifyRecipient(recipientId, newMessage)
+        this.messageGateway.notifyRecipient(recipientId, newMessage);
 
         return newMessage;
       } else {
