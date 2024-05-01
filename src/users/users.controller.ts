@@ -190,7 +190,7 @@ export class UserController {
         });
       }
 
-      if (session.resetPassword) session.resetPassword.verifyCode = true;
+      session.resetPassword.verifyCode = true;
       usersEmailPasswordResetCodes[userEmail] = session;
 
       return res.status(StatusCodes.OK).json({
@@ -249,6 +249,8 @@ export class UserController {
         userEmail,
         resetPasswordCode,
         sendCode: true,
+        verifyCode: false,
+        reset: false,
       };
 
       usersEmailPasswordResetCodes[userEmail] = session;
