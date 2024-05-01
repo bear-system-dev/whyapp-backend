@@ -17,7 +17,6 @@ import { UserQueriesDTO } from './dto/userQueries.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserDTO } from './dto/user.dto';
 import { UserUpdateDTO } from './dto/userUpdate.dto';
-import { AuthGuard } from 'src/auth/auth.guard';
 import { StatusCodes } from 'http-status-codes';
 import { userQueriesFriendsDTO } from './dto/userQueriesFriends.dto';
 import { MailingService } from 'src/mailing/mailer.service';
@@ -26,6 +25,7 @@ import { BearHashingService } from 'src/utils/bearHashing/bear-hashing.service';
 const bcrypt = new BCrypt();
 
 const usersEmailPasswordResetCodes = {};
+import { Public } from 'src/decorators/is-public-endpoint.decorator';
 
 @ApiTags('User')
 @Controller('user')
@@ -276,7 +276,6 @@ export class UserController {
     }
   }
 
-  @UseGuards(AuthGuard)
   @Delete('amigos')
   async removeFriend(
     @Query() queries: userQueriesFriendsDTO,
@@ -315,7 +314,6 @@ export class UserController {
     });
   }
 
-  @UseGuards(AuthGuard)
   @Post('amigos')
   async addFriend(
     @Query() queries: userQueriesFriendsDTO,
@@ -373,7 +371,6 @@ export class UserController {
     });
   }
 
-  @UseGuards(AuthGuard)
   @Get()
   @ApiResponse({
     status: 200,
@@ -397,8 +394,6 @@ export class UserController {
         .json({ message: 'Não existem usuários com essas informações' });
     return res.status(200).json({ users });
   }
-
-  @UseGuards(AuthGuard)
   @Get(':id')
   @ApiResponse({
     status: 200,
@@ -417,7 +412,6 @@ export class UserController {
     return res.status(200).json({ user });
   }
 
-  @UseGuards(AuthGuard)
   @Delete('remove-account/:id')
   async deleteById(@Param('id') userId: string, @Res() res: Response) {
     const deletedUser = await this.usersService.deleteById(userId);
@@ -432,7 +426,6 @@ export class UserController {
     });
   }
 
-  @UseGuards(AuthGuard)
   @Delete('activate-account/:id')
   async desactiveById(@Param('id') userId: string, @Res() res: Response) {
     const desactivatedUser = await this.usersService.desactiveById(userId);
@@ -447,7 +440,6 @@ export class UserController {
     });
   }
 
-  @UseGuards(AuthGuard)
   @Post('activate-account/:id')
   async activeById(@Param('id') userId: string, @Res() res: Response) {
     const activatedUser = await this.usersService.activeById(userId);
@@ -462,7 +454,6 @@ export class UserController {
     });
   }
 
-  @UseGuards(AuthGuard)
   @Post('update/:id')
   async updateUser(
     @Param('id') userId: string,

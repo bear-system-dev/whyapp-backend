@@ -15,9 +15,9 @@ import { Request, Response } from 'express';
 import { ApiTags } from '@nestjs/swagger';
 import { UserEntrarDTO } from './dto/userEntrar.dto';
 import { StatusCodes } from 'http-status-codes';
-import { AuthGuard } from './auth.guard';
 import { BCrypt } from 'src/utils/bcrypt.service';
 import { CustomLogger } from 'src/utils/customLogger/customLogger.service';
+import { Public } from 'src/decorators/is-public-endpoint.decorator';
 import { BearHashingService } from 'src/utils/bearHashing/bear-hashing.service';
 import { MailingService } from 'src/mailing/mailer.service';
 const bcrypt = new BCrypt();
@@ -31,9 +31,8 @@ export class AuthController {
     private logService: CustomLogger,
     private bearHashingService: BearHashingService,
     private mailingService: MailingService,
-  ) {}
+  ) { }
 
-  @UseGuards(AuthGuard)
   @Post('sair/:id')
   async sair(
     @Param('id') userId: string,
@@ -80,6 +79,7 @@ export class AuthController {
     }
   }
 
+  @Public()
   @Post('entrar')
   async entrar(@Body() userData: UserEntrarDTO, @Res() res: Response) {
     if (!userData.email || !userData.senha)
@@ -124,6 +124,7 @@ export class AuthController {
     return res.status(StatusCodes.OK).json(token);
   }
 
+  @Public()
   @Post('cadastrar')
   async cadastrar(@Body() data: UserCreateDTO, @Res() res: Response) {
     const erros: string[] = [];
