@@ -202,4 +202,38 @@ export class UsersService {
       return new Error('Erro ao verificar se são amigos');
     }
   }
+
+  async updatePasswordByUserUnique(
+    userWhereUniqueInput: Prisma.UserWhereUniqueInput,
+    newSenha: string,
+  ): Promise<Error | User> {
+    console.log(userWhereUniqueInput, newSenha);
+    try {
+      const newPasswordUser = await this.prisma.user.update({
+        where: userWhereUniqueInput,
+        data: {
+          senha: newSenha,
+        },
+        include: userDataIncludes,
+      });
+      return newPasswordUser;
+    } catch (error) {
+      console.log(error);
+      return new Error('Um erro ocorreu ao trocar a senha do usuário');
+    }
+  }
+
+  generateResetPasswordCode(): string {
+    // const chars =
+    //   '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJLMNOPQRSTUVWXYZ!@#$%^&*()+?><:{}[]';
+    const chars =
+      '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJLMNOPQRSTUVWXYZ';
+    const passwordLength = 6;
+    let code = '';
+    for (let i = 0; i < passwordLength; i++) {
+      const randomNumber = Math.floor(Math.random() * chars.length);
+      code += chars.substring(randomNumber, randomNumber + 1);
+    }
+    return code;
+  }
 }

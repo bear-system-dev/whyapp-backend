@@ -58,6 +58,61 @@ export class MailingService {
     }
   }
 
+  async sendResetPasswordCode(data: ISendEmail, code: string) {
+    const { userName, subject, text, to } = data;
+    const env = await this.getEnv();
+    if (!(env instanceof Error)) {
+      const { PROFESSIONAL_EMAIL, PROFESSIONAL_NAME } = env;
+      await this.mailerService.sendMail({
+        sender: { name: PROFESSIONAL_NAME, address: PROFESSIONAL_EMAIL },
+        to,
+        subject,
+        text,
+        html: `
+        <div style='display:flex; justify-content:center; align-items:center; flex-direction:column; font-size:1.2rem'>
+          <h1>Olá, ${userName}!</h1>
+          <p>Aqui está seu código para a troca de senha</p>
+          <div style='background-color:gray; width:300px; height:200px; display:flex; align-items:center; justify-content:center;'>
+            <p style='font-size:1.6rem; font-weight:800;'>${code}</p>
+          </div>
+          <p><i>Lembre-se de não enviar este código para ninguém, <a href='' target='_blank'>clique aqui</a> ou no botão abaixo se não foi você</i></p>
+          <button style="background-color:green; width:200px; height:50px; border-radius:7px;">SUPORTE</button>
+          <br />
+          <p>Se precisar entre com contato conosco! Iremos te atender em até 24h.</p>
+        </div>
+        `,
+      });
+    } else {
+      console.log(env.message, ' Impossível enviar e-mails.');
+    }
+  }
+
+  async sendResetPasswordNotfication(data: ISendEmail) {
+    const { userName, subject, text, to } = data;
+    const env = await this.getEnv();
+    if (!(env instanceof Error)) {
+      const { PROFESSIONAL_EMAIL, PROFESSIONAL_NAME } = env;
+      await this.mailerService.sendMail({
+        sender: { name: PROFESSIONAL_NAME, address: PROFESSIONAL_EMAIL },
+        to,
+        subject,
+        text,
+        html: `
+        <div style='display:flex; justify-content:center; align-items:center; flex-direction:column; font-size:1.2rem'>
+          <h1>Olá, ${userName}. Atenção!</h1>
+          <p>SUA SENHA FOI ALTERADA</p>
+          <p><i>Se não foi você, <a href='' target='_blank'>clique aqui</a> ou no botão abaixo</i></p>
+          <button style="background-color:green; width:200px; height:50px; border-radius:7px;">SUPORTE</button>
+          <br />
+          <p>Se precisar entre com contato conosco! Iremos te atender em até 24h.</p>
+        </div>
+        `,
+      });
+    } else {
+      console.log(env.message, ' Impossível enviar e-mails.');
+    }
+  }
+
   private async getEnv() {
     const PROFESSIONAL_EMAIL = process.env.PROFESSIONAL_EMAIL
       ? process.env.PROFESSIONAL_EMAIL

@@ -264,3 +264,10 @@ model GrupoDocument {
   Transmissao   Transmissao? @relation(fields: [transmissaoId], references: [id])
   transmissaoId String?
 }
+
+model Session {
+  id        String   @id
+  sid       String   @unique
+  data      String
+  expiresAt   DateTime
+}

@@ -10,6 +10,7 @@ const grupoMessageIncludedData = {};
 @Injectable()
 export class GroupMessagesService {
   constructor(private readonly prismaService: PrismaService) {}
+
   async create(
     createGroupMessageDto: CreateGroupMessageDto,
   ): Promise<Error | GrupoMessage> {

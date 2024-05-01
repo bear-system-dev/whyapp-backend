@@ -7,8 +7,11 @@ import {
   Get,
   Query,
   Body,
+  UseGuards,
+  Session,
+  Req,
 } from '@nestjs/common';
-import { Response } from 'express';
+import { Response, Request } from 'express';
 import { UsersService } from './users.service';
 import { UserQueriesDTO } from './dto/userQueries.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -16,12 +19,262 @@ import { UserDTO } from './dto/user.dto';
 import { UserUpdateDTO } from './dto/userUpdate.dto';
 import { StatusCodes } from 'http-status-codes';
 import { userQueriesFriendsDTO } from './dto/userQueriesFriends.dto';
+import { MailingService } from 'src/mailing/mailer.service';
+import { BCrypt } from 'src/utils/bcrypt.service';
+import { BearHashingService } from 'src/utils/bearHashing/bear-hashing.service';
+const bcrypt = new BCrypt();
+
+const usersEmailPasswordResetCodes = {};
 import { Public } from 'src/decorators/is-public-endpoint.decorator';
 
 @ApiTags('User')
 @Controller('user')
 export class UserController {
-  constructor(private usersService: UsersService) { }
+  constructor(
+    private usersService: UsersService,
+    private mailingService: MailingService,
+    private bearHashingService: BearHashingService,
+  ) {}
+
+  @Post('reset-password/reset')
+  async resetPasswordReset(
+    @Body() data: { userEmail: string; newPassword: string },
+    @Res() res: Response,
+    @Session() session: Record<string, any>,
+    @Req() req: Request,
+  ) {
+    const { newPassword, userEmail } = data;
+    if (
+      !userEmail ||
+      userEmail.length < 1 ||
+      userEmail === '' ||
+      !newPassword ||
+      newPassword.length < 1 ||
+      newPassword === ''
+    ) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Você deve enviar userEmail e newPassword no body',
+        status: 400,
+      });
+    }
+
+    console.log(usersEmailPasswordResetCodes[userEmail] ?? userEmail);
+    console.log(usersEmailPasswordResetCodes ?? userEmail);
+    if (
+      usersEmailPasswordResetCodes[userEmail]?.resetPassword?.userEmail !==
+        userEmail ||
+      !usersEmailPasswordResetCodes[userEmail]?.resetPassword?.sendCode ||
+      !usersEmailPasswordResetCodes[userEmail]?.resetPassword?.verifyCode
+    )
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Sessão inválida, reenvie o código ou verifique novamente',
+        status: 400,
+        sessionId: session.id,
+      });
+
+    const hashedEmail = this.bearHashingService.transform(userEmail);
+    const userExists = await this.usersService.userUnique({
+      email: hashedEmail,
+    });
+    if (userExists instanceof Error || !userExists) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Este usuário não existe',
+        status: 400,
+      });
+    }
+
+    const hashedNewPassword = await bcrypt.hashData(newPassword);
+    if (hashedNewPassword instanceof Error) {
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        message: hashedNewPassword.message,
+        status: 500,
+      });
+    }
+    console.log(`${newPassword}: ${hashedNewPassword}`);
+
+    const newPasswordUser = await this.usersService.updatePasswordByUserUnique(
+      {
+        email: hashedEmail,
+      },
+      hashedNewPassword,
+    );
+    if (newPasswordUser instanceof Error) {
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        message: newPasswordUser.message,
+        status: 500,
+      });
+    }
+
+    delete usersEmailPasswordResetCodes[userEmail];
+    console.log('Delete: ', usersEmailPasswordResetCodes);
+
+    await this.mailingService.sendResetPasswordNotfication({
+      to: userEmail,
+      subject: 'Troca de senha realizada',
+      text: 'Troca de senha',
+      userName: userEmail,
+    });
+
+    req.session.destroy((err) => {
+      if (err) {
+        console.log(err);
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+          message: 'Erro ao finzalizar sessão',
+          status: 500,
+        });
+      }
+    });
+
+    return res.status(StatusCodes.OK).json({
+      message: 'Senha trocada com sucesso',
+      status: 200,
+    });
+  }
+
+  @Post('reset-password/verify-code')
+  async resetPasswordVerify(
+    @Query('resetCode') resetCode: string, //resetCode é o código digitado pelo usuário no front
+    @Body() data: { userEmail: string },
+    @Res() res: Response,
+    @Session() session: Record<string, any>,
+  ) {
+    const { userEmail } = data;
+    if (!resetCode || resetCode.length < 1 || resetCode === '') {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Você precisa enviar o resetCode como Query Param',
+        status: 400,
+      });
+    }
+    if (!userEmail || userEmail.length < 1 || userEmail === '') {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Você deve enviar userEmail no body',
+        status: 400,
+      });
+    }
+
+    console.log(session);
+    console.log(usersEmailPasswordResetCodes[userEmail] ?? userEmail);
+    if (
+      usersEmailPasswordResetCodes[userEmail]?.resetPassword?.userEmail !==
+        userEmail ||
+      !usersEmailPasswordResetCodes[userEmail]?.resetPassword?.sendCode
+    )
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Sessão inválida, reenvie o código',
+        status: 400,
+        sessionId: session.id,
+      });
+
+    const hashedEmail = this.bearHashingService.transform(userEmail);
+    const userExists = await this.usersService.userUnique({
+      email: hashedEmail,
+    });
+
+    if (userExists instanceof Error || !userExists) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Este usuário não existe',
+        status: 400,
+      });
+    }
+
+    if (usersEmailPasswordResetCodes[userEmail]) {
+      const code =
+        usersEmailPasswordResetCodes[userEmail]?.resetPassword
+          ?.resetPasswordCode;
+      console.log(code);
+      if (code !== resetCode) {
+        return res.status(StatusCodes.BAD_REQUEST).json({
+          message: 'O código informado é inválido',
+          status: 400,
+        });
+      }
+
+      usersEmailPasswordResetCodes[userEmail].resetPassword.verifyCode = true;
+      console.log('Funcionoouuu??');
+
+      return res.status(StatusCodes.OK).json({
+        message: 'Código validado com sucesso',
+        status: 200,
+      });
+    }
+
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message:
+        'Usuário não solicitou o código de verificação, ou o servidor foi reiniciado',
+      status: 400,
+    });
+  }
+
+  @Post('reset-password/send-code')
+  async resetPasswordSend(
+    @Body() data: { userEmail: string },
+    @Res() res: Response,
+    @Session() session: Record<string, any>,
+  ) {
+    console.log(session);
+    const { userEmail } = data;
+    if (!userEmail || userEmail.length < 1 || userEmail === '') {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Você deve enviar userEmail no body',
+        status: 400,
+      });
+    }
+
+    const hashedEmail = this.bearHashingService.transform(userEmail);
+    const userExists = await this.usersService.userUnique({
+      email: hashedEmail,
+    });
+    if (userExists instanceof Error || !userExists) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Este usuário não existe',
+        status: 400,
+      });
+    }
+
+    try {
+      const resetPasswordCode: string =
+        this.usersService.generateResetPasswordCode();
+      await this.mailingService.sendResetPasswordCode(
+        {
+          to: userEmail,
+          subject: 'Código para troca de senha',
+          text: 'Reset Password',
+          userName: userEmail,
+        },
+        resetPasswordCode,
+      );
+
+      session.resetPassword = {
+        userEmail,
+        resetPasswordCode,
+        sendCode: true,
+        verifyCode: false,
+        reset: false,
+      };
+
+      usersEmailPasswordResetCodes[userEmail] = session;
+      console.log(usersEmailPasswordResetCodes);
+
+      return res.status(StatusCodes.OK).json({
+        message: 'Código para troca de senha enviado com sucesso',
+        status: 200,
+        data: {
+          userEmail,
+          code: resetPasswordCode,
+        },
+        sessionId: session.id,
+      });
+    } catch (error) {
+      console.log(
+        `Erro ao enviar o código de troca de senha para o usuário: ${userEmail}`,
+        error,
+      );
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        message: 'Erro ao enviar o código de troca de senha para o usuário',
+        status: 500,
+      });
+    }
+  }
 
   @Delete('amigos')
   async removeFriend(
