@@ -43,17 +43,6 @@ export class UserController {
     @Session() session: Record<string, any>,
     @Req() req: Request,
   ) {
-    console.log(session);
-    if (
-      !session?.resetPassword?.sendCode ||
-      !session?.resetPassword?.verifyCode
-    )
-      return res.status(StatusCodes.BAD_REQUEST).json({
-        message: 'Sessão inválida, reenvie o código ou verifique novamente',
-        status: 400,
-        sessionId: session.id,
-      });
-
     const { newPassword, userEmail } = data;
     if (
       !userEmail ||
@@ -68,6 +57,20 @@ export class UserController {
         status: 400,
       });
     }
+
+    console.log(usersEmailPasswordResetCodes[userEmail] ?? userEmail);
+    console.log(usersEmailPasswordResetCodes ?? userEmail);
+    if (
+      usersEmailPasswordResetCodes[userEmail]?.resetPassword?.userEmail !==
+        userEmail ||
+      !usersEmailPasswordResetCodes[userEmail]?.resetPassword?.sendCode ||
+      !usersEmailPasswordResetCodes[userEmail]?.resetPassword?.verifyCode
+    )
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Sessão inválida, reenvie o código ou verifique novamente',
+        status: 400,
+        sessionId: session.id,
+      });
 
     const hashedEmail = this.bearHashingService.transform(userEmail);
     const userExists = await this.usersService.userUnique({
@@ -150,12 +153,6 @@ export class UserController {
       });
     }
 
-    // session.resetPassword = {
-    //   userEmail,
-    //   resetPasswordCode,
-    //   sendCode: true,
-    // };
-
     console.log(session);
     console.log(usersEmailPasswordResetCodes[userEmail] ?? userEmail);
     if (
@@ -182,7 +179,9 @@ export class UserController {
     }
 
     if (usersEmailPasswordResetCodes[userEmail]) {
-      const code = usersEmailPasswordResetCodes[userEmail];
+      const code =
+        usersEmailPasswordResetCodes[userEmail]?.resetPassword
+          ?.resetPasswordCode;
       console.log(code);
       if (code !== resetCode) {
         return res.status(StatusCodes.BAD_REQUEST).json({
@@ -192,6 +191,7 @@ export class UserController {
       }
 
       session.resetPassword.verifyCode = true;
+      usersEmailPasswordResetCodes[userEmail] = session;
 
       return res.status(StatusCodes.OK).json({
         message: 'Código validado com sucesso',
