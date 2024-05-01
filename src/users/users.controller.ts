@@ -115,7 +115,7 @@ export class UserController {
       userName: userEmail,
     });
 
-    session.resetPassword.reset = true;
+    usersEmailPasswordResetCodes[userEmail].resetPassword.reset = true;
     req.session.destroy((err) => {
       if (err) {
         console.log(err);
