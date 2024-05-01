@@ -190,9 +190,7 @@ export class UserController {
         });
       }
 
-      usersEmailPasswordResetCodes[userEmail] = usersEmailPasswordResetCodes[
-        userEmail
-      ].resetPassword.verifyCode = true;
+      usersEmailPasswordResetCodes[userEmail].resetPassword.verifyCode = true;
       console.log('Funcionoouuu??');
 
       return res.status(StatusCodes.OK).json({
