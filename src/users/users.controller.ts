@@ -7,7 +7,6 @@ import {
   Get,
   Query,
   Body,
-  UseGuards,
   Session,
   Req,
 } from '@nestjs/common';
@@ -25,6 +24,7 @@ import { BearHashingService } from 'src/utils/bearHashing/bear-hashing.service';
 const bcrypt = new BCrypt();
 
 const usersEmailPasswordResetCodes = {};
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Public } from 'src/decorators/is-public-endpoint.decorator';
 
 @ApiTags('User')

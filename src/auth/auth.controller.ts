@@ -6,7 +6,6 @@ import {
   Post,
   Req,
   Res,
-  UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserCreateDTO } from 'src/users/dto/userCreate.dto';
@@ -31,7 +30,7 @@ export class AuthController {
     private logService: CustomLogger,
     private bearHashingService: BearHashingService,
     private mailingService: MailingService,
-  ) { }
+  ) {}
 
   @Post('sair/:id')
   async sair(
