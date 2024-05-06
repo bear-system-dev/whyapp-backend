@@ -21,6 +21,7 @@
   },
   "include": [
     "./src/**/*.ts",
-    "./test/**/*.e2e-spec.ts"
+    "./test/**/*.e2e-spec.ts",
+    "./test/jest-e2e.config.ts"
   ]
 }
