@@ -1,17 +1,34 @@
-version: '3'
+networks:
+  main:
+    driver: bridge
 
 services:
   database:
     image: bitnami/postgresql:latest
+    networks:
+      - main
+    container_name: database
+    restart: always
     environment:
       - POSTGRESQL_USERNAME=docker
       - POSTGRESQL_PASSWORD=docker
       - POSTGRESQL_DATABASE=docker
     ports:
-      - "5435:5432"
+      - "5432:5432"
+    volumes:
+      - ./pgData:/bitnami/postgresql
+
   whyapp:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - main
+    container_name: whyapp
+    restart: unless-stopped
     depends_on:
       - database
+    environment:
+      - DATABASE_URL=postgresql://docker:docker@database:5432/docker?schema=public
     ports:
       - "3000:3000"
