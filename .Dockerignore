@@ -1,6 +1,6 @@
-dist
-node_modules
-test
-wsTests
+/dist
+/node_modules
+/test
+/wsTests
 
 .env-exemple
