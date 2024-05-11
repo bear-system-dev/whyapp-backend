@@ -2,21 +2,37 @@ networks:
   main:
     driver: bridge
 
+volumes:
+  db_data:
+    
+
 services:
+  # database:
+  #   image: bitnami/postgresql:latest
+  #   networks:
+  #     - main
+  #   container_name: database
+  #   restart: always
+  #   environment:
+  #     - POSTGRESQL_USERNAME=docker
+  #     - POSTGRESQL_PASSWORD=docker
+  #     - POSTGRESQL_DATABASE=docker
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - ./pgData:/bitnami/postgresql
+
   database:
-    image: bitnami/postgresql:latest
-    networks:
-      - main
-    container_name: database
+    image: postgres:15
     restart: always
     environment:
-      - POSTGRESQL_USERNAME=docker
-      - POSTGRESQL_PASSWORD=docker
-      - POSTGRESQL_DATABASE=docker
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
     ports:
-      - "5432:5432"
+      - ${DB_PORT}:5432
     volumes:
-      - ./pgData:/bitnami/postgresql
+      - ./docker/pgData:/var/lib/postgresql/data
 
   whyapp:
     build:
@@ -28,7 +44,5 @@ services:
     restart: unless-stopped
     depends_on:
       - database
-    environment:
-      - DATABASE_URL=postgresql://docker:docker@database:5432/docker?schema=public
     ports:
       - "3000:3000"
