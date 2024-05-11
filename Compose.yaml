@@ -24,25 +24,27 @@ services:
 
   database:
     image: postgres:15
+    volumes:
+      - ./docker/pgData:/var/lib/postgresql/data
     restart: always
+    ports:
+      - ${DB_PORT}:5432
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
-    ports:
-      - ${DB_PORT}:5432
-    volumes:
-      - ./docker/pgData:/var/lib/postgresql/data
+    networks:
+      - main
 
   whyapp:
+    depends_on:
+      - database
+    container_name: whyapp
     build:
       context: .
       dockerfile: Dockerfile
-    networks:
-      - main
-    container_name: whyapp
-    restart: unless-stopped
-    depends_on:
-      - database
+    restart: no
     ports:
       - "3000:3000"
+    networks:
+      - main
