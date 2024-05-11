@@ -5,7 +5,6 @@
 ## Depende
 
 - [NodeJs LTS (v20.11.0)](https://nodejs.org/en)
-- Yarn
   
 O projeto é feito utilizando o framework [NestJS](https://docs.nestjs.com)
 
@@ -24,11 +23,11 @@ Siga estes passos corretamente para instalar, testar e modificar a cópia desta 
 4. **Finalize a configuração**: Preencha as chaves obrigatórias restantes do arquivo **.env**
 5. **Instale os pacotes necessários**: Faça as instalações das dependências com o comando
 ```bash
-   yarn install
+   npm i
 ```
 6. **Execute a aplicação**: Pronto! Agora você pode executar a aplicação localmente com o comando:
 ```bash
-   yarn start:dev
+   npm run start:dev
 ```
 >**Nota:** Repare que estamos executando como **_dev_**, o que habilita o reinicio automático em caso de alteração no código, em produção você deve executar com **start:prod**. Confira os scripts no arquivo **_package.json_**
 
