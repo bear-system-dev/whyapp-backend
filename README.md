@@ -10,6 +10,8 @@ O projeto é feito utilizando o framework [NestJS](https://docs.nestjs.com)
 
 ## Instalação
 
+Caso prefira configurar com o Docker compose [clique aqui](https://github.com/bear-system-dev/whyapp-backend/blob/dev/docs/Docker.md)
+
 Siga estes passos corretamente para instalar, testar e modificar a cópia desta API
 
 1. **Obtenha um banco de dados POSTGREE**: Antes de tudo, você deve ter um banco de dados rodando. Nós utilizamos para testes o [Render](https://render.com) para hospedar.
