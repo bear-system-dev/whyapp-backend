@@ -8,7 +8,7 @@
 ```bash
 docker compose up -d
 ```
->**NOTA:** **-d** irá executar os containers em modo Daemon (Em segundo plano). Utilize **down** ao invés de **up** para fechar os containers
+>**NOTA:** **-d** irá executar os containers em modo Daemon (Em segundo plano). Utilize **docker compose down** ao invés de **up** para fechar os containers
 
 - Você deverá agora entrar no container **whyapp** para fazer aplicar as migrations ao banco de dados
 Execute:
