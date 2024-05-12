@@ -4,7 +4,7 @@
 
 ### EXECUÇÃO
 
-- Primeiro, inicie a composição de containers: 
+- Primeiro, na raiz do projeto, inicie a composição de containers: 
 ```bash
 docker compose up -d
 ```
