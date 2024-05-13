@@ -4,6 +4,8 @@ import { PrismaService } from 'src/database/prisma.service';
 import { UserCreateDTO } from './dto/userCreate.dto';
 import { UserQueriesDTO } from './dto/userQueries.dto';
 import { UserUpdateDTO } from './dto/userUpdate.dto';
+import { BCrypt } from 'src/utils/bcrypt.service';
+const bcrypt = new BCrypt();
 
 const userDataIncludes = {
   cargos: true,
@@ -118,9 +120,13 @@ export class UsersService {
     newData: UserUpdateDTO,
   ): Promise<User | Error> {
     try {
+      const passwordHash = await bcrypt.hashData(newData.senha)
       const updatedUser = await this.prisma.user.update({
         where: { id: userId },
-        data: newData,
+        data: {
+          ...newData,
+          senha: typeof passwordHash === 'string' ? passwordHash : passwordHash.message
+        }  
       });
 
       return updatedUser;
