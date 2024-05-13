@@ -8,9 +8,17 @@
   
 O projeto é feito utilizando o framework [NestJS](https://docs.nestjs.com)
 
-## Instalação
+## Estrutura das pastas no projeto
 
-Caso prefira configurar com o Docker compose [clique aqui](https://github.com/bear-system-dev/whyapp-backend/blob/dev/docs/Docker.md)
+Utilizamos a arquitetura padrão do NestJS. Em adição, disponibilizamos mais alguns detalhes para cada diretório e arquivo [aqui](https://github.com/bear-system-dev/whyapp-backend/blob/dev/docs/structure.md)
+
+## Instalação e execução
+
+### Docker
+
+Caso prefira configurar com o Docker, utilizamos o compose para gerar os containers. [Clique aqui](https://github.com/bear-system-dev/whyapp-backend/blob/dev/docs/Docker.md) para acessar esta sessão
+
+### NPM
 
 Siga estes passos corretamente para instalar, testar e modificar a cópia desta API
 
@@ -34,7 +42,32 @@ Siga estes passos corretamente para instalar, testar e modificar a cópia desta 
 >**Nota:** Repare que estamos executando como **_dev_**, o que habilita o reinicio automático em caso de alteração no código, em produção você deve executar com **start:prod**. Confira os scripts no arquivo **_package.json_**
 
 Ao seguir o passo-a-passo, a aplicação deve estar rodando corretamente. Assim você pode acessar através do seu [localhost na porta 3000](http:127.0.0.1:3000) e receber a mensagem: **_API WhyApp Backend - Rodando..._**
+
+## Funcionamento e funcionalidades no projeto
+
+### Eventos WebSocket
+
+Utilizamos alguns eventos pra manter a conexão em tempo real em alguns momentos. Sendo a biblioteca padrão no NestJS o Socket.IO, optamos por manter. Tais eventos são utilizados em conjunto com as requisições HTTP da API REST padrão e você pode utilizá-los sem conflitos
+
+Os eventos estão divididos em grupos por namespaces. Assim podemos organizar o contexto dos eventos para cada finalidade
+
+- DIVISÃO POR NAMESPACES
+
+1. **NAMESPACE /** (https://url_deploy/)
+
+Aqui ficam os eventos relacionados às mensagens privadas. [Clique aqui]() para visualizar os eventos e seus detalhes.
+
+2. **NAMESPACE /messages** (https://url_deploy/messages*)
+
+Aqui ficam os eventos relacionados às notificações e atualização dos usuários. [Clique aqui]() para visualizar os eventos e seus detalhes.<br \>
+Este grupo está sujeito à mudanças até a finalização do sistema de notificações
+
+1. **NAMESPACE /grupos** (https://url_deploy/grupos)
+
+Aqui ficam os eventos relacionados às mensagens de grupo e funcionalidades relacionadas. [Clique aqui]() para visualizar os eventos e seus detalhes.
+
 ## Contribuição / Contributing
 Você pode contribuir neste projeto livremente abrindo um Pull Request após fazer o Fork deste repositório.
+
 ## License
-Este projeto está sob a Licença MIT - consulte o arquivo [LICENSE](https://github.com/bear-system-dev/whyapp-backend/blob/dev/LICENSE) para mais detalhes.
+Este projeto está sob a Licença MIT - consulte o arquivo [LICENSE](https://github.com/bear-system-dev/whyapp-backend/blob/dev/LICENSE) para mais detalhes
