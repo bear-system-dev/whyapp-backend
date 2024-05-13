@@ -117,7 +117,7 @@ Gerencia o serviço de mensagens entre usuários:
 
 - **Service:** Lida com processamento de mensagens, criação de chats e mensagens, notificações e busca de mensagens.
 
-## Pasta `Users`
+## `Users`
 
 Gerencia os usuários da aplicação:
 
