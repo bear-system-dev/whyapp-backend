@@ -57,13 +57,13 @@ Os eventos estão divididos em grupos por namespaces. Assim podemos organizar o 
 ```bash
 https://url_deploy/
 ```
->**NOTA:** Aqui ficam os eventos relacionados às mensagens privadas. [Clique aqui]() para visualizar os eventos e seus detalhes.
+>**NOTA:** Aqui ficam os eventos relacionados às mensagens privadas. [Clique aqui]() para visualizar os eventos e seus detalhes. __**Este grupo está sujeito à mudanças até a finalização do sistema de notificações**__
 
 2. **NAMESPACE /messages**
 ```bash
 https://url_deploy/messages
 ```
->**NOTA:** Aqui ficam os eventos relacionados às notificações e atualização dos usuários. [Clique aqui]() para visualizar os eventos e seus detalhes. **__Este grupo está sujeito à mudanças até a finalização do sistema de notificações__**
+>**NOTA:** Aqui ficam os eventos relacionados às notificações e atualização dos usuários. [Clique aqui]() para visualizar os eventos e seus detalhes. __**Este grupo está sujeito à mudanças até a finalização do sistema de notificações**__
 
 3. **NAMESPACE /grupos**
 ```bash
