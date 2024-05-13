@@ -53,18 +53,24 @@ Os eventos estão divididos em grupos por namespaces. Assim podemos organizar o 
 
 - DIVISÃO POR NAMESPACES
 
-1. **NAMESPACE /** (https://url_deploy/)
+1. **NAMESPACE /**
+```bash
+https://url_deploy/
+```
+>**NOTA:** Aqui ficam os eventos relacionados às mensagens privadas. [Clique aqui]() para visualizar os eventos e seus detalhes.
 
-Aqui ficam os eventos relacionados às mensagens privadas. [Clique aqui]() para visualizar os eventos e seus detalhes.
-
-2. **NAMESPACE /messages** (https://url_deploy/messages*)
-
-Aqui ficam os eventos relacionados às notificações e atualização dos usuários. [Clique aqui]() para visualizar os eventos e seus detalhes.<br \>
+2. **NAMESPACE /messages**
+```bash
+https://url_deploy/messages
+```
+>**NOTA:** Aqui ficam os eventos relacionados às notificações e atualização dos usuários. [Clique aqui]() para visualizar os eventos e seus detalhes.<br>
 Este grupo está sujeito à mudanças até a finalização do sistema de notificações
 
-1. **NAMESPACE /grupos** (https://url_deploy/grupos)
-
-Aqui ficam os eventos relacionados às mensagens de grupo e funcionalidades relacionadas. [Clique aqui]() para visualizar os eventos e seus detalhes.
+3. **NAMESPACE /grupos**
+```bash
+https://url_deploy/grupos
+```
+>**NOTA:** Aqui ficam os eventos relacionados às mensagens de grupo e funcionalidades relacionadas. [Clique aqui]() para visualizar os eventos e seus detalhes.
 
 ## Contribuição / Contributing
 Você pode contribuir neste projeto livremente abrindo um Pull Request após fazer o Fork deste repositório.
