@@ -63,8 +63,7 @@ https://url_deploy/
 ```bash
 https://url_deploy/messages
 ```
->**NOTA:** Aqui ficam os eventos relacionados às notificações e atualização dos usuários. [Clique aqui]() para visualizar os eventos e seus detalhes.<br>
-Este grupo está sujeito à mudanças até a finalização do sistema de notificações
+>**NOTA:** Aqui ficam os eventos relacionados às notificações e atualização dos usuários. [Clique aqui]() para visualizar os eventos e seus detalhes. **__Este grupo está sujeito à mudanças até a finalização do sistema de notificações__**
 
 3. **NAMESPACE /grupos**
 ```bash
