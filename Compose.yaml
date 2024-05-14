@@ -29,7 +29,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    restart: no
+    restart: unless-stopped
     ports:
       - "3000:3000"
     networks:
