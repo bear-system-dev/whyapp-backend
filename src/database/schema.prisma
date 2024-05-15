@@ -72,7 +72,7 @@ model Chat {
   videos     ChatVideo[]
   audios     ChatAudio[]
   documentos ChatDocument[]
-  usuario    User           @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  usuario    User           @relation(fields: [usuarioId], references: [id], onDelete: Cascade) //TALVEZ DÊ PROBLEMA E APAGUE PARA OS DOIS USUÁRIO POR CONTA DO cascade
   usuarioId  String
   chatId     String?
   createdAt  DateTime       @default(now())
@@ -82,7 +82,7 @@ model Chat {
 model ChatMessage {
   id         String   @id @default(uuid())
   mensagem   String
-  chat       Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  chat       Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade) //TALVEZ DÊ PROBLEMA E APAGUE PARA OS DOIS USUÁRIO POR CONTA DO cascade
   chatId     String
   fromUserId String
   toUserId   String
