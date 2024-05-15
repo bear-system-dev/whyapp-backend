@@ -72,7 +72,7 @@ model Chat {
   videos     ChatVideo[]
   audios     ChatAudio[]
   documentos ChatDocument[]
-  usuario    User           @relation(fields: [usuarioId], references: [id])
+  usuario    User           @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
   usuarioId  String
   chatId     String?
   createdAt  DateTime       @default(now())
@@ -82,7 +82,7 @@ model Chat {
 model ChatMessage {
   id         String   @id @default(uuid())
   mensagem   String
-  chat       Chat     @relation(fields: [chatId], references: [id])
+  chat       Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
   chatId     String
   fromUserId String
   toUserId   String
