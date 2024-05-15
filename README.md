@@ -16,7 +16,7 @@ Utilizamos a arquitetura padrão do NestJS. Em adição, disponibilizamos mais a
 
 ### Docker
 
-Caso prefira configurar com o Docker, utilizamos o compose para gerar os containers. [Clique aqui](https://github.com/bear-system-dev/whyapp-backend/blob/dev/docs/docker.md) para acessar esta sessão
+Caso prefira configurar com o Docker, utilizamos o compose para gerar os containers. [Clique aqui](https://github.com/bear-system-dev/whyapp-backend/blob/dev/docs/Docker.md) para acessar esta sessão
 
 ### NPM
 
