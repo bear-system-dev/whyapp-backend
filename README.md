@@ -16,7 +16,7 @@ Utilizamos a arquitetura padrão do NestJS. Em adição, disponibilizamos mais a
 
 ### Docker
 
-Caso prefira configurar com o Docker, utilizamos o compose para gerar os containers. [Clique aqui](https://github.com/bear-system-dev/whyapp-backend/blob/dev/docs/Docker.md) para acessar esta sessão
+Caso prefira configurar com o Docker, utilizamos o compose para gerar os containers. [Clique aqui](https://github.com/bear-system-dev/whyapp-backend/blob/dev/docs/docker.md) para acessar esta sessão
 
 ### NPM
 
@@ -44,6 +44,10 @@ Siga estes passos corretamente para instalar, testar e modificar a cópia desta 
 Ao seguir o passo-a-passo, a aplicação deve estar rodando corretamente. Assim você pode acessar através do seu [localhost na porta 3000](http:127.0.0.1:3000) e receber a mensagem: **_API WhyApp Backend - Rodando..._**
 
 ## Funcionamento e funcionalidades no projeto
+
+### Endpoints da API REST
+
+Nós utilizamos o **SWAGGER** como documentação principal. Entretanto, adicionamos mais algumas informações em **nosso repositório** [nesta sessão](https://github.com/bear-system-dev/whyapp-backend/blob/dev/docs/endpoints.md). Já a documentação no **SWAGGER** você pode encontrar [aqui](https://whyapp-backend.onrender.com/v1/docs/api/#/)
 
 ### Eventos WebSocket
 
