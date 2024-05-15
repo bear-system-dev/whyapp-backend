@@ -69,7 +69,7 @@ https://url_deploy/messages
 ```bash
 https://url_deploy/grupos
 ```
->**NOTA:** Aqui ficam os eventos relacionados às mensagens de grupo e funcionalidades relacionadas. [Clique aqui](https://github.com/bear-system-dev/whyapp-backend/blob/dev/docs/groups-events.md) para visualizar os eventos e seus detalhes.
+>**NOTA:** Aqui ficam os eventos relacionados às mensagens de grupo e funcionalidades relacionadas. [Clique aqui](https://github.com/bear-system-dev/whyapp-backend/blob/dev/docs/group-events.md) para visualizar os eventos e seus detalhes.
 
 ## Contribuição / Contributing
 Você pode contribuir neste projeto livremente abrindo um Pull Request após fazer o Fork deste repositório.
