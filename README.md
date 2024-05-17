@@ -61,7 +61,7 @@ Os eventos estão divididos em grupos por namespaces. Assim podemos organizar o 
 ```bash
 https://url_deploy/
 ```
->**NOTA:** Aqui ficam os eventos relacionados às mensagens privadas. [Clique aqui]() para visualizar os eventos e seus detalhes. __**Este grupo está sujeito à mudanças até a finalização do sistema de notificações**__
+>**NOTA:** Aqui ficam os eventos relacionados às mensagens privadas. [Clique aqui](https://github.com/bear-system-dev/whyapp-backend/blob/dev/docs/private_events.md) para visualizar os eventos e seus detalhes. __**Este grupo está sujeito à mudanças até a finalização do sistema de notificações**__
 
 2. **NAMESPACE /messages**
 ```bash
