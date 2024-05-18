@@ -3,14 +3,42 @@ import {
   WebSocketGateway,
   MessageBody,
   ConnectedSocket,
+  OnGatewayConnection,
+  OnGatewayDisconnect,
+  OnGatewayInit,
+  WebSocketServer,
 } from '@nestjs/websockets';
-import { Socket } from 'socket.io';
+import { Server, Socket } from 'socket.io';
 import { MessageService } from './message.services';
 import { corsOptions } from 'src/utils/cors.options';
+import { Logger } from '@nestjs/common';
 
-@WebSocketGateway({ cors: corsOptions })
-export class MyGateway {
+@WebSocketGateway({ namespace: 'private-chats', cors: corsOptions })
+export class PrivateChatsGateway
+  implements OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit
+{
   constructor(private readonly messageService: MessageService) {}
+
+  private readonly logger = new Logger(PrivateChatsGateway.name);
+
+  @WebSocketServer()
+  private readonly server: Server;
+
+  afterInit() {
+    this.logger.debug('Up and running...');
+    // instrument(this.server, {
+    //   auth: {
+    //     type: 'basic',
+    //     username: process.env.SOCKETIO_ADMIN_UI_USERNAME || 'admin',
+    //     password: process.env.SOCKETIO_ADMIN_UI_PASSWORD || 'admin2024',
+    //   },
+    //   mode: 'development',
+    //   namespaceName: process.env.SOCKETIO_ADMIN_UI_NAMESPACE_NAME || '/admin',
+    // });
+  }
+
+  handleConnection() {}
+  handleDisconnect() {}
 
   @SubscribeMessage('newMessage')
   async onNewMessage(

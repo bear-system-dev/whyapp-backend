@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { MyGateway } from './message.controller';
+import { PrivateChatsGateway } from './message.gateway';
 import { CustomLoggerModule } from 'src/utils/customLogger/CustomLogger.module';
 import { ChatsModule } from 'src/chats/chats.module';
 import { AuthModule } from 'src/auth/auth.module';
@@ -11,7 +11,7 @@ import { MessagesGateway } from 'src/events/messages.gateway';
 @Module({
   imports: [CustomLoggerModule, ChatsModule, AuthModule],
   providers: [
-    MyGateway,
+    PrivateChatsGateway,
     PrismaService,
     ChatsService,
     MessageService,

@@ -4,32 +4,46 @@ import {
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
+  OnGatewayConnection,
+  OnGatewayDisconnect,
+  OnGatewayInit,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { GroupsService } from './groups.service';
 import { corsOptions } from 'src/utils/cors.options';
 import { GroupMessagesService } from 'src/group-messages/group-messages.service';
+import { Logger } from '@nestjs/common';
 // import { instrument } from '@socket.io/admin-ui';
 
-@WebSocketGateway({ cors: corsOptions, namespace: 'grupos' })
-export class GroupsGateway {
-  // afterInit() {
-  //   instrument(this.server, {
-  //     auth: {
-  //       type: 'basic',
-  //       username: process.env.SOCKETIO_ADMIN_UI_USERNAME || 'admin',
-  //       password: process.env.SOCKETIO_ADMIN_UI_PASSWORD || 'admin2024',
-  //     },
-  //     mode: 'development',
-  //     namespaceName: process.env.SOCKETIO_ADMIN_UI_NAMESPACE_NAME || '/admin',
-  //   });
-  // }
+@WebSocketGateway({ cors: corsOptions, namespace: 'group-chats' })
+export class GroupsGateway
+  implements OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit
+{
   constructor(
     private readonly groupsService: GroupsService,
     private readonly groupMessagesService: GroupMessagesService,
   ) {}
+
+  private readonly logger = new Logger(GroupsGateway.name);
+
   @WebSocketServer()
-  server: Server;
+  private readonly server: Server;
+
+  afterInit() {
+    this.logger.debug('Up and running...');
+    // instrument(this.server, {
+    //   auth: {
+    //     type: 'basic',
+    //     username: process.env.SOCKETIO_ADMIN_UI_USERNAME || 'admin',
+    //     password: process.env.SOCKETIO_ADMIN_UI_PASSWORD || 'admin2024',
+    //   },
+    //   mode: 'development',
+    //   namespaceName: process.env.SOCKETIO_ADMIN_UI_NAMESPACE_NAME || '/admin',
+    // });
+  }
+
+  handleConnection() {}
+  handleDisconnect() {}
 
   @SubscribeMessage('load groups')
   async onLoadGroups(
