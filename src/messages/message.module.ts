@@ -7,9 +7,11 @@ import { ChatsService } from 'src/chats/chats.service';
 import { PrismaService } from 'src/database/prisma.service';
 import { MessageService } from './message.services';
 import { MessagesGateway } from 'src/events/messages.gateway';
+import { PrivateChatsController } from './message.controller';
 
 @Module({
   imports: [CustomLoggerModule, ChatsModule, AuthModule],
+  controllers: [PrivateChatsController],
   providers: [
     PrivateChatsGateway,
     PrismaService,

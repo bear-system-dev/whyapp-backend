@@ -134,4 +134,44 @@ export class MessageService {
       throw error;
     }
   }
+  async updateMessage(
+    mergedIds: string,
+    messageId: string,
+    newContent: string,
+  ): Promise<ChatMessage> {
+    try {
+      const updatedMessage = await this.prisma.chatMessage.update({
+        where: {
+          id: messageId,
+        },
+        data: {
+          mensagem: newContent,
+          updatedAt: new Date(),
+        },
+      });
+
+      return updatedMessage;
+    } catch (error) {
+      console.error('Error updating message:', error);
+      throw error;
+    }
+  }
+  async deleteMessage(mergedIds: string, messageId: string): Promise<ChatMessage> {
+    try {
+      const deleteMessage = await this.prisma.chatMessage.update({
+        where: {
+          id: messageId,
+        },
+        data: {
+          mensagem: '<i>Esta mensagem foi apagada.</i>',
+          updatedAt: new Date(),
+        },
+      });
+
+      return deleteMessage;
+    } catch (error) {
+      console.error('Error deleting message:', error);
+      throw error;
+    }
+  }
 }
