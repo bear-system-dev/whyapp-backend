@@ -3,11 +3,11 @@ import { GroupMessagesService } from './group-messages.service';
 import { GroupMessagesController } from './group-messages.controller';
 import { PrismaService } from 'src/database/prisma.service';
 import { AuthModule } from 'src/auth/auth.module';
-import { MessagesGateway } from 'src/events/messages.gateway';
+import { NotificationGateway } from 'src/notification/notification.gateway';
 
 @Module({
-  imports: [AuthModule],
+  imports: [AuthModule, NotificationGateway],
   controllers: [GroupMessagesController],
-  providers: [GroupMessagesService, PrismaService, MessagesGateway],
+  providers: [GroupMessagesService, PrismaService, NotificationGateway],
 })
 export class GroupMessagesModule {}

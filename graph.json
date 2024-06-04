@@ -1,0 +1,3178 @@
+{
+  "nodes": {
+    "17200801": {
+      "id": "17200801",
+      "label": "HomePageService",
+      "parent": "-4953497",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "HomePageModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "HomePageService",
+        "initTime": 20.405699999999797
+      }
+    },
+    "95355232": {
+      "id": "95355232",
+      "label": "JwtModule",
+      "parent": "-536515674",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "JwtModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "JwtModule",
+        "initTime": 20.975999999999658
+      }
+    },
+    "126609156": {
+      "id": "126609156",
+      "label": "NotificationModule",
+      "metadata": {
+        "type": "module",
+        "global": false,
+        "dynamic": false,
+        "internal": false
+      }
+    },
+    "172572434": {
+      "id": "172572434",
+      "label": "ApplicationConfig",
+      "parent": "969425645",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "GroupsModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "176088545": {
+      "id": "176088545",
+      "label": "ApplicationConfig",
+      "parent": "-891265690",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "MessageModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "203550704": {
+      "id": "203550704",
+      "label": "ExternalContextCreator",
+      "parent": "555176277",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "InternalCoreModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "ExternalContextCreator",
+        "initTime": 22.19080000000031
+      }
+    },
+    "225063248": {
+      "id": "225063248",
+      "label": "InternalCoreModule",
+      "parent": "555176277",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "InternalCoreModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "InternalCoreModule",
+        "initTime": 23.448799999999665
+      }
+    },
+    "268812090": {
+      "id": "268812090",
+      "label": "ChatsModule",
+      "metadata": {
+        "type": "module",
+        "global": false,
+        "dynamic": false,
+        "internal": false
+      }
+    },
+    "272686378": {
+      "id": "272686378",
+      "label": "MailingModule",
+      "metadata": {
+        "type": "module",
+        "global": false,
+        "dynamic": false,
+        "internal": false
+      }
+    },
+    "276705889": {
+      "id": "276705889",
+      "label": "ModuleRef",
+      "parent": "-4953497",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "HomePageModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "373235992": {
+      "id": "373235992",
+      "label": "SandboxedCodeExecutor",
+      "parent": "-1033621697",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "DevtoolsModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "SandboxedCodeExecutor"
+      }
+    },
+    "400681591": {
+      "id": "400681591",
+      "label": "DiscoveryService",
+      "parent": "-643397745",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "DiscoveryModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "DiscoveryService"
+      }
+    },
+    "523519792": {
+      "id": "523519792",
+      "label": "GroupsGateway",
+      "parent": "969425645",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "GroupsModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "GroupsGateway"
+      }
+    },
+    "541828540": {
+      "id": "541828540",
+      "label": "MailerCoreModule",
+      "metadata": {
+        "type": "module",
+        "global": true,
+        "dynamic": true,
+        "internal": false
+      }
+    },
+    "545474093": {
+      "id": "545474093",
+      "label": "UserController",
+      "parent": "-2003726489",
+      "metadata": {
+        "type": "controller",
+        "internal": false,
+        "sourceModuleName": "UsersModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "UserController"
+      }
+    },
+    "555176277": {
+      "id": "555176277",
+      "label": "InternalCoreModule",
+      "metadata": {
+        "type": "module",
+        "global": true,
+        "dynamic": true,
+        "internal": true
+      }
+    },
+    "597417344": {
+      "id": "597417344",
+      "label": "BearHashingModule",
+      "parent": "-1070959905",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "BearHashingModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "BearHashingModule",
+        "initTime": 20.998000000000047
+      }
+    },
+    "603011239": {
+      "id": "603011239",
+      "label": "UsersService",
+      "parent": "-2003726489",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "UsersModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "UsersService",
+        "initTime": 44.1541000000002
+      }
+    },
+    "633558838": {
+      "id": "633558838",
+      "label": "ModuleRef",
+      "parent": "541828540",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "MailerCoreModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "653066382": {
+      "id": "653066382",
+      "label": "CustomLogger",
+      "parent": "-955530758",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "CustomLoggerModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "CustomLogger",
+        "initTime": 20.980400000000373
+      }
+    },
+    "671882984": {
+      "id": "671882984",
+      "label": "Reflector",
+      "parent": "555176277",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "InternalCoreModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "Reflector",
+        "initTime": 23.159499999999753
+      }
+    },
+    "710200032": {
+      "id": "710200032",
+      "label": "MessageModule",
+      "parent": "-891265690",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "MessageModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "MessageModule",
+        "initTime": 20.712099999999737
+      }
+    },
+    "710202285": {
+      "id": "710202285",
+      "label": "MailingService",
+      "parent": "272686378",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "MailingModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "MailingService"
+      }
+    },
+    "712454178": {
+      "id": "712454178",
+      "label": "ApplicationConfig",
+      "parent": "1482218087",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "ThrottlerModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "769764816": {
+      "id": "769764816",
+      "label": "NotificationGateway",
+      "parent": "126609156",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "NotificationModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "NotificationGateway"
+      }
+    },
+    "804020896": {
+      "id": "804020896",
+      "label": "GroupMessagesModule",
+      "parent": "-304876278",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "GroupMessagesModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "GroupMessagesModule",
+        "initTime": 20.605299999999716
+      }
+    },
+    "807990512": {
+      "id": "807990512",
+      "label": "GroupMessagesController",
+      "parent": "-304876278",
+      "metadata": {
+        "type": "controller",
+        "internal": false,
+        "sourceModuleName": "GroupMessagesModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "GroupMessagesController"
+      }
+    },
+    "833231184": {
+      "id": "833231184",
+      "label": "ModuleRef",
+      "parent": "-304876278",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "GroupMessagesModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "947372391": {
+      "id": "947372391",
+      "label": "ModuleRef",
+      "parent": "969425645",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "GroupsModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "957019461": {
+      "id": "957019461",
+      "label": "ApplicationConfig",
+      "parent": "-304876278",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "GroupMessagesModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "969425645": {
+      "id": "969425645",
+      "label": "GroupsModule",
+      "metadata": {
+        "type": "module",
+        "global": false,
+        "dynamic": false,
+        "internal": false
+      }
+    },
+    "971320160": {
+      "id": "971320160",
+      "label": "NotificationGateway",
+      "parent": "-1786636116",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "NotificationGateway",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "NotificationGateway"
+      }
+    },
+    "993594822": {
+      "id": "993594822",
+      "label": "UserController",
+      "parent": "-19112576",
+      "metadata": {
+        "type": "controller",
+        "internal": false,
+        "sourceModuleName": "AppModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "UserController"
+      }
+    },
+    "1070370213": {
+      "id": "1070370213",
+      "label": "JwtService",
+      "parent": "-536515674",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "JwtModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "JwtService",
+        "initTime": 22.1283999999996
+      }
+    },
+    "1179374324": {
+      "id": "1179374324",
+      "label": "HomePageModule",
+      "parent": "-4953497",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "HomePageModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "HomePageModule",
+        "initTime": 20.411999999999807
+      }
+    },
+    "1182825970": {
+      "id": "1182825970",
+      "label": "PrismaService",
+      "parent": "268812090",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "ChatsModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "PrismaService",
+        "initTime": 20.7203999999997
+      }
+    },
+    "1188408880": {
+      "id": "1188408880",
+      "label": "GroupsController",
+      "parent": "969425645",
+      "metadata": {
+        "type": "controller",
+        "internal": false,
+        "sourceModuleName": "GroupsModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "GroupsController"
+      }
+    },
+    "1219093248": {
+      "id": "1219093248",
+      "label": "GroupsModule",
+      "parent": "969425645",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "GroupsModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "GroupsModule",
+        "initTime": 20.52520000000004
+      }
+    },
+    "1225356237": {
+      "id": "1225356237",
+      "label": "ChatsService",
+      "parent": "268812090",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "ChatsModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "ChatsService"
+      }
+    },
+    "1242161315": {
+      "id": "1242161315",
+      "label": "HomePageController",
+      "parent": "-19112576",
+      "metadata": {
+        "type": "controller",
+        "internal": false,
+        "sourceModuleName": "AppModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "HomePageController"
+      }
+    },
+    "1297939700": {
+      "id": "1297939700",
+      "label": "ModuleRef",
+      "parent": "-955530758",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "CustomLoggerModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "1302744606": {
+      "id": "1302744606",
+      "label": "PrismaService",
+      "parent": "-891265690",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "MessageModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "PrismaService",
+        "initTime": 20.679200000000037
+      }
+    },
+    "1340040613": {
+      "id": "1340040613",
+      "label": "ApplicationConfig",
+      "parent": "272686378",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "MailingModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "1399306624": {
+      "id": "1399306624",
+      "label": "ThrottlerModule",
+      "parent": "1482218087",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "ThrottlerModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ThrottlerModule",
+        "initTime": 21.188000000000102
+      }
+    },
+    "1404752088": {
+      "id": "1404752088",
+      "label": "AuthController",
+      "parent": "-1134487807",
+      "metadata": {
+        "type": "controller",
+        "internal": false,
+        "sourceModuleName": "AuthModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "AuthController"
+      }
+    },
+    "1427667839": {
+      "id": "1427667839",
+      "label": "PrivateChatsController",
+      "parent": "-891265690",
+      "metadata": {
+        "type": "controller",
+        "internal": false,
+        "sourceModuleName": "MessageModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "PrivateChatsController"
+      }
+    },
+    "1434456218": {
+      "id": "1434456218",
+      "label": "Reflector",
+      "parent": "555176277",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "InternalCoreModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": true,
+        "token": "Reflector",
+        "initTime": 43.60940000000028
+      }
+    },
+    "1477231111": {
+      "id": "1477231111",
+      "label": "PrivateChatsGateway",
+      "parent": "-891265690",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "MessageModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "PrivateChatsGateway"
+      }
+    },
+    "1482218087": {
+      "id": "1482218087",
+      "label": "ThrottlerModule",
+      "metadata": {
+        "type": "module",
+        "global": true,
+        "dynamic": true,
+        "internal": false
+      }
+    },
+    "1542581243": {
+      "id": "1542581243",
+      "label": "ModuleRef",
+      "parent": "-1134487807",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "AuthModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "1575490394": {
+      "id": "1575490394",
+      "label": "CustomLoggerModule",
+      "parent": "-955530758",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "CustomLoggerModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "CustomLoggerModule",
+        "initTime": 20.984599999999773
+      }
+    },
+    "1623724461": {
+      "id": "1623724461",
+      "label": "ModuleRef",
+      "parent": "1482218087",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "ThrottlerModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "1628580469": {
+      "id": "1628580469",
+      "label": "ApplicationConfig",
+      "parent": "268812090",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "ChatsModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "1653574016": {
+      "id": "1653574016",
+      "label": "ModuleRef",
+      "parent": "268812090",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "ChatsModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "1688619051": {
+      "id": "1688619051",
+      "label": "DevtoolsHttpServerHost",
+      "parent": "-1033621697",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "DevtoolsModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "DevtoolsHttpServerHost"
+      }
+    },
+    "1709210562": {
+      "id": "1709210562",
+      "label": "PrismaService",
+      "parent": "-304876278",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "GroupMessagesModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "PrismaService",
+        "initTime": 20.571399999999812
+      }
+    },
+    "1712941473": {
+      "id": "1712941473",
+      "label": "ApplicationConfig",
+      "parent": "-536515674",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "JwtModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "1716758049": {
+      "id": "1716758049",
+      "label": "GroupsService",
+      "parent": "969425645",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "GroupsModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "GroupsService",
+        "initTime": 54.32569999999987
+      }
+    },
+    "1723702688": {
+      "id": "1723702688",
+      "label": "ChatsModule",
+      "parent": "268812090",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "ChatsModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ChatsModule",
+        "initTime": 20.80789999999979
+      }
+    },
+    "1739648750": {
+      "id": "1739648750",
+      "label": "NotificationModule",
+      "parent": "126609156",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "NotificationModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "NotificationModule",
+        "initTime": 20.460399999999936
+      }
+    },
+    "1755859792": {
+      "id": "1755859792",
+      "label": "ThrottlerGuard",
+      "parent": "-19112576",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "AppModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "APP_GUARD (UUID: 1239237319)",
+        "subtype": "guard"
+      }
+    },
+    "1772074861": {
+      "id": "1772074861",
+      "label": "GroupMessagesService",
+      "parent": "-304876278",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "GroupMessagesModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "GroupMessagesService",
+        "initTime": 51.584100000000035
+      }
+    },
+    "1772679333": {
+      "id": "1772679333",
+      "label": "ModuleRef",
+      "parent": "-1070959905",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "BearHashingModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "1823014432": {
+      "id": "1823014432",
+      "label": "MailerService",
+      "parent": "541828540",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "MailerCoreModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "MailerService",
+        "initTime": 31.421899999999823
+      }
+    },
+    "1866097956": {
+      "id": "1866097956",
+      "label": "HomePageController",
+      "parent": "-4953497",
+      "metadata": {
+        "type": "controller",
+        "internal": false,
+        "sourceModuleName": "HomePageModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "HomePageController",
+        "initTime": 22.11110000000008
+      }
+    },
+    "1919157847": {
+      "id": "1919157847",
+      "label": "REQUEST",
+      "parent": "555176277",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "InternalCoreModule",
+        "durable": false,
+        "static": false,
+        "scope": 2,
+        "transient": false,
+        "exported": true,
+        "token": "REQUEST",
+        "initTime": 5.521600000000035
+      }
+    },
+    "1989588516": {
+      "id": "1989588516",
+      "label": "ApplicationConfig",
+      "parent": "-1033621697",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "DevtoolsModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "2114366838": {
+      "id": "2114366838",
+      "label": "CONFIGURABLE_MODULE_OPTIONS[0a2f1a1b1ab79eb8741b0]",
+      "parent": "-1033621697",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "DevtoolsModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "CONFIGURABLE_MODULE_OPTIONS[0a2f1a1b1ab79eb8741b0]"
+      }
+    },
+    "2133216863": {
+      "id": "2133216863",
+      "label": "ApplicationConfig",
+      "parent": "-955530758",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "CustomLoggerModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "-1486320561": {
+      "id": "-1486320561",
+      "label": "ModuleRef",
+      "parent": "555176277",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "InternalCoreModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "-651043398": {
+      "id": "-651043398",
+      "label": "ApplicationConfig",
+      "parent": "555176277",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "InternalCoreModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "-255469305": {
+      "id": "-255469305",
+      "label": "INQUIRER",
+      "parent": "555176277",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "InternalCoreModule",
+        "durable": false,
+        "static": true,
+        "scope": 1,
+        "transient": true,
+        "exported": true,
+        "token": "INQUIRER",
+        "initTime": 5.510399999999663
+      }
+    },
+    "-26938366": {
+      "id": "-26938366",
+      "label": "ModulesContainer",
+      "parent": "555176277",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "InternalCoreModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "ModulesContainer",
+        "initTime": 22.17310000000043
+      }
+    },
+    "-326832201": {
+      "id": "-326832201",
+      "label": "HttpAdapterHost",
+      "parent": "555176277",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "InternalCoreModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "HttpAdapterHost",
+        "initTime": 22.153600000000097
+      }
+    },
+    "-702581189": {
+      "id": "-702581189",
+      "label": "LazyModuleLoader",
+      "parent": "555176277",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "InternalCoreModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "LazyModuleLoader",
+        "initTime": 22.153600000000097
+      }
+    },
+    "-1904419534": {
+      "id": "-1904419534",
+      "label": "SerializedGraph",
+      "parent": "555176277",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "InternalCoreModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "SerializedGraph",
+        "initTime": 22.14890000000014
+      }
+    },
+    "-19112576": {
+      "id": "-19112576",
+      "label": "AppModule",
+      "metadata": {
+        "type": "module",
+        "global": false,
+        "dynamic": false,
+        "internal": false
+      }
+    },
+    "-2139588960": {
+      "id": "-2139588960",
+      "label": "AppModule",
+      "parent": "-19112576",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "AppModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "AppModule",
+        "initTime": 22.135600000000068
+      }
+    },
+    "-71302842": {
+      "id": "-71302842",
+      "label": "ModuleRef",
+      "parent": "-19112576",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "AppModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "-2064622725": {
+      "id": "-2064622725",
+      "label": "ApplicationConfig",
+      "parent": "-19112576",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "AppModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "-1888273744": {
+      "id": "-1888273744",
+      "label": "AuthGuard",
+      "parent": "-19112576",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "AppModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "APP_GUARD (UUID: 1201125561)",
+        "subtype": "guard"
+      }
+    },
+    "-1952648617": {
+      "id": "-1952648617",
+      "label": "THROTTLER:MODULE_OPTIONS",
+      "parent": "1482218087",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "ThrottlerModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": true,
+        "token": "THROTTLER:MODULE_OPTIONS"
+      }
+    },
+    "-470986226": {
+      "id": "-470986226",
+      "label": "Symbol(ThrottlerStorage)",
+      "parent": "1482218087",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "ThrottlerModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "Symbol(ThrottlerStorage)",
+        "initTime": 23.56100000000015
+      }
+    },
+    "-1033621697": {
+      "id": "-1033621697",
+      "label": "DevtoolsModule",
+      "metadata": {
+        "type": "module",
+        "global": false,
+        "dynamic": true,
+        "internal": false
+      }
+    },
+    "-1142553948": {
+      "id": "-1142553948",
+      "label": "DevtoolsModule",
+      "parent": "-1033621697",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "DevtoolsModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "DevtoolsModule",
+        "initTime": 21.128699999999753
+      }
+    },
+    "-751962311": {
+      "id": "-751962311",
+      "label": "ModuleRef",
+      "parent": "-1033621697",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "DevtoolsModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "-643397745": {
+      "id": "-643397745",
+      "label": "DiscoveryModule",
+      "metadata": {
+        "type": "module",
+        "global": false,
+        "dynamic": false,
+        "internal": false
+      }
+    },
+    "-1048394624": {
+      "id": "-1048394624",
+      "label": "DiscoveryModule",
+      "parent": "-643397745",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "DiscoveryModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "DiscoveryModule",
+        "initTime": 20.892899999999827
+      }
+    },
+    "-501891371": {
+      "id": "-501891371",
+      "label": "ModuleRef",
+      "parent": "-643397745",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "DiscoveryModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "-1413161654": {
+      "id": "-1413161654",
+      "label": "ApplicationConfig",
+      "parent": "-643397745",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "DiscoveryModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "-438112115": {
+      "id": "-438112115",
+      "label": "MetadataScanner",
+      "parent": "-643397745",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "DiscoveryModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "MetadataScanner",
+        "initTime": 20.92529999999988
+      }
+    },
+    "-1134487807": {
+      "id": "-1134487807",
+      "label": "AuthModule",
+      "metadata": {
+        "type": "module",
+        "global": false,
+        "dynamic": false,
+        "internal": false
+      }
+    },
+    "-1846279256": {
+      "id": "-1846279256",
+      "label": "AuthModule",
+      "parent": "-1134487807",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "AuthModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "AuthModule",
+        "initTime": 20.686999999999898
+      }
+    },
+    "-120792986": {
+      "id": "-120792986",
+      "label": "ApplicationConfig",
+      "parent": "-1134487807",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "AuthModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "-793915935": {
+      "id": "-793915935",
+      "label": "AuthService",
+      "parent": "-1134487807",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "AuthModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "AuthService"
+      }
+    },
+    "-119710455": {
+      "id": "-119710455",
+      "label": "BearHashingService",
+      "parent": "-1134487807",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "AuthModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "BearHashingService",
+        "initTime": 20.465400000000045
+      }
+    },
+    "-1839896738": {
+      "id": "-1839896738",
+      "label": "MailingService",
+      "parent": "-1134487807",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "AuthModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "MailingService"
+      }
+    },
+    "-737057104": {
+      "id": "-737057104",
+      "label": "AuthGateway",
+      "parent": "-1134487807",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "AuthModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "AuthGateway",
+        "initTime": 20.410899999999856
+      }
+    },
+    "-2003726489": {
+      "id": "-2003726489",
+      "label": "UsersModule",
+      "metadata": {
+        "type": "module",
+        "global": false,
+        "dynamic": false,
+        "internal": false
+      }
+    },
+    "-495603840": {
+      "id": "-495603840",
+      "label": "UsersModule",
+      "parent": "-2003726489",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "UsersModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "UsersModule",
+        "initTime": 20.40139999999974
+      }
+    },
+    "-618964563": {
+      "id": "-618964563",
+      "label": "ModuleRef",
+      "parent": "-2003726489",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "UsersModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "-643958110": {
+      "id": "-643958110",
+      "label": "ApplicationConfig",
+      "parent": "-2003726489",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "UsersModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "-1089712609": {
+      "id": "-1089712609",
+      "label": "PrismaService",
+      "parent": "-2003726489",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "UsersModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "PrismaService",
+        "initTime": 20.654799999999796
+      }
+    },
+    "-618034848": {
+      "id": "-618034848",
+      "label": "MailingModule",
+      "parent": "272686378",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "MailingModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "MailingModule",
+        "initTime": 20.65009999999984
+      }
+    },
+    "-410964496": {
+      "id": "-410964496",
+      "label": "ModuleRef",
+      "parent": "272686378",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "MailingModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "-384922179": {
+      "id": "-384922179",
+      "label": "MailerModule",
+      "metadata": {
+        "type": "module",
+        "global": false,
+        "dynamic": true,
+        "internal": false
+      }
+    },
+    "-1735606112": {
+      "id": "-1735606112",
+      "label": "MailerModule",
+      "parent": "-384922179",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "MailerModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "MailerModule",
+        "initTime": 20.614800000000287
+      }
+    },
+    "-406975433": {
+      "id": "-406975433",
+      "label": "ModuleRef",
+      "parent": "-384922179",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "MailerModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "-1181775390": {
+      "id": "-1181775390",
+      "label": "ApplicationConfig",
+      "parent": "-384922179",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "MailerModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "-185178210": {
+      "id": "-185178210",
+      "label": "MailerCoreModule",
+      "parent": "541828540",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "MailerCoreModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "MailerCoreModule",
+        "initTime": 20.606900000000223
+      }
+    },
+    "-1846016159": {
+      "id": "-1846016159",
+      "label": "ApplicationConfig",
+      "parent": "541828540",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "MailerCoreModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "-1058138446": {
+      "id": "-1058138446",
+      "label": "MAILER_OPTIONS",
+      "parent": "541828540",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "MailerCoreModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "MAILER_OPTIONS"
+      }
+    },
+    "-1070959905": {
+      "id": "-1070959905",
+      "label": "BearHashingModule",
+      "metadata": {
+        "type": "module",
+        "global": false,
+        "dynamic": false,
+        "internal": false
+      }
+    },
+    "-2079701542": {
+      "id": "-2079701542",
+      "label": "ApplicationConfig",
+      "parent": "-1070959905",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "BearHashingModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "-1854090281": {
+      "id": "-1854090281",
+      "label": "BearHashingService",
+      "parent": "-1070959905",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "BearHashingModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": true,
+        "token": "BearHashingService",
+        "initTime": 20.99019999999973
+      }
+    },
+    "-955530758": {
+      "id": "-955530758",
+      "label": "CustomLoggerModule",
+      "metadata": {
+        "type": "module",
+        "global": false,
+        "dynamic": false,
+        "internal": false
+      }
+    },
+    "-536515674": {
+      "id": "-536515674",
+      "label": "JwtModule",
+      "metadata": {
+        "type": "module",
+        "global": true,
+        "dynamic": true,
+        "internal": false
+      }
+    },
+    "-588705940": {
+      "id": "-588705940",
+      "label": "ModuleRef",
+      "parent": "-536515674",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "JwtModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "-1900804336": {
+      "id": "-1900804336",
+      "label": "JWT_MODULE_OPTIONS",
+      "parent": "-536515674",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "JwtModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "JWT_MODULE_OPTIONS"
+      }
+    },
+    "-891265690": {
+      "id": "-891265690",
+      "label": "MessageModule",
+      "metadata": {
+        "type": "module",
+        "global": false,
+        "dynamic": false,
+        "internal": false
+      }
+    },
+    "-1574916564": {
+      "id": "-1574916564",
+      "label": "ModuleRef",
+      "parent": "-891265690",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "MessageModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "-775341767": {
+      "id": "-775341767",
+      "label": "ChatsService",
+      "parent": "-891265690",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "MessageModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "ChatsService"
+      }
+    },
+    "-505365723": {
+      "id": "-505365723",
+      "label": "MessageService",
+      "parent": "-891265690",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "MessageModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "MessageService",
+        "initTime": 48.95620000000008
+      }
+    },
+    "-304876278": {
+      "id": "-304876278",
+      "label": "GroupMessagesModule",
+      "metadata": {
+        "type": "module",
+        "global": false,
+        "dynamic": false,
+        "internal": false
+      }
+    },
+    "-1841887298": {
+      "id": "-1841887298",
+      "label": "NotificationGateway",
+      "parent": "-304876278",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "GroupMessagesModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "NotificationGateway"
+      }
+    },
+    "-1786636116": {
+      "id": "-1786636116",
+      "label": "NotificationGateway",
+      "metadata": {
+        "type": "module",
+        "global": false,
+        "dynamic": false,
+        "internal": false
+      }
+    },
+    "-648528654": {
+      "id": "-648528654",
+      "label": "ModuleRef",
+      "parent": "-1786636116",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "NotificationGateway",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "-524740377": {
+      "id": "-524740377",
+      "label": "ApplicationConfig",
+      "parent": "-1786636116",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "NotificationGateway",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "-760915147": {
+      "id": "-760915147",
+      "label": "PrismaService",
+      "parent": "969425645",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "GroupsModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "PrismaService",
+        "initTime": 20.505099999999857
+      }
+    },
+    "-1157031446": {
+      "id": "-1157031446",
+      "label": "GroupMessagesService",
+      "parent": "969425645",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "GroupsModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "GroupMessagesService",
+        "initTime": 54.28369999999995
+      }
+    },
+    "-1914887682": {
+      "id": "-1914887682",
+      "label": "ModuleRef",
+      "parent": "126609156",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "NotificationModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ModuleRef"
+      }
+    },
+    "-1079610519": {
+      "id": "-1079610519",
+      "label": "ApplicationConfig",
+      "parent": "126609156",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "NotificationModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    },
+    "-4953497": {
+      "id": "-4953497",
+      "label": "HomePageModule",
+      "metadata": {
+        "type": "module",
+        "global": false,
+        "dynamic": false,
+        "internal": false
+      }
+    },
+    "-1276710580": {
+      "id": "-1276710580",
+      "label": "ApplicationConfig",
+      "parent": "-4953497",
+      "metadata": {
+        "type": "provider",
+        "internal": true,
+        "sourceModuleName": "HomePageModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "ApplicationConfig"
+      }
+    }
+  },
+  "edges": {
+    "69031510": {
+      "source": "-2003726489",
+      "target": "272686378",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "UsersModule",
+        "targetModuleName": "MailingModule"
+      },
+      "id": "69031510"
+    },
+    "70226107": {
+      "source": "-1033621697",
+      "target": "-536515674",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "DevtoolsModule",
+        "targetModuleName": "JwtModule"
+      },
+      "id": "70226107"
+    },
+    "165808010": {
+      "source": "268812090",
+      "target": "1482218087",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "ChatsModule",
+        "targetModuleName": "ThrottlerModule"
+      },
+      "id": "165808010"
+    },
+    "184060730": {
+      "source": "-643397745",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "DiscoveryModule",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "184060730"
+    },
+    "189694679": {
+      "source": "1434456218",
+      "target": "671882984",
+      "metadata": {
+        "type": "class-to-class",
+        "sourceModuleName": "InternalCoreModule",
+        "sourceClassName": "Reflector",
+        "targetClassName": "Reflector",
+        "sourceClassToken": "Reflector",
+        "targetClassToken": "Reflector",
+        "targetModuleName": "InternalCoreModule",
+        "keyOrIndex": 0,
+        "injectionType": "constructor",
+        "internal": true
+      },
+      "id": "189694679"
+    },
+    "219775656": {
+      "source": "-19112576",
+      "target": "-1134487807",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "AppModule",
+        "targetModuleName": "AuthModule"
+      },
+      "id": "219775656"
+    },
+    "289403048": {
+      "source": "-1134487807",
+      "target": "-2003726489",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "AuthModule",
+        "targetModuleName": "UsersModule"
+      },
+      "id": "289403048"
+    },
+    "326228328": {
+      "source": "-304876278",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "GroupMessagesModule",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "326228328"
+    },
+    "339198727": {
+      "source": "-384922179",
+      "target": "1482218087",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "MailerModule",
+        "targetModuleName": "ThrottlerModule"
+      },
+      "id": "339198727"
+    },
+    "409307546": {
+      "source": "969425645",
+      "target": "-536515674",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "GroupsModule",
+        "targetModuleName": "JwtModule"
+      },
+      "id": "409307546"
+    },
+    "565650659": {
+      "source": "-536515674",
+      "target": "1482218087",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "JwtModule",
+        "targetModuleName": "ThrottlerModule"
+      },
+      "id": "565650659"
+    },
+    "613981756": {
+      "source": "126609156",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "NotificationModule",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "613981756"
+    },
+    "634848270": {
+      "source": "-4953497",
+      "target": "541828540",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "HomePageModule",
+        "targetModuleName": "MailerCoreModule"
+      },
+      "id": "634848270"
+    },
+    "675513665": {
+      "source": "541828540",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "MailerCoreModule",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "675513665"
+    },
+    "681815594": {
+      "source": "-470986226",
+      "target": "-1952648617",
+      "metadata": {
+        "type": "class-to-class",
+        "sourceModuleName": "ThrottlerModule",
+        "sourceClassName": "Symbol(ThrottlerStorage)",
+        "targetClassName": "THROTTLER:MODULE_OPTIONS",
+        "sourceClassToken": "Symbol(ThrottlerStorage)",
+        "targetClassToken": "THROTTLER:MODULE_OPTIONS",
+        "targetModuleName": "ThrottlerModule",
+        "keyOrIndex": 0,
+        "injectionType": "constructor"
+      },
+      "id": "681815594"
+    },
+    "687184490": {
+      "source": "-1070959905",
+      "target": "541828540",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "BearHashingModule",
+        "targetModuleName": "MailerCoreModule"
+      },
+      "id": "687184490"
+    },
+    "800507573": {
+      "source": "-1786636116",
+      "target": "541828540",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "NotificationGateway",
+        "targetModuleName": "MailerCoreModule"
+      },
+      "id": "800507573"
+    },
+    "815146367": {
+      "source": "-304876278",
+      "target": "-1134487807",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "GroupMessagesModule",
+        "targetModuleName": "AuthModule"
+      },
+      "id": "815146367"
+    },
+    "883351791": {
+      "source": "-304876278",
+      "target": "541828540",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "GroupMessagesModule",
+        "targetModuleName": "MailerCoreModule"
+      },
+      "id": "883351791"
+    },
+    "978356204": {
+      "source": "-1134487807",
+      "target": "-536515674",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "AuthModule",
+        "targetModuleName": "JwtModule"
+      },
+      "id": "978356204"
+    },
+    "987755577": {
+      "source": "-2003726489",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "UsersModule",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "987755577"
+    },
+    "988220625": {
+      "source": "-643397745",
+      "target": "-536515674",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "DiscoveryModule",
+        "targetModuleName": "JwtModule"
+      },
+      "id": "988220625"
+    },
+    "1032207922": {
+      "source": "541828540",
+      "target": "-536515674",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "MailerCoreModule",
+        "targetModuleName": "JwtModule"
+      },
+      "id": "1032207922"
+    },
+    "1056428433": {
+      "source": "-19112576",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "AppModule",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "1056428433"
+    },
+    "1134336077": {
+      "source": "-536515674",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "JwtModule",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "1134336077"
+    },
+    "1141753216": {
+      "source": "-2003726489",
+      "target": "-536515674",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "UsersModule",
+        "targetModuleName": "JwtModule"
+      },
+      "id": "1141753216"
+    },
+    "1149914772": {
+      "source": "-536515674",
+      "target": "541828540",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "JwtModule",
+        "targetModuleName": "MailerCoreModule"
+      },
+      "id": "1149914772"
+    },
+    "1175183130": {
+      "source": "1070370213",
+      "target": "-1900804336",
+      "metadata": {
+        "type": "class-to-class",
+        "sourceModuleName": "JwtModule",
+        "sourceClassName": "JwtService",
+        "targetClassName": "JWT_MODULE_OPTIONS",
+        "sourceClassToken": "JwtService",
+        "targetClassToken": "JWT_MODULE_OPTIONS",
+        "targetModuleName": "JwtModule",
+        "keyOrIndex": 0,
+        "injectionType": "constructor"
+      },
+      "id": "1175183130"
+    },
+    "1193006430": {
+      "source": "1772074861",
+      "target": "1709210562",
+      "metadata": {
+        "type": "class-to-class",
+        "sourceModuleName": "GroupMessagesModule",
+        "sourceClassName": "GroupMessagesService",
+        "targetClassName": "PrismaService",
+        "sourceClassToken": "GroupMessagesService",
+        "targetClassToken": "PrismaService",
+        "targetModuleName": "GroupMessagesModule",
+        "keyOrIndex": 0,
+        "injectionType": "constructor"
+      },
+      "id": "1193006430"
+    },
+    "1225337355": {
+      "source": "-1070959905",
+      "target": "1482218087",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "BearHashingModule",
+        "targetModuleName": "ThrottlerModule"
+      },
+      "id": "1225337355"
+    },
+    "1231913994": {
+      "source": "-891265690",
+      "target": "-1134487807",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "MessageModule",
+        "targetModuleName": "AuthModule"
+      },
+      "id": "1231913994"
+    },
+    "1236028185": {
+      "source": "268812090",
+      "target": "-536515674",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "ChatsModule",
+        "targetModuleName": "JwtModule"
+      },
+      "id": "1236028185"
+    },
+    "1343396810": {
+      "source": "126609156",
+      "target": "1482218087",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "NotificationModule",
+        "targetModuleName": "ThrottlerModule"
+      },
+      "id": "1343396810"
+    },
+    "1356487389": {
+      "source": "126609156",
+      "target": "-2003726489",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "NotificationModule",
+        "targetModuleName": "UsersModule"
+      },
+      "id": "1356487389"
+    },
+    "1462729567": {
+      "source": "-1786636116",
+      "target": "-536515674",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "NotificationGateway",
+        "targetModuleName": "JwtModule"
+      },
+      "id": "1462729567"
+    },
+    "1581131692": {
+      "source": "-505365723",
+      "target": "1302744606",
+      "metadata": {
+        "type": "class-to-class",
+        "sourceModuleName": "MessageModule",
+        "sourceClassName": "MessageService",
+        "targetClassName": "PrismaService",
+        "sourceClassToken": "MessageService",
+        "targetClassToken": "PrismaService",
+        "targetModuleName": "MessageModule",
+        "keyOrIndex": 0,
+        "injectionType": "constructor"
+      },
+      "id": "1581131692"
+    },
+    "1602338535": {
+      "source": "969425645",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "GroupsModule",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "1602338535"
+    },
+    "1640259257": {
+      "source": "-19112576",
+      "target": "268812090",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "AppModule",
+        "targetModuleName": "ChatsModule"
+      },
+      "id": "1640259257"
+    },
+    "1698754963": {
+      "source": "268812090",
+      "target": "541828540",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "ChatsModule",
+        "targetModuleName": "MailerCoreModule"
+      },
+      "id": "1698754963"
+    },
+    "1723845786": {
+      "source": "603011239",
+      "target": "-1089712609",
+      "metadata": {
+        "type": "class-to-class",
+        "sourceModuleName": "UsersModule",
+        "sourceClassName": "UsersService",
+        "targetClassName": "PrismaService",
+        "sourceClassToken": "UsersService",
+        "targetClassToken": "PrismaService",
+        "targetModuleName": "UsersModule",
+        "keyOrIndex": 0,
+        "injectionType": "constructor"
+      },
+      "id": "1723845786"
+    },
+    "1733675336": {
+      "source": "-1033621697",
+      "target": "1482218087",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "DevtoolsModule",
+        "targetModuleName": "ThrottlerModule"
+      },
+      "id": "1733675336"
+    },
+    "1759774274": {
+      "source": "-643397745",
+      "target": "1482218087",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "DiscoveryModule",
+        "targetModuleName": "ThrottlerModule"
+      },
+      "id": "1759774274"
+    },
+    "1876250712": {
+      "source": "-891265690",
+      "target": "-536515674",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "MessageModule",
+        "targetModuleName": "JwtModule"
+      },
+      "id": "1876250712"
+    },
+    "1877275581": {
+      "source": "126609156",
+      "target": "-536515674",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "NotificationModule",
+        "targetModuleName": "JwtModule"
+      },
+      "id": "1877275581"
+    },
+    "1957961018": {
+      "source": "-891265690",
+      "target": "541828540",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "MessageModule",
+        "targetModuleName": "MailerCoreModule"
+      },
+      "id": "1957961018"
+    },
+    "1988853970": {
+      "source": "969425645",
+      "target": "541828540",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "GroupsModule",
+        "targetModuleName": "MailerCoreModule"
+      },
+      "id": "1988853970"
+    },
+    "-659403571": {
+      "source": "1823014432",
+      "target": "-1058138446",
+      "metadata": {
+        "type": "class-to-class",
+        "sourceModuleName": "MailerCoreModule",
+        "sourceClassName": "MailerService",
+        "targetClassName": "MAILER_OPTIONS",
+        "sourceClassToken": "MailerService",
+        "targetClassToken": "MAILER_OPTIONS",
+        "targetModuleName": "MailerCoreModule",
+        "keyOrIndex": 0,
+        "injectionType": "constructor"
+      },
+      "id": "-659403571"
+    },
+    "-1091370085": {
+      "source": "-19112576",
+      "target": "1482218087",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "AppModule",
+        "targetModuleName": "ThrottlerModule"
+      },
+      "id": "-1091370085"
+    },
+    "-692061701": {
+      "source": "-19112576",
+      "target": "-1033621697",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "AppModule",
+        "targetModuleName": "DevtoolsModule"
+      },
+      "id": "-692061701"
+    },
+    "-158970266": {
+      "source": "-19112576",
+      "target": "-2003726489",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "AppModule",
+        "targetModuleName": "UsersModule"
+      },
+      "id": "-158970266"
+    },
+    "-958195568": {
+      "source": "-19112576",
+      "target": "-891265690",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "AppModule",
+        "targetModuleName": "MessageModule"
+      },
+      "id": "-958195568"
+    },
+    "-790876411": {
+      "source": "-19112576",
+      "target": "-304876278",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "AppModule",
+        "targetModuleName": "GroupMessagesModule"
+      },
+      "id": "-790876411"
+    },
+    "-984948162": {
+      "source": "-19112576",
+      "target": "969425645",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "AppModule",
+        "targetModuleName": "GroupsModule"
+      },
+      "id": "-984948162"
+    },
+    "-1542187906": {
+      "source": "-19112576",
+      "target": "272686378",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "AppModule",
+        "targetModuleName": "MailingModule"
+      },
+      "id": "-1542187906"
+    },
+    "-335199277": {
+      "source": "-19112576",
+      "target": "126609156",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "AppModule",
+        "targetModuleName": "NotificationModule"
+      },
+      "id": "-335199277"
+    },
+    "-1342542320": {
+      "source": "-19112576",
+      "target": "-1070959905",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "AppModule",
+        "targetModuleName": "BearHashingModule"
+      },
+      "id": "-1342542320"
+    },
+    "-1694004662": {
+      "source": "-19112576",
+      "target": "-4953497",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "AppModule",
+        "targetModuleName": "HomePageModule"
+      },
+      "id": "-1694004662"
+    },
+    "-450164520": {
+      "source": "-19112576",
+      "target": "541828540",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "AppModule",
+        "targetModuleName": "MailerCoreModule"
+      },
+      "id": "-450164520"
+    },
+    "-1407874198": {
+      "source": "-19112576",
+      "target": "-536515674",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "AppModule",
+        "targetModuleName": "JwtModule"
+      },
+      "id": "-1407874198"
+    },
+    "-2016448962": {
+      "source": "1482218087",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "ThrottlerModule",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "-2016448962"
+    },
+    "-1932449211": {
+      "source": "1482218087",
+      "target": "541828540",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "ThrottlerModule",
+        "targetModuleName": "MailerCoreModule"
+      },
+      "id": "-1932449211"
+    },
+    "-758197627": {
+      "source": "1482218087",
+      "target": "-536515674",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "ThrottlerModule",
+        "targetModuleName": "JwtModule"
+      },
+      "id": "-758197627"
+    },
+    "-1926621316": {
+      "source": "-1033621697",
+      "target": "-643397745",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "DevtoolsModule",
+        "targetModuleName": "DiscoveryModule"
+      },
+      "id": "-1926621316"
+    },
+    "-308574300": {
+      "source": "-1033621697",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "DevtoolsModule",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "-308574300"
+    },
+    "-766652337": {
+      "source": "-1033621697",
+      "target": "541828540",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "DevtoolsModule",
+        "targetModuleName": "MailerCoreModule"
+      },
+      "id": "-766652337"
+    },
+    "-531278271": {
+      "source": "-643397745",
+      "target": "541828540",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "DiscoveryModule",
+        "targetModuleName": "MailerCoreModule"
+      },
+      "id": "-531278271"
+    },
+    "-557946967": {
+      "source": "-1134487807",
+      "target": "-955530758",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "AuthModule",
+        "targetModuleName": "CustomLoggerModule"
+      },
+      "id": "-557946967"
+    },
+    "-1377619055": {
+      "source": "-1134487807",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "AuthModule",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "-1377619055"
+    },
+    "-1088610631": {
+      "source": "-1134487807",
+      "target": "1482218087",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "AuthModule",
+        "targetModuleName": "ThrottlerModule"
+      },
+      "id": "-1088610631"
+    },
+    "-1840661380": {
+      "source": "-1134487807",
+      "target": "541828540",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "AuthModule",
+        "targetModuleName": "MailerCoreModule"
+      },
+      "id": "-1840661380"
+    },
+    "-1141436952": {
+      "source": "-2003726489",
+      "target": "-1070959905",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "UsersModule",
+        "targetModuleName": "BearHashingModule"
+      },
+      "id": "-1141436952"
+    },
+    "-127805263": {
+      "source": "-2003726489",
+      "target": "1482218087",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "UsersModule",
+        "targetModuleName": "ThrottlerModule"
+      },
+      "id": "-127805263"
+    },
+    "-1897534976": {
+      "source": "-2003726489",
+      "target": "541828540",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "UsersModule",
+        "targetModuleName": "MailerCoreModule"
+      },
+      "id": "-1897534976"
+    },
+    "-553641734": {
+      "source": "272686378",
+      "target": "-384922179",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "MailingModule",
+        "targetModuleName": "MailerModule"
+      },
+      "id": "-553641734"
+    },
+    "-1070987055": {
+      "source": "272686378",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "MailingModule",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "-1070987055"
+    },
+    "-1722769425": {
+      "source": "272686378",
+      "target": "1482218087",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "MailingModule",
+        "targetModuleName": "ThrottlerModule"
+      },
+      "id": "-1722769425"
+    },
+    "-1023715048": {
+      "source": "272686378",
+      "target": "541828540",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "MailingModule",
+        "targetModuleName": "MailerCoreModule"
+      },
+      "id": "-1023715048"
+    },
+    "-97808450": {
+      "source": "272686378",
+      "target": "-536515674",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "MailingModule",
+        "targetModuleName": "JwtModule"
+      },
+      "id": "-97808450"
+    },
+    "-1343023662": {
+      "source": "-384922179",
+      "target": "541828540",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "MailerModule",
+        "targetModuleName": "MailerCoreModule"
+      },
+      "id": "-1343023662"
+    },
+    "-581430297": {
+      "source": "-384922179",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "MailerModule",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "-581430297"
+    },
+    "-1995623878": {
+      "source": "-384922179",
+      "target": "-536515674",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "MailerModule",
+        "targetModuleName": "JwtModule"
+      },
+      "id": "-1995623878"
+    },
+    "-393122305": {
+      "source": "541828540",
+      "target": "1482218087",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "MailerCoreModule",
+        "targetModuleName": "ThrottlerModule"
+      },
+      "id": "-393122305"
+    },
+    "-981814109": {
+      "source": "-1070959905",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "BearHashingModule",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "-981814109"
+    },
+    "-1858078758": {
+      "source": "-1070959905",
+      "target": "-536515674",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "BearHashingModule",
+        "targetModuleName": "JwtModule"
+      },
+      "id": "-1858078758"
+    },
+    "-1893430334": {
+      "source": "-955530758",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "CustomLoggerModule",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "-1893430334"
+    },
+    "-1630474756": {
+      "source": "-955530758",
+      "target": "1482218087",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "CustomLoggerModule",
+        "targetModuleName": "ThrottlerModule"
+      },
+      "id": "-1630474756"
+    },
+    "-28206355": {
+      "source": "-955530758",
+      "target": "541828540",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "CustomLoggerModule",
+        "targetModuleName": "MailerCoreModule"
+      },
+      "id": "-28206355"
+    },
+    "-141470865": {
+      "source": "-955530758",
+      "target": "-536515674",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "CustomLoggerModule",
+        "targetModuleName": "JwtModule"
+      },
+      "id": "-141470865"
+    },
+    "-459023398": {
+      "source": "268812090",
+      "target": "-955530758",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "ChatsModule",
+        "targetModuleName": "CustomLoggerModule"
+      },
+      "id": "-459023398"
+    },
+    "-426286324": {
+      "source": "268812090",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "ChatsModule",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "-426286324"
+    },
+    "-1005081157": {
+      "source": "-891265690",
+      "target": "-955530758",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "MessageModule",
+        "targetModuleName": "CustomLoggerModule"
+      },
+      "id": "-1005081157"
+    },
+    "-932422761": {
+      "source": "-891265690",
+      "target": "268812090",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "MessageModule",
+        "targetModuleName": "ChatsModule"
+      },
+      "id": "-932422761"
+    },
+    "-423474061": {
+      "source": "-891265690",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "MessageModule",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "-423474061"
+    },
+    "-349567735": {
+      "source": "-891265690",
+      "target": "1482218087",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "MessageModule",
+        "targetModuleName": "ThrottlerModule"
+      },
+      "id": "-349567735"
+    },
+    "-890286748": {
+      "source": "-304876278",
+      "target": "-1786636116",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "GroupMessagesModule",
+        "targetModuleName": "NotificationGateway"
+      },
+      "id": "-890286748"
+    },
+    "-388803450": {
+      "source": "-304876278",
+      "target": "1482218087",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "GroupMessagesModule",
+        "targetModuleName": "ThrottlerModule"
+      },
+      "id": "-388803450"
+    },
+    "-90163435": {
+      "source": "-304876278",
+      "target": "-536515674",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "GroupMessagesModule",
+        "targetModuleName": "JwtModule"
+      },
+      "id": "-90163435"
+    },
+    "-1977653842": {
+      "source": "-1786636116",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "NotificationGateway",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "-1977653842"
+    },
+    "-798181040": {
+      "source": "-1786636116",
+      "target": "1482218087",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "NotificationGateway",
+        "targetModuleName": "ThrottlerModule"
+      },
+      "id": "-798181040"
+    },
+    "-1500964520": {
+      "source": "969425645",
+      "target": "-1134487807",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "GroupsModule",
+        "targetModuleName": "AuthModule"
+      },
+      "id": "-1500964520"
+    },
+    "-704048537": {
+      "source": "969425645",
+      "target": "1482218087",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "GroupsModule",
+        "targetModuleName": "ThrottlerModule"
+      },
+      "id": "-704048537"
+    },
+    "-2068053017": {
+      "source": "126609156",
+      "target": "541828540",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "NotificationModule",
+        "targetModuleName": "MailerCoreModule"
+      },
+      "id": "-2068053017"
+    },
+    "-2086221917": {
+      "source": "-4953497",
+      "target": "555176277",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "HomePageModule",
+        "targetModuleName": "InternalCoreModule"
+      },
+      "id": "-2086221917"
+    },
+    "-748650921": {
+      "source": "-4953497",
+      "target": "1482218087",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "HomePageModule",
+        "targetModuleName": "ThrottlerModule"
+      },
+      "id": "-748650921"
+    },
+    "-1485898486": {
+      "source": "-4953497",
+      "target": "-536515674",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "HomePageModule",
+        "targetModuleName": "JwtModule"
+      },
+      "id": "-1485898486"
+    },
+    "-428675572": {
+      "source": "1716758049",
+      "target": "-760915147",
+      "metadata": {
+        "type": "class-to-class",
+        "sourceModuleName": "GroupsModule",
+        "sourceClassName": "GroupsService",
+        "targetClassName": "PrismaService",
+        "sourceClassToken": "GroupsService",
+        "targetClassToken": "PrismaService",
+        "targetModuleName": "GroupsModule",
+        "keyOrIndex": 0,
+        "injectionType": "constructor"
+      },
+      "id": "-428675572"
+    },
+    "-1826573942": {
+      "source": "-1157031446",
+      "target": "-760915147",
+      "metadata": {
+        "type": "class-to-class",
+        "sourceModuleName": "GroupsModule",
+        "sourceClassName": "GroupMessagesService",
+        "targetClassName": "PrismaService",
+        "sourceClassToken": "GroupMessagesService",
+        "targetClassToken": "PrismaService",
+        "targetModuleName": "GroupsModule",
+        "keyOrIndex": 0,
+        "injectionType": "constructor"
+      },
+      "id": "-1826573942"
+    }
+  },
+  "entrypoints": {},
+  "extras": {
+    "orphanedEnhancers": [],
+    "attachedEnhancers": []
+  },
+  "status": "partial",
+  "metadata": {
+    "cause": {
+      "type": "unknown-dependencies",
+      "context": {
+        "index": 0,
+        "dependencies": [
+          "UsersService"
+        ],
+        "name": "UsersService"
+      },
+      "moduleId": "-1786636116",
+      "nodeId": "971320160"
+    }
+  }
+}

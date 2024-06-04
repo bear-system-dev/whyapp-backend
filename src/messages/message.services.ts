@@ -3,14 +3,10 @@ import { Chat, ChatMessage, User } from '@prisma/client';
 import { PrismaService } from 'src/database/prisma.service';
 import { chatDto } from './dto/chat.dto';
 import { newMessageDTO } from './dto/newMessage.dto';
-import { MessagesGateway } from 'src/events/messages.gateway';
 
 @Injectable()
 export class MessageService {
-  constructor(
-    private prisma: PrismaService,
-    private readonly messageGateway: MessagesGateway,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
   async processMessage(
     userId: string,
@@ -46,9 +42,6 @@ export class MessageService {
           toUserId: recipientId,
         };
         const newMessage = await this.createNewMessage(newMessageData);
-
-        //NOTIFICATION
-        this.messageGateway.notifyRecipient(recipientId, newMessage);
 
         return newMessage;
       } else {
@@ -156,7 +149,10 @@ export class MessageService {
       throw error;
     }
   }
-  async deleteMessage(mergedIds: string, messageId: string): Promise<ChatMessage> {
+  async deleteMessage(
+    mergedIds: string,
+    messageId: string,
+  ): Promise<ChatMessage> {
     try {
       const deleteMessage = await this.prisma.chatMessage.update({
         where: {

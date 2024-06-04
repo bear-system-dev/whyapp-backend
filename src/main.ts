@@ -1,4 +1,4 @@
-import { NestFactory } from '@nestjs/core';
+import { NestFactory, PartialGraphHost } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import 'dotenv/config';
@@ -10,6 +10,7 @@ import coockieParser from 'cookie-parser';
 import session from 'express-session';
 import { PrismaSessionStore } from '@quixo3/prisma-session-store';
 import { PrismaClient } from '@prisma/client';
+import { writeFileSync } from 'fs';
 
 const SERVER_PORT = process.env.SERVER_PORT || 3000;
 const SWAGGER_DOCS_PATH = process.env.SWAGGER_DOCS_PATH || 'v1/docs/api';
@@ -18,6 +19,8 @@ const SECRET_KEY = process.env.SECRET_KEY || 'aokjda~]fasf';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     cors: corsOptions,
+    snapshot: true,
+    abortOnError: false, // <-- Set it to false when using DevTools
   });
   app.useBodyParser('json', { limit: '5mb' });
   app.use(helmet());
@@ -65,4 +68,8 @@ async function bootstrap() {
 
   await app.listen(SERVER_PORT);
 }
-bootstrap();
+bootstrap().catch((err) => {
+  console.log(err);
+  writeFileSync('graph.json', PartialGraphHost.toString() ?? '');
+  process.exit(1);
+});

@@ -44,7 +44,6 @@ export class PrivateChatsGateway
   async onNewMessage(
     @MessageBody() body: string,
     @ConnectedSocket() client: Socket,
-    
   ) {
     const userId = client.handshake.query.userId as string;
     const recipientId = client.handshake.query.recipientId as string;
@@ -57,23 +56,18 @@ export class PrivateChatsGateway
     return client.to(mergedIds).emit('newMessage', message);
   }
 
-   @SubscribeMessage('getMessages')
-    async onGetMessages(
-      @ConnectedSocket() client: Socket,
-    ) {
-      
-      const userId = client.handshake.query.userId as string;
-      const recipientId = client.handshake.query.recipientId as string;
-      const mergedIds = await this.messageService.mergeIds(userId, recipientId);
-      const messages = await this.messageService.getMessages(mergedIds);
-      console.log('Mensagem enviada para a sala: ', mergedIds);
-      return client.to(mergedIds).emit('messages', messages);
-    }
+  @SubscribeMessage('getMessages')
+  async onGetMessages(@ConnectedSocket() client: Socket) {
+    const userId = client.handshake.query.userId as string;
+    const recipientId = client.handshake.query.recipientId as string;
+    const mergedIds = await this.messageService.mergeIds(userId, recipientId);
+    const messages = await this.messageService.getMessages(mergedIds);
+    console.log('Mensagem enviada para a sala: ', mergedIds);
+    return client.to(mergedIds).emit('messages', messages);
+  }
 
   @SubscribeMessage('join private')
-  async onJoinPrivate(
-    @ConnectedSocket() client: Socket,
-  ) {
+  async onJoinPrivate(@ConnectedSocket() client: Socket) {
     const userId = client.handshake.query.userId as string;
     const recipientId = client.handshake.query.recipientId as string;
     const mergedIds = await this.messageService.mergeIds(userId, recipientId);
@@ -82,9 +76,7 @@ export class PrivateChatsGateway
   }
 
   @SubscribeMessage('leave private')
-  async onLeavePrivate(
-    @ConnectedSocket() client: Socket,
-  ) {
+  async onLeavePrivate(@ConnectedSocket() client: Socket) {
     const userId = client.handshake.query.userId as string;
     const recipientId = client.handshake.query.recipientId as string;
     const mergedIds = await this.messageService.mergeIds(userId, recipientId);

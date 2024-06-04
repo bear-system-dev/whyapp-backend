@@ -19,5 +19,6 @@ const PROFESSIONAL_EMAIL_PASSWORD =
     }),
   ],
   providers: [MailingService],
+  exports: [MailingService],
 })
 export class MailingModule {}

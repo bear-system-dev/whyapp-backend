@@ -49,6 +49,7 @@ export class UsersService {
         where: userWhereUniqueInput,
         include: userDataIncludes,
       });
+      console.log('uniqueUser: ', uniqueUser);
       return uniqueUser;
     } catch (error) {
       console.log(error);
@@ -120,13 +121,16 @@ export class UsersService {
     newData: UserUpdateDTO,
   ): Promise<User | Error> {
     try {
-      const passwordHash = await bcrypt.hashData(newData.senha)
+      const passwordHash = await bcrypt.hashData(newData.senha);
       const updatedUser = await this.prisma.user.update({
         where: { id: userId },
         data: {
           ...newData,
-          senha: typeof passwordHash === 'string' ? passwordHash : passwordHash.message
-        }  
+          senha:
+            typeof passwordHash === 'string'
+              ? passwordHash
+              : passwordHash.message,
+        },
       });
 
       return updatedUser;
