@@ -24,25 +24,8 @@ Envie uma nova mensagem para um usuário específico.
 socket.emit('newMessage', 'Olá, seja bem vindo a Bear System!');
 ```
 
-### 2. Evento para obter todas as Mensagens 
 
-- **Evento:** `getMessages`
-- **Dados Enviados:** `string` (ID combinado dos usuários)
-
-#### Exemplo:
-
-```javascript
-const mergedIds = 'USER_ID1_USER_ID2'; // o front envia os id's dos usuarios combinados
-socket.emit('getMessages', mergedIds);
-
-//para receber o evento no front utilize: 
-
-socket.on('messages', (messages) => {
-  console.log('Mensagens recebidas: ', messages);
-});
-```
-
-### 3. Entrar em uma Sala Privada
+### 2. Entrar em uma Sala Privada
 
 - **Evento:** `join private`
 - **Dados Enviados:** `string` (ID combinado dos usuários)
@@ -54,7 +37,7 @@ const mergedIds = 'USER_ID1_USER_ID2'; // Formato combinado de IDs
 socket.emit('join private', mergedIds);
 ```
 
-### 4. Sair de uma Sala Privada
+### 3. Sair de uma Sala Privada
 
 - **Evento:** `leave private`
 - **Dados Enviados:** `string` (ID combinado dos usuários)
