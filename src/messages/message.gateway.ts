@@ -53,6 +53,15 @@ export class PrivateChatsGateway
       body,
     );
     const mergedIds = await this.messageService.mergeIds(userId, recipientId);
+
+    this.server.of('/notifications').to(recipientId).emit('notification', {
+      context: 'private-chats_newMessage',
+      contextMessage: 'Nova mensagem privada',
+      from: userId,
+      to: recipientId,
+      data: message,
+    });
+
     return client.to(mergedIds).emit('newMessage', message);
   }
 

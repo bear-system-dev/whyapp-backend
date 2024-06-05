@@ -97,8 +97,15 @@ export class GroupsGateway
   @SubscribeMessage('newGroupMessage')
   async onNewGroupMessage(
     @ConnectedSocket() client: Socket,
-    @MessageBody() messageId: string,
+    @MessageBody()
+    data: {
+      messageId: string;
+      userId: string;
+      recipientsId: Array<string>;
+    },
   ) {
+    const { messageId, recipientsId, userId } = data;
+
     if (!messageId)
       return client.emit('error', {
         mensagem: 'Você precisa fornecer o messageId',
@@ -108,7 +115,19 @@ export class GroupsGateway
       return client.emit('error', {
         mensagem: 'Erro ao buscar dados da mensagem',
       });
-    client.broadcast
+
+    for (const recipientId in recipientsId) {
+      this.logger.debug(`Emitindo vento NOTIFICATION para: ${recipientId}`);
+      this.server.of('/notifications').to(recipientId).emit('notification', {
+        context: 'group-chats_newGroupMessage',
+        contextMessage: 'Nova mensagem de grupo',
+        from: userId,
+        to: recipientId,
+        data: messageData,
+      });
+    }
+
+    return client.broadcast
       .in(messageData.grupoId)
       .emit('newGroupMessage', messageData);
   }
