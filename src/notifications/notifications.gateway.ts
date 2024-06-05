@@ -37,7 +37,7 @@ export class NotificationsGateway {
         socketId: client.id,
       });
     return client.broadcast.emit('isOnline', {
-      userId: onlineUser?.userId,
+      onlineUser,
       isOnline: false,
     });
   }
@@ -50,14 +50,15 @@ export class NotificationsGateway {
     console.log(userId);
 
     const user = await this.usersService.userUnique({ id: userId });
-    console.log(user);
     if (user instanceof Error) {
       console.log('Could not find this user by id');
       return client.emit('error', 'Could not find this user by id');
     }
-    this.onlineUsers.setOnlineUser(userId, user.nome, client.id);
 
-    client.broadcast.emit('isOnline', { userId, isOnline: true });
+    this.onlineUsers.setOnlineUser(userId, user.nome, client.id);
+    const onlineUser = this.onlineUsers.getOnlineUser(client.id); //O return da função setOnlineUser() não funcionar, por isso tal utilização
+
+    client.broadcast.emit('isOnline', { onlineUser, isOnline: true });
 
     return client.join(userId);
   }

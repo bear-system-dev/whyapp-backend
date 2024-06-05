@@ -19,8 +19,9 @@ export class OnlineUsers {
     this.onlineUsers[socketId] = {
       name: userName,
       userId,
-      lastLoginDate: new Date().toLocaleDateString(),
+      lastLoginDate: new Date(),
     };
+    return this.getOnlineUser(socketId); //Por algum motivo, não funciona
   };
 
   public setOfflineUser = async (userId: string) => {
