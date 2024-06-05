@@ -9,10 +9,10 @@ import { GroupMessagesModule } from './group-messages/group-messages.module';
 import { GroupsModule } from './groups/groups.module';
 import { AuthGuard } from './auth/auth.guard';
 import { MailingModule } from './mailing/mailing.module';
-import { NotificationModule } from './notification/notification.module';
 import { DevtoolsModule } from '@nestjs/devtools-integration';
 import { BearHashingModule } from './utils/bearHashing/bear-hashing.module';
 import { HomePageModule } from './home-page/home-page.module';
+import { NotificationsModule } from './notifications/notifications.module';
 
 const THROTTLER_TTL = process.env.THROTTLER_TTL || 60000;
 const THROTTLER_LIMIT = process.env.THROTTLER_LIMIT || 100;
@@ -38,9 +38,9 @@ const THROTTLER_LIMIT = process.env.THROTTLER_LIMIT || 100;
     GroupMessagesModule,
     GroupsModule,
     MailingModule,
-    NotificationModule,
     BearHashingModule,
     HomePageModule,
+    NotificationsModule,
   ],
   providers: [
     {
