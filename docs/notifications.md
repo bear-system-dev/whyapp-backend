@@ -11,8 +11,8 @@ POST /notifications
 | `destinatarioId` | `string` | Insira o ID do destinatário da notificação |
 | `mensagem`      | `string` | Insira a mensagem da notificação          |
 | `categoria`     | `string` | Insira a categoria da notificação         |
-| `readAt`        | `string` | Data e hora de leitura da notificação (opcional) |
-| `canceledAt`    | `string` | Data e hora de cancelamento da notificação (opcional) |
+| `readAt`        | `string` | Data e hora de leitura da notificação |
+| `canceledAt`    | `string` | Data e hora de cancelamento da notificação  |
 
 ### Retorna todas as notificações de um Usuário
 
@@ -48,5 +48,5 @@ DELETE /notifications/:notificationId
 
 ### Notas
 
-- **Rotas:** As rotas são acessadas por métodos HTTP diferentes (POST, GET, PUT, DELETE).
+- **Rotas:** As rotas são acessadas por métodos HTTP diferentes (POST, GET, PATCH, DELETE).
 - **Parâmetros:** Todos os parâmetros para criação e atualização são inseridos no corpo da requisição em formato JSON.
