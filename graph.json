@@ -13,7 +13,54 @@
         "transient": false,
         "exported": false,
         "token": "HomePageService",
-        "initTime": 21.75520000000006
+        "initTime": 51.16270000000077
+      }
+    },
+    "23281744": {
+      "id": "23281744",
+      "label": "NotificationsController",
+      "parent": "-1968411833",
+      "metadata": {
+        "type": "controller",
+        "internal": false,
+        "sourceModuleName": "NotificationsModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "NotificationsController"
+      }
+    },
+    "45675007": {
+      "id": "45675007",
+      "label": "PrismaService",
+      "parent": "-1968411833",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "NotificationsModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "PrismaService",
+        "initTime": 50.948599999999715
+      }
+    },
+    "71503856": {
+      "id": "71503856",
+      "label": "HomePageGateway",
+      "parent": "-4953497",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "HomePageModule",
+        "durable": false,
+        "static": true,
+        "transient": false,
+        "exported": false,
+        "token": "HomePageGateway",
+        "initTime": 51.15450000000055
       }
     },
     "95355232": {
@@ -30,7 +77,7 @@
         "transient": false,
         "exported": false,
         "token": "JwtModule",
-        "initTime": 22.308199999999943
+        "initTime": 52.50540000000001
       }
     },
     "172572434": {
@@ -78,7 +125,7 @@
         "transient": false,
         "exported": true,
         "token": "ExternalContextCreator",
-        "initTime": 23.855499999999665
+        "initTime": 56.20309999999972
       }
     },
     "225063248": {
@@ -95,7 +142,7 @@
         "transient": false,
         "exported": false,
         "token": "InternalCoreModule",
-        "initTime": 25.234999999999673
+        "initTime": 59.19010000000071
       }
     },
     "268812090": {
@@ -228,7 +275,7 @@
         "transient": false,
         "exported": false,
         "token": "BearHashingModule",
-        "initTime": 22.35239999999976
+        "initTime": 52.576100000000224
       }
     },
     "603011239": {
@@ -244,7 +291,7 @@
         "transient": false,
         "exported": true,
         "token": "UsersService",
-        "initTime": 48.6552999999999
+        "initTime": 98.0618000000004
       }
     },
     "633558838": {
@@ -276,7 +323,7 @@
         "transient": false,
         "exported": true,
         "token": "CustomLogger",
-        "initTime": 22.31790000000001
+        "initTime": 52.520300000000134
       }
     },
     "671882984": {
@@ -292,7 +339,7 @@
         "transient": false,
         "exported": true,
         "token": "Reflector",
-        "initTime": 24.88130000000001
+        "initTime": 58.518199999999524
       }
     },
     "710200032": {
@@ -309,7 +356,7 @@
         "transient": false,
         "exported": false,
         "token": "MessageModule",
-        "initTime": 22.0333999999998
+        "initTime": 51.83309999999983
       }
     },
     "710202285": {
@@ -357,7 +404,7 @@
         "transient": false,
         "exported": false,
         "token": "GroupMessagesModule",
-        "initTime": 21.914200000000164
+        "initTime": 51.5637999999999
       }
     },
     "807990512": {
@@ -433,22 +480,6 @@
         "internal": false
       }
     },
-    "986224768": {
-      "id": "986224768",
-      "label": "CONFIGURABLE_MODULE_OPTIONS[142316ca3f7a86f6ba39b]",
-      "parent": "-1033621697",
-      "metadata": {
-        "type": "provider",
-        "internal": false,
-        "sourceModuleName": "DevtoolsModule",
-        "durable": false,
-        "static": true,
-        "scope": 0,
-        "transient": false,
-        "exported": false,
-        "token": "CONFIGURABLE_MODULE_OPTIONS[142316ca3f7a86f6ba39b]"
-      }
-    },
     "1070370213": {
       "id": "1070370213",
       "label": "JwtService",
@@ -462,7 +493,7 @@
         "transient": false,
         "exported": true,
         "token": "JwtService",
-        "initTime": 23.532600000000002
+        "initTime": 54.65450000000055
       }
     },
     "1179374324": {
@@ -479,7 +510,7 @@
         "transient": false,
         "exported": false,
         "token": "HomePageModule",
-        "initTime": 21.76740000000018
+        "initTime": 51.17950000000019
       }
     },
     "1182825970": {
@@ -495,7 +526,7 @@
         "transient": false,
         "exported": false,
         "token": "PrismaService",
-        "initTime": 22.04399999999987
+        "initTime": 51.85199999999986
       }
     },
     "1188408880": {
@@ -527,7 +558,7 @@
         "transient": false,
         "exported": false,
         "token": "GroupsModule",
-        "initTime": 21.871900000000096
+        "initTime": 51.47440000000006
       }
     },
     "1223435111": {
@@ -542,8 +573,7 @@
         "static": true,
         "transient": false,
         "exported": false,
-        "token": "NotificationsService",
-        "initTime": 21.69529999999986
+        "token": "NotificationsService"
       }
     },
     "1225356237": {
@@ -590,7 +620,7 @@
         "transient": false,
         "exported": false,
         "token": "PrismaService",
-        "initTime": 21.989799999999832
+        "initTime": 51.747299999999996
       }
     },
     "1340040613": {
@@ -623,7 +653,7 @@
         "transient": false,
         "exported": false,
         "token": "ThrottlerModule",
-        "initTime": 22.773999999999887
+        "initTime": 54.004400000000714
       }
     },
     "1404752088": {
@@ -670,7 +700,7 @@
         "transient": false,
         "exported": true,
         "token": "Reflector",
-        "initTime": 47.884700000000066
+        "initTime": 99.59820000000036
       }
     },
     "1477231111": {
@@ -712,7 +742,7 @@
         "transient": false,
         "exported": false,
         "token": "NotificationsModule",
-        "initTime": 21.74669999999969
+        "initTime": 51.14059999999972
       }
     },
     "1542581243": {
@@ -745,7 +775,7 @@
         "transient": false,
         "exported": false,
         "token": "CustomLoggerModule",
-        "initTime": 22.328599999999824
+        "initTime": 52.53349999999955
       }
     },
     "1623724461": {
@@ -824,7 +854,7 @@
         "transient": false,
         "exported": false,
         "token": "PrismaService",
-        "initTime": 21.88289999999961
+        "initTime": 51.491799999999785
       }
     },
     "1712941473": {
@@ -856,7 +886,7 @@
         "transient": false,
         "exported": false,
         "token": "GroupsService",
-        "initTime": 58.74270000000024
+        "initTime": 117.67390000000069
       }
     },
     "1723702688": {
@@ -873,7 +903,7 @@
         "transient": false,
         "exported": false,
         "token": "ChatsModule",
-        "initTime": 22.14870000000019
+        "initTime": 52.08140000000003
       }
     },
     "1755859792": {
@@ -905,7 +935,7 @@
         "transient": false,
         "exported": false,
         "token": "GroupMessagesService",
-        "initTime": 56.11949999999979
+        "initTime": 111.04139999999916
       }
     },
     "1772679333": {
@@ -937,7 +967,7 @@
         "transient": false,
         "exported": true,
         "token": "MailerService",
-        "initTime": 34.08339999999998
+        "initTime": 76.87980000000061
       }
     },
     "1866097956": {
@@ -953,7 +983,7 @@
         "transient": false,
         "exported": false,
         "token": "HomePageController",
-        "initTime": 23.902999999999793
+        "initTime": 50.33350000000064
       }
     },
     "1919157847": {
@@ -970,7 +1000,7 @@
         "transient": false,
         "exported": true,
         "token": "REQUEST",
-        "initTime": 5.938999999999851
+        "initTime": 11.737499999999272
       }
     },
     "1989588516": {
@@ -1051,7 +1081,7 @@
         "transient": true,
         "exported": true,
         "token": "INQUIRER",
-        "initTime": 5.923699999999826
+        "initTime": 11.675799999999981
       }
     },
     "-26938366": {
@@ -1067,7 +1097,7 @@
         "transient": false,
         "exported": true,
         "token": "ModulesContainer",
-        "initTime": 23.835199999999986
+        "initTime": 55.83420000000024
       }
     },
     "-326832201": {
@@ -1083,7 +1113,7 @@
         "transient": false,
         "exported": true,
         "token": "HttpAdapterHost",
-        "initTime": 23.8117000000002
+        "initTime": 55.76290000000063
       }
     },
     "-702581189": {
@@ -1099,7 +1129,7 @@
         "transient": false,
         "exported": true,
         "token": "LazyModuleLoader",
-        "initTime": 23.809200000000146
+        "initTime": 55.75929999999971
       }
     },
     "-1904419534": {
@@ -1115,7 +1145,7 @@
         "transient": false,
         "exported": true,
         "token": "SerializedGraph",
-        "initTime": 23.797500000000127
+        "initTime": 55.70089999999982
       }
     },
     "-19112576": {
@@ -1142,7 +1172,7 @@
         "transient": false,
         "exported": false,
         "token": "AppModule",
-        "initTime": 23.753900000000158
+        "initTime": 55.82480000000032
       }
     },
     "-71302842": {
@@ -1222,7 +1252,7 @@
         "transient": false,
         "exported": true,
         "token": "Symbol(ThrottlerStorage)",
-        "initTime": 25.25720000000001
+        "initTime": 57.98540000000048
       }
     },
     "-1033621697": {
@@ -1249,7 +1279,7 @@
         "transient": false,
         "exported": false,
         "token": "DevtoolsModule",
-        "initTime": 22.697999999999865
+        "initTime": 53.78520000000026
       }
     },
     "-751962311": {
@@ -1266,6 +1296,22 @@
         "transient": false,
         "exported": false,
         "token": "ModuleRef"
+      }
+    },
+    "-964043975": {
+      "id": "-964043975",
+      "label": "CONFIGURABLE_MODULE_OPTIONS[14a056bfeb8915b020931]",
+      "parent": "-1033621697",
+      "metadata": {
+        "type": "provider",
+        "internal": false,
+        "sourceModuleName": "DevtoolsModule",
+        "durable": false,
+        "static": true,
+        "scope": 0,
+        "transient": false,
+        "exported": false,
+        "token": "CONFIGURABLE_MODULE_OPTIONS[14a056bfeb8915b020931]"
       }
     },
     "-643397745": {
@@ -1292,7 +1338,7 @@
         "transient": false,
         "exported": false,
         "token": "DiscoveryModule",
-        "initTime": 22.42679999999973
+        "initTime": 52.97119999999995
       }
     },
     "-501891371": {
@@ -1340,7 +1386,7 @@
         "transient": false,
         "exported": true,
         "token": "MetadataScanner",
-        "initTime": 22.471199999999953
+        "initTime": 53.08230000000003
       }
     },
     "-1134487807": {
@@ -1367,7 +1413,7 @@
         "transient": false,
         "exported": false,
         "token": "AuthModule",
-        "initTime": 22.20659999999998
+        "initTime": 52.59659999999985
       }
     },
     "-120792986": {
@@ -1414,7 +1460,7 @@
         "transient": false,
         "exported": false,
         "token": "BearHashingService",
-        "initTime": 21.94470000000001
+        "initTime": 52.124799999999595
       }
     },
     "-1839896738": {
@@ -1445,7 +1491,7 @@
         "transient": false,
         "exported": false,
         "token": "AuthGateway",
-        "initTime": 21.878000000000156
+        "initTime": 51.95550000000003
       }
     },
     "-2003726489": {
@@ -1472,7 +1518,7 @@
         "transient": false,
         "exported": false,
         "token": "UsersModule",
-        "initTime": 21.86130000000003
+        "initTime": 51.92979999999989
       }
     },
     "-618964563": {
@@ -1520,7 +1566,7 @@
         "transient": false,
         "exported": false,
         "token": "PrismaService",
-        "initTime": 22.08490000000029
+        "initTime": 52.2483000000002
       }
     },
     "-618034848": {
@@ -1537,7 +1583,7 @@
         "transient": false,
         "exported": false,
         "token": "MailingModule",
-        "initTime": 22.075600000000122
+        "initTime": 52.235099999999875
       }
     },
     "-410964496": {
@@ -1580,7 +1626,7 @@
         "transient": false,
         "exported": false,
         "token": "MailerModule",
-        "initTime": 22.02260000000024
+        "initTime": 52.13140000000021
       }
     },
     "-406975433": {
@@ -1629,7 +1675,7 @@
         "transient": false,
         "exported": false,
         "token": "MailerCoreModule",
-        "initTime": 22.009300000000167
+        "initTime": 52.10949999999957
       }
     },
     "-1846016159": {
@@ -1703,7 +1749,7 @@
         "transient": false,
         "exported": true,
         "token": "BearHashingService",
-        "initTime": 22.340999999999894
+        "initTime": 52.55150000000049
       }
     },
     "-955530758": {
@@ -1812,7 +1858,7 @@
         "transient": false,
         "exported": false,
         "token": "MessageService",
-        "initTime": 53.321500000000015
+        "initTime": 106.01689999999962
       }
     },
     "-304876278": {
@@ -1838,7 +1884,7 @@
         "transient": false,
         "exported": false,
         "token": "PrismaService",
-        "initTime": 21.840400000000045
+        "initTime": 51.406299999999646
       }
     },
     "-1157031446": {
@@ -1854,7 +1900,7 @@
         "transient": false,
         "exported": false,
         "token": "GroupMessagesService",
-        "initTime": 58.68010000000004
+        "initTime": 117.47800000000007
       }
     },
     "-4953497": {
@@ -2955,6 +3001,16 @@
       },
       "id": "-1485898486"
     },
+    "-591330191": {
+      "source": "-1968411833",
+      "target": "-2003726489",
+      "metadata": {
+        "type": "module-to-module",
+        "sourceModuleName": "NotificationsModule",
+        "targetModuleName": "UsersModule"
+      },
+      "id": "-591330191"
+    },
     "-1175271714": {
       "source": "-1968411833",
       "target": "1482218087",
@@ -3020,13 +3076,13 @@
       "context": {
         "index": 1,
         "dependencies": [
-          "NotificationsService",
-          "UsersService"
+          "PrismaService",
+          "CustomLogger"
         ],
-        "name": "UsersService"
+        "name": "CustomLogger"
       },
       "moduleId": "-1968411833",
-      "nodeId": "-2022309000"
+      "nodeId": "1223435111"
     }
   }
 }
