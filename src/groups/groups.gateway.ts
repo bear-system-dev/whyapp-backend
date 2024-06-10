@@ -117,7 +117,7 @@ export class GroupsGateway
       });
 
     for (const recipientId in recipientsId) {
-      this.logger.debug(`Emitindo vento NOTIFICATION para: ${recipientId}`);
+      this.logger.debug(`Emitindo evento NOTIFICATION para: ${recipientId}`);
       this.server.of('/notifications').to(recipientId).emit('notification', {
         context: 'group-chats_newGroupMessage',
         contextMessage: 'Nova mensagem de grupo',

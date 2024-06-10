@@ -69,6 +69,21 @@ Caso ocorra algum erro, o evento **error** será retornado com uma mensagem
           mensagem: 'Erro ao buscar dados da mensagem',
         });
 ```
+Este evento também irá emitir um outro de nome **notification** para o **namespace /NOTIFICATIONS** contendo os dados necessários para notificar e atualizar os outros usuários no grupo:
+```javascript
+  for (const recipientId in recipientsId) {
+      this.logger.debug(`Emitindo vento NOTIFICATION para: ${recipientId}`);
+      this.server.of('/notifications').to(recipientId).emit('notification', {
+        context: 'group-chats_newGroupMessage',
+        contextMessage: 'Nova mensagem de grupo',
+        from: userId,
+        to: recipientId,
+        data: messageData,
+      });
+    }
+```
+>**NOTA:** Fazemos uma varredura no array **recipientsId** e enviamos tal evento para cada sala de nome com base no userId fornecido<br>
+
 Em caso de sucesso, será emitido um evento de mesmo nome - *newGroupMessage* - para os outros clientes/usuários conectados à sala do grupo, que deverá ser capturado e validado pelo frontend O **groupId** é 
 ```javascript
   client.broadcast
