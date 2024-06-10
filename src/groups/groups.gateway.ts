@@ -45,7 +45,7 @@ export class GroupsGateway
   handleConnection() {}
   handleDisconnect() {}
 
-  @SubscribeMessage('load groups')
+  @SubscribeMessage('load groups') //ideia inicial, não usado
   async onLoadGroups(
     @ConnectedSocket() client: Socket,
     @MessageBody() userId: string,
