@@ -49,6 +49,8 @@ Ao seguir o passo-a-passo, a aplicação deve estar rodando corretamente. Assim 
 
 Nós utilizamos o **SWAGGER** como documentação principal. Entretanto, adicionamos mais algumas informações em **nosso repositório** [nesta sessão](https://github.com/bear-system-dev/whyapp-backend/blob/dev/docs/endpoints.md). Já a documentação no **SWAGGER** você pode encontrar [aqui](https://whyapp-backend.onrender.com/v1/docs/api/#/)
 
+Decidimos fazer uma sessão separada para as **notificações**: [Aqui](https://github.com/bear-system-dev/whyapp-backend/blob/dev/docs/notifications.md)
+
 ### Eventos WebSocket
 
 Utilizamos alguns eventos pra manter a conexão em tempo real em alguns momentos. Sendo a biblioteca padrão no NestJS o Socket.IO, optamos por manter. Tais eventos são utilizados em conjunto com as requisições HTTP da API REST padrão e você pode utilizá-los sem conflitos
@@ -61,19 +63,25 @@ Os eventos estão divididos em grupos por namespaces. Assim podemos organizar o 
 ```bash
 https://url_deploy/
 ```
->**NOTA:** Aqui ficam os eventos relacionados às mensagens privadas. [Clique aqui](https://github.com/bear-system-dev/whyapp-backend/blob/dev/docs/private_events.md) para visualizar os eventos e seus detalhes. __**Este grupo está sujeito à mudanças até a finalização do sistema de notificações**__
+>**NOTA:** Aqui ficam os eventos gerais. [Clique aqui](https://github.com/bear-system-dev/whyapp-backend/blob/dev/docs/#) para visualizar os eventos e seus detalhes. (VAZIO)
 
-2. **NAMESPACE /messages**
+2. **NAMESPACE /private-chats**
 ```bash
-https://url_deploy/messages
+https://url_deploy/private-chats
 ```
->**NOTA:** Aqui ficam os eventos relacionados às notificações e atualização dos usuários. [Clique aqui]() para visualizar os eventos e seus detalhes. __**Este grupo está sujeito à mudanças até a finalização do sistema de notificações**__
+>**NOTA:** Aqui ficam os eventos relacionados às mensagens privadas. [Clique aqui](https://github.com/bear-system-dev/whyapp-backend/blob/dev/docs/socket_private_events.md) para visualizar os eventos e seus detalhes.
 
-3. **NAMESPACE /grupos**
+3. **NAMESPACE /group-chats**
 ```bash
-https://url_deploy/grupos
+https://url_deploy/group-chats
 ```
 >**NOTA:** Aqui ficam os eventos relacionados às mensagens de grupo e funcionalidades relacionadas. [Clique aqui](https://github.com/bear-system-dev/whyapp-backend/blob/dev/docs/group-events.md) para visualizar os eventos e seus detalhes.
+
+4. **NAMESPACE /notifications**
+```bash
+https://url_deploy/notifications
+```
+>**NOTA:** Aqui ficam os eventos relacionados às notificações e atualização de informação para os usuários. [Clique aqui](https://github.com/bear-system-dev/whyapp-backend/blob/dev/docs/notifications-events.md) para visualizar os eventos e seus detalhes.
 
 ## Contribuição / Contributing
 Você pode contribuir neste projeto livremente abrindo um Pull Request após fazer o Fork deste repositório.
