@@ -7,7 +7,7 @@
 
 ## EVENTOS NAMESPACE **/notifications**
 
-1. <a id='jpr'>JOIN PRIVATE ROOM</a>
+1. <a id='jpr'>JOIN PRIVATE ROOM</a> <br>
 Deve-se enviar o **userId: string** como parâmetro
 ```javascript
 socket.emit('join private room', userId)
@@ -32,7 +32,7 @@ Este evento também irá emitir um outro de nome **<a id='isOn'>isOnline²</a>**
 ``` 
 >**NOTA:** Quando o usuário deslogar ou fechar a página, tal evento será emitido novamente. A diferença é que o **isOnline** terá o valor **false**
 
-3. <a id='not'>NOTIFICATION</a>
+3. <a id='not'>NOTIFICATION</a><br>
 Você deverá esperar pelo evento **notification**, que será emitido ao usuário enviar uma mensagem privada, de grupo, entre outros<br>
 A estrutura dos dados enviado será da seguinte maneira: 
 ```javascript
@@ -44,7 +44,7 @@ A estrutura dos dados enviado será da seguinte maneira:
   data: messageData,
 }
 ```
-**NOTA:** A chave **context** pode ter algumas strings padrão que poderão ser gerenciadas para dar uma finalidade adequada à notificação. Já **contextMessage** será uma descrição mais geral do que está acontecendo e poderá ou não ser utilizada no frontend
+>**NOTA:** A chave **context** pode ter algumas strings padrão que poderão ser gerenciadas para dar uma finalidade adequada à notificação. Já **contextMessage** será uma descrição mais geral do que está acontecendo e poderá ou não ser utilizada no frontend
 
 ### Tipos de **<a id='cont'>context</a>** disponíveis
 O **context** sempre será com base no seguinte formato: __**namespace_event**__. A exemplo: **group-chats_newGroupMessage** --> Emitido do evento newGroupMessage no namespace group-chats<br>
