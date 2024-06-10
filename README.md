@@ -49,7 +49,8 @@ Ao seguir o passo-a-passo, a aplicação deve estar rodando corretamente. Assim 
 
 Nós utilizamos o **SWAGGER** como documentação principal. Entretanto, adicionamos mais algumas informações em **nosso repositório** [nesta sessão](https://github.com/bear-system-dev/whyapp-backend/blob/dev/docs/endpoints.md). Já a documentação no **SWAGGER** você pode encontrar [aqui](https://whyapp-backend.onrender.com/v1/docs/api/#/)
 
-Decidimos fazer uma sessão separada para as **notificações**: [Aqui](https://github.com/bear-system-dev/whyapp-backend/blob/dev/docs/notifications.md)
+Decidimos fazer uma sessão separada para as **notificações**: [Aqui](https://github.com/bear-system-dev/whyapp-backend/blob/dev/docs/notifications.md)<br>
+Também, para private-chats: [Aqui](https://github.com/bear-system-dev/whyapp-backend/blob/dev/docs/private_rest_events.md)
 
 ### Eventos WebSocket
 
