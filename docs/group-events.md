@@ -54,7 +54,7 @@ Tudo ocorrendo bem, o usuário será removido daquela sala do grupo:
 
 3. NEWGROUPMESSAGE
 
-Este evento é responsável por enviar as mensagens de um cliente/usuário os outros no mesmo grupo<br>
+Este evento é responsável por enviar as mensagens de um cliente/usuário aos outros no mesmo grupo<br>
 É preciso enviar um objeto contento: **messageId, userId e recipientsId(Array)** todos como uma *string*
 ```javascript
   socket.emit('newGroupMessage', data: {
