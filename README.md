@@ -23,7 +23,7 @@ Caso prefira configurar com o Docker, utilizamos o compose para gerar os contain
 Siga estes passos corretamente para instalar, testar e modificar a cópia desta API
 
 1. **Obtenha um banco de dados POSTGREE**: Antes de tudo, você deve ter um banco de dados rodando. Nós utilizamos para testes o [Render](https://render.com) para hospedar.
-2. **Configurar as variáveis de ambiente**: Você deve renomear o arquivo **./.env-exemple** para **.env** apenas.
+2. **Configurar as variáveis de ambiente**: Você deve renomear o arquivo **./.env-exemple** para **.env** apenas. Veja a documentação [nesta sessão](https://github.com/bear-system-dev/whyapp-backend/blob/dev/docs/environment_variables.md)
 3. **Conecte-se ao banco de dados POSTGREE**: Obtenha a URL de conexão e modifique a chave **DATABASE_URL** no arquivo **./.env**, assim como mostrado abaixo.
 ```bash 
    DATABASE_URL="postgresql://docker:docker@localhost:5434/docker?schema=public" 

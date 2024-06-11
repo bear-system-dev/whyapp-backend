@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Param, Patch, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Patch,
+  Delete,
+} from '@nestjs/common';
 import { NotificationsService } from './notifications.service';
 import { NotificationDto } from './dto/notifications.dto';
 import { ApiTags } from '@nestjs/swagger';
@@ -18,8 +26,14 @@ export class NotificationsController {
     return await this.notificationsService.getAllNotifications(recipientId);
   }
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() notificationDto: Partial<NotificationDto>) {
-    return await this.notificationsService.updateNotification(id, notificationDto);
+  async update(
+    @Param('id') id: string,
+    @Body() notificationDto: Partial<NotificationDto>,
+  ) {
+    return await this.notificationsService.updateNotification(
+      id,
+      notificationDto,
+    );
   }
 
   @Delete(':id')
