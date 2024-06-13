@@ -27,4 +27,8 @@ export class OnlineUsers {
   public setOfflineUser = async (userId: string) => {
     this.onlineUsers.delete(userId);
   };
+
+  public getAll() {
+    return this.onlineUsers;
+  }
 }

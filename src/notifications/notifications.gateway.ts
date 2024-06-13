@@ -87,4 +87,8 @@ export class NotificationsGateway {
       this.logger.error(`${err}`);
     }
   }
+
+  public async getDynamicOnlineUsers() {
+    return this.onlineUsers.getAll();
+  }
 }
