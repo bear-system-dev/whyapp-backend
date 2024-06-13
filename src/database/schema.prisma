@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
 }
 
@@ -14,6 +14,7 @@ model User {
   email         String          @unique
   senha         String
   ativo         Boolean
+  isOnline      Boolean         @default(false)
   identificador String
   avatar        String?
   humor         Humor[]
@@ -206,16 +207,16 @@ model OpcaoEnquete {
 }
 
 model GrupoMessage {
-  id            String      @id @default(uuid())
+  id            String       @id @default(uuid())
   mensagem      String
-  grupo         Grupo       @relation(fields: [grupoId], references: [id])
+  grupo         Grupo        @relation(fields: [grupoId], references: [id])
   grupoId       String
-  usuario       User        @relation(fields: [usuarioId], references: [id])
+  usuario       User         @relation(fields: [usuarioId], references: [id])
   usuarioId     String
   transmissao   Transmissao? @relation(fields: [transmissaoId], references: [id])
   transmissaoId String?
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
 }
 
 model GrupoAudio {
@@ -270,5 +271,5 @@ model Session {
   id        String   @id
   sid       String   @unique
   data      String
-  expiresAt   DateTime
+  expiresAt DateTime
 }

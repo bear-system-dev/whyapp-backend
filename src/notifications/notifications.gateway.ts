@@ -36,6 +36,9 @@ export class NotificationsGateway {
         isOnline: false,
         socketId: client.id,
       });
+
+    this.changeIsOnlineOnUsersModel(onlineUser.userId, false); //Muda no banco de dados
+
     return client.broadcast.emit('isOnline', {
       onlineUser,
       isOnline: false,
@@ -58,8 +61,30 @@ export class NotificationsGateway {
     this.onlineUsers.setOnlineUser(userId, user.nome, client.id);
     const onlineUser = this.onlineUsers.getOnlineUser(client.id); //O return da função setOnlineUser() não funcionar, por isso tal utilização
 
-    client.broadcast.emit('isOnline', { onlineUser, isOnline: true });
+    this.changeIsOnlineOnUsersModel(userId, true);
+
+    client.broadcast.emit('isOnline', { onlineUser, isOnline: true }); //Muda no banco de dados
 
     return client.join(userId);
+  }
+
+  private async changeIsOnlineOnUsersModel(userId: string, isOnline: boolean) {
+    try {
+      const user = await this.usersService.userUnique({ id: userId });
+      if (user instanceof Error) throw new Error(user.message);
+      if (!user || user === undefined) throw new Error(`Usuário não existe`);
+
+      const updatedUser = await this.usersService.updateIsOnlineByUserUnique(
+        { id: userId },
+        isOnline,
+      );
+      if (updatedUser instanceof Error) throw new Error(updatedUser.message);
+
+      this.logger.debug(
+        `Usuário atualizado: isOnline --> ${updatedUser.isOnline}`,
+      );
+    } catch (err) {
+      this.logger.error(`${err}`);
+    }
   }
 }
