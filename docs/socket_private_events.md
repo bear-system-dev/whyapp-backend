@@ -1,10 +1,10 @@
 
 ## Conectar ao WebSocket
 
-Para se conectar ao WebSocket de mensagens privadas, use o código abaixo, substituindo `http://localhost:3000` pela URL correta do servidor:
+Para se conectar ao WebSocket de mensagens privadas, use o código abaixo, substituindo `http://localhost:3000/private-chats` pela URL correta do servidor:
 
 ```javascript
-const socket = io('http://localhost:3000', {
+const socket = io('http://localhost:3000/private-chats', {
   query: {
     userId: 'USER_ID_AQUI',
     recipientId: 'RECIPIENT_ID_AQUI',

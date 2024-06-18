@@ -32,7 +32,7 @@ export class NotificationsService {
       return newNotification;
     } catch (error) {
       console.log(error);
-      throw new Error('Erro ao criar notificação');
+      return new Error('Erro ao criar notificação');
     }
   }
 
@@ -44,7 +44,7 @@ export class NotificationsService {
       });
       return notifications;
     } catch {
-      throw new Error('Erro ao obter notificações');
+      return new Error('Erro ao obter notificações');
     }
   }
 
@@ -55,7 +55,7 @@ export class NotificationsService {
         where: { id: notificationId },
       });
       if (!notification) {
-        throw new NotFoundException('Notificação não encontrada');
+        return new NotFoundException('Notificação não encontrada');
       }
 
       const updatedNotification = await this.prisma.notification.update({
@@ -64,7 +64,7 @@ export class NotificationsService {
       });
       return updatedNotification;
     } catch {
-      throw new Error('Erro ao atualizar notificação');
+      return new Error('Erro ao atualizar notificação');
     }
   }
 
@@ -74,7 +74,7 @@ export class NotificationsService {
         where: { id },
       });
       if (!notification) {
-        throw new NotFoundException('Notificação não encontrada');
+        return new NotFoundException('Notificação não encontrada');
       }
 
       await this.prisma.notification.delete({
@@ -82,7 +82,7 @@ export class NotificationsService {
       });
       return { message: 'Notificação deletada com sucesso' };
     } catch {
-      throw new Error('Erro ao deletar notificação');
+      return new Error('Erro ao deletar notificação');
     }
   }
 }
