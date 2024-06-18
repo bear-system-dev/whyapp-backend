@@ -24,6 +24,17 @@ Envie uma nova mensagem para um usuário específico.
 socket.emit('newMessage', 'Olá, seja bem vindo a Bear System!');
 ```
 
+Este evento também irá emitir um outro de nome **notification** para o **namespace /NOTIFICATIONS** contendo os dados necessários para notificar e atualizar o outro usuário:
+```javascript
+  this.server.of('/notifications').to(recipientId).emit('notification', {
+      context: 'private-chats_newMessage',
+      contextMessage: 'Nova mensagem privada',
+      from: userId,
+      to: recipientId,
+      data: message,
+    });
+```
+>**NOTA:** Lemos o **recipientId** e enviamos tal evento para a sala de nome com base no userId fornecido<br>
 
 ### 2. Entrar em uma Sala Privada
 

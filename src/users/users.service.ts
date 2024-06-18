@@ -246,4 +246,26 @@ export class UsersService {
     }
     return code;
   }
+
+  async updateIsOnlineByUserUnique(
+    userWhereUniqueInput: Prisma.UserWhereUniqueInput,
+    isOnline: boolean,
+  ): Promise<Error | User> {
+    console.log(userWhereUniqueInput, isOnline);
+    try {
+      const newIsOnlineUser = await this.prisma.user.update({
+        where: userWhereUniqueInput,
+        data: {
+          isOnline,
+        },
+        include: userDataIncludes,
+      });
+      return newIsOnlineUser;
+    } catch (error) {
+      console.log(error);
+      return new Error(
+        'Um erro ocorreu ao trocar a propriedade isOnline do usuário',
+      );
+    }
+  }
 }

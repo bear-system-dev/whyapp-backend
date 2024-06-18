@@ -2,15 +2,9 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/database/prisma.service';
 import { NotificationDto } from './dto/notifications.dto';
 
-
 @Injectable()
 export class NotificationsService {
-
-  constructor(
-    private prisma: PrismaService,
-  ) {}
-
-
+  constructor(private prisma: PrismaService) {}
 
   public async createNotifications(NotificationData: NotificationDto) {
     try {
@@ -36,7 +30,6 @@ export class NotificationsService {
     }
   }
 
-
   public async getAllNotifications(recipientId: string) {
     try {
       const notifications = await this.prisma.notification.findMany({
@@ -48,8 +41,10 @@ export class NotificationsService {
     }
   }
 
-
-  public async updateNotification(notificationId: string, NotificationData: Partial<NotificationDto>) {
+  public async updateNotification(
+    notificationId: string,
+    NotificationData: Partial<NotificationDto>,
+  ) {
     try {
       const notification = await this.prisma.notification.findUnique({
         where: { id: notificationId },
