@@ -1,4 +1,4 @@
-import { Controller, Body, Get, Delete, Patch } from '@nestjs/common';
+import { Controller, Body, Post, Delete, Patch, Get, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 import { MessageService } from './message.services';
@@ -8,14 +8,12 @@ export class PrivateChatsController {
   constructor(private readonly messageService: MessageService) {}
 
   @Get()
-  async getMessages(@Body() body: { userId: string; recipientId: string }) {
-    const { userId, recipientId } = body;
+  async getMessages(@Query('userId') userId: string, @Query('recipientId') recipientId: string) {
     const mergedIds = await this.messageService.mergeIds(userId, recipientId);
     const messages = await this.messageService.getMessages(mergedIds);
     console.log('Mensagem enviada para a sala: ', mergedIds);
     return { messages };
   }
-
   @Patch()
   async updateMessage(
     @Body()
