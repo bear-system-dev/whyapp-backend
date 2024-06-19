@@ -45,6 +45,7 @@ export class PrivateChatsGateway
     @MessageBody() body: string,
     @ConnectedSocket() client: Socket,
   ) {
+    
     const userId = client.handshake.query.userId as string;
     const recipientId = client.handshake.query.recipientId as string;
     const message = await this.messageService.processMessage(
@@ -54,14 +55,17 @@ export class PrivateChatsGateway
     );
     const mergedIds = await this.messageService.mergeIds(userId, recipientId);
 
-    this.server.of('/notifications').to(recipientId).emit('notification', {
-      context: 'private-chats_newMessage',
-      contextMessage: 'Nova mensagem privada',
-      from: userId,
-      to: recipientId,
-      data: message,
-    });
-
+    try {
+      this.server.of('/notifications').to(recipientId).emit('notification', {
+        context: 'private-chats_newMessage',
+        contextMessage: 'Nova mensagem privada',
+        from: userId,
+        to: recipientId,
+        data: message,
+      });
+    } catch (error) {
+      console.error('Error emitting notification:', error);
+    }
     return client.to(mergedIds).emit('newMessage', message);
   }
 
