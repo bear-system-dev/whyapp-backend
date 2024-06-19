@@ -107,6 +107,9 @@ export class MessageService {
   async getMessages(mergedIds: string): Promise<ChatMessage[]> {
     try {
       const chatId = await this.findChatId(mergedIds);
+      if(!chatId){
+        return
+      } 
       const findChatMessages = await this.prisma.chatMessage.findMany({
         where: { chatId: chatId },
       });
@@ -114,7 +117,6 @@ export class MessageService {
       return findChatMessages;
     } catch (error) {
       console.error('Error fetching chat messages:', error);
-      throw error;
     }
   }
   async mergeIds(id1: string, id2: string): Promise<string> {

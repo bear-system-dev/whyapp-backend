@@ -7,7 +7,7 @@
   GET private-chats/messages
 ```
 
-| Body   | Tipo       | Descrição                           |
+| Params   | Tipo       | Descrição                           |
 | :---------- | :--------- | :---------------------------------- |
 | `userId` | `string` | Insira o Id do usuario |
 | `recipientId` | `string` | Insira o Id do usuario |

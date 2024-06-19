@@ -12,7 +12,7 @@ export class PrivateChatsController {
     const mergedIds = await this.messageService.mergeIds(userId, recipientId);
     const messages = await this.messageService.getMessages(mergedIds);
     console.log('Mensagem enviada para a sala: ', mergedIds);
-    return { messages };
+    return messages ? { messages } : [];
   }
   @Patch()
   async updateMessage(
