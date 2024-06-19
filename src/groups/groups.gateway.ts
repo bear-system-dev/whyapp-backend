@@ -8,7 +8,7 @@ import {
   OnGatewayDisconnect,
   OnGatewayInit,
 } from '@nestjs/websockets';
-import { Server, Socket } from 'socket.io';
+import { Namespace, Socket } from 'socket.io';
 import { GroupsService } from './groups.service';
 import { corsOptions } from 'src/utils/cors.options';
 import { GroupMessagesService } from 'src/group-messages/group-messages.service';
@@ -27,7 +27,7 @@ export class GroupsGateway
   private readonly logger = new Logger(GroupsGateway.name);
 
   @WebSocketServer()
-  private readonly server: Server;
+  io: Namespace;
 
   afterInit() {
     this.logger.debug('Up and running...');
@@ -118,7 +118,7 @@ export class GroupsGateway
 
     for (const recipientId in recipientsId) {
       this.logger.debug(`Emitindo evento NOTIFICATION para: ${recipientId}`);
-      this.server.of('/notifications').to(recipientId).emit('notification', {
+      this.io.server.of('/notifications').to(recipientId).emit('notification', {
         context: 'group-chats_newGroupMessage',
         contextMessage: 'Nova mensagem de grupo',
         from: userId,

@@ -8,7 +8,7 @@ import {
   OnGatewayInit,
   WebSocketServer,
 } from '@nestjs/websockets';
-import { Server, Socket } from 'socket.io';
+import { Socket, Namespace } from 'socket.io';
 import { MessageService } from './message.services';
 import { corsOptions } from 'src/utils/cors.options';
 import { Logger } from '@nestjs/common';
@@ -22,7 +22,7 @@ export class PrivateChatsGateway
   private readonly logger = new Logger(PrivateChatsGateway.name);
 
   @WebSocketServer()
-  private readonly server: Server;
+  io: Namespace;
 
   afterInit() {
     this.logger.debug('Up and running...');
@@ -45,7 +45,6 @@ export class PrivateChatsGateway
     @MessageBody() body: string,
     @ConnectedSocket() client: Socket,
   ) {
-    
     const userId = client.handshake.query.userId as string;
     const recipientId = client.handshake.query.recipientId as string;
     const message = await this.messageService.processMessage(
@@ -56,7 +55,7 @@ export class PrivateChatsGateway
     const mergedIds = await this.messageService.mergeIds(userId, recipientId);
 
     try {
-      this.server.of('/notifications').to(recipientId).emit('notification', {
+      this.io.server.of('/notifications').to(recipientId).emit('notification', {
         context: 'private-chats_newMessage',
         contextMessage: 'Nova mensagem privada',
         from: userId,
