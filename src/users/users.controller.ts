@@ -24,7 +24,6 @@ import { BearHashingService } from 'src/utils/bearHashing/bear-hashing.service';
 const bcrypt = new BCrypt();
 
 const usersEmailPasswordResetCodes = {};
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Public } from 'src/decorators/is-public-endpoint.decorator';
 
 @ApiTags('User')
@@ -36,6 +35,7 @@ export class UserController {
     private bearHashingService: BearHashingService,
   ) {}
 
+  @Public()
   @Post('reset-password/reset')
   async resetPasswordReset(
     @Body() data: { userEmail: string; newPassword: string },
@@ -131,6 +131,7 @@ export class UserController {
     });
   }
 
+  @Public()
   @Post('reset-password/verify-code')
   async resetPasswordVerify(
     @Query('resetCode') resetCode: string, //resetCode é o código digitado pelo usuário no front
@@ -205,6 +206,7 @@ export class UserController {
     });
   }
 
+  @Public()
   @Post('reset-password/send-code')
   async resetPasswordSend(
     @Body() data: { userEmail: string },
